@@ -1,11 +1,46 @@
 {
-  "pages":[
-    "pages/index/index"
-  ],
-  "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
-  }
+	"pages": [
+		"pages/index/index",
+		"pages/eventData/eventData",
+		"pages/gameData/teamData",
+		"pages/myFavorite/myFavorite"
+	],
+	"window": {
+		"backgroundTextStyle": "light",
+		"navigationBarBackgroundColor": "#3f51b5",
+		"navigationBarTitleText": "FRC赛事信息",
+		"navigationBarTextStyle": "white"
+	},
+	"tabBar": {
+		"color" : "#8a8a8a",
+		"selectedColor" : "#3f51b5",
+		"backgroundColor" : "#fff",
+
+		"list": [
+			{
+				"text": "主页",
+				"pagePath": "pages/index/index",
+				"iconPath": "res/icons/tabBar/default/homefill.png",
+				"selectedIconPath" : "res/icons/tabBar/selected/homefill.png"
+			},
+			{
+				"text": "赛事",
+				"pagePath" : "pages/eventData/eventData",
+				"iconPath": "res/icons/tabBar/default/news_hot_fill_light.png",
+				"selectedIconPath": "res/icons/tabBar/selected/news_hot_fill_light.png"
+			},
+			{
+				"text": "队伍",
+				"pagePath": "pages/gameData/teamData",
+				"iconPath": "res/icons/tabBar/default/clothesfill.png",
+				"selectedIconPath": "res/icons/tabBar/selected/clothesfill.png"
+			},
+			{
+				"text": "收藏",
+				"pagePath" : "pages/myFavorite/myFavorite",
+				"iconPath": "res/icons/tabBar/default/favorfill.png",
+				"selectedIconPath": "res/icons/tabBar/selected/favorfill.png"
+			}
+		]
+	}
 }
