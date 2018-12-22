@@ -1,0 +1,38 @@
+.event {
+    display: flex;
+    flex-direction: column;
+    width: 700rpx;
+}
+
+.location-date {
+    margin-top: 2px;
+    margin-bottom: 10px;
+    display: flex;
+    flex: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.location {
+    margin-left: 20rpx;
+    font-size: 25rpx;
+    width: 300rpx;
+    overflow: auto;
+    color: #424242;
+}
+
+.date {
+    margin-right: 15rpx;
+    font-size: 25rpx;
+    color: #424242;
+    width: 300rpx;
+    overflow: auto;
+    text-align: right;
+}
+
+.eventTitle {
+    margin-top: 10px;
+    margin-left: 20rpx;
+    font-size: 35rpx;
+    font-weight: bold;
+}

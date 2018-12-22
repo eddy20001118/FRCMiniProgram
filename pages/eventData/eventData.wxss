@@ -1,0 +1,20 @@
+.tank {
+    display: flex;
+    flex: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 750rpx;
+}
+
+.left {
+    font-size: 80rpx;
+    width: 370rpx;
+    overflow: hidden;
+}
+
+.right {
+    font-size: 80rpx;
+    width: 370rpx;
+    overflow: auto;
+    text-align: right;
+}

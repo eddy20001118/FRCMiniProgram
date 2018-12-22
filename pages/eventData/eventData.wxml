@@ -1,3 +1,7 @@
 <view class='container'>
     <van-search class="searchBar" value="{{ search }}" placeholder="请输入搜索关键词" show-action bind:search="onSearch" bind:cancel="onCancel" /> {{search}}
+    <view class='tank'>
+        <text class='left'>aaaaaaaaaaaaaaaa</text>
+        <text class='right'>bbbbbbbbbbb</text>
+    </view>
 </view>

@@ -1,6 +1,25 @@
 <!--index.wxml-->
 <view class="container">
-    <view class="List" wx:for="{{list}}" wx:key="{{index}}">
-        <team-card teamNumber="6766" teamName="Pharma Atom Storm" teamLocation="Shenzhen, Guangdong, China"></team-card>
-    </view>
+    <pin-list wx:for="{{list}}" wx:key="{{index}}">
+        <team-card 
+        teamNumber="6766" 
+        teamName="Pharma Atom Storm" 
+        teamLocation="Shenzhen, Guangdong, China"/>
+    </pin-list>
+    <pin-list>
+        <event-card
+            eventTitle = "Shenzhen Regional"
+            eventLocation = "Shenzhen Shi, Guangdong Sheng, China"
+            eventStartDate = "Mar 7"
+            eventEndDate = "Mar 10"
+            eventYear = " 2019"
+        />
+    </pin-list>
+    <team-index 
+        eventTitle = "Shenzhen Regional"
+        eventLocation = "Tuanjie Rd, Longgang Qu, Shenzhen Shi, Guangdong Sheng, China, 518118"
+        eventStartDate = "Mar 7"
+        eventEndDate = "Mar 10"
+        eventYear = " 2019"
+    />
 </view>

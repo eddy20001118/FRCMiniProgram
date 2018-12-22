@@ -1,0 +1,7 @@
+<view class='event'>
+    <text class='eventTitle'>{{eventTitle}}</text>
+    <view class='location-date'>
+        <text class='location'>{{eventLocation}}</text>
+        <text class='date'>{{eventStartDate}} to {{eventEndDate}}, {{eventYear}}</text>
+    </view>
+</view>
