@@ -1,3 +1,8 @@
-.title {
-	font-size: 30px;
+.List {
+    width: 700rpx;
+    margin: 5px 5px;
+    overflow: hidden;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
+    box-sizing: border-box;
 }

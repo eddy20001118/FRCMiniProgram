@@ -1,0 +1,33 @@
+.team {
+    display: flex;
+    flex-direction: row;
+}
+.teamInfo {
+    display: flex;
+    margin-left: 20rpx;
+    flex-direction: column;
+    justify-content:center;
+}
+
+.teamNumber {
+    font-size: 40rpx;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 60px;
+}
+
+.teamName {
+    font-size: 30rpx;
+}
+
+.teamLocation {
+    font-size: 25rpx;
+    font-weight: lighter;
+}
+
+.teamNumberBox {
+    width: 60px;
+    height: 60px;
+}

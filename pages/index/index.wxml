@@ -1,4 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-  <view class='title'>Hello world</view>
+    <view class="List" wx:for="{{list}}" wx:key="{{index}}">
+        <team-card teamNumber="6766" teamName="Pharma Atom Storm" teamLocation="Shenzhen, Guangdong, China"></team-card>
+    </view>
 </view>
