@@ -1,0 +1,15 @@
+<pin-list>
+    <view class='data-list'>
+        <image class='icon' src="/res/icons/team-event/info.png"/>
+        <text class='text'>{{eventTitle}}</text>
+    </view>
+    <hr/>
+    <view class='data-list'>
+        <image class='icon' src="/res/icons/team-event/calendar.png"/>
+        <text class='text'>{{eventStartDate}} to {{eventEndDate}}, {{eventYear}}</text>
+    </view>
+    <view class='data-list'>
+        <image class='icon' src="/res/icons/team-event/location.png"/>
+        <text class='text'>{{eventLocation}}</text>
+    </view>
+</pin-list>

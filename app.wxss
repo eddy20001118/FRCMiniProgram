@@ -11,6 +11,6 @@
 
 .searchBar{
     width: 750rpx;
-    background-color: #fff;
+    color: #fff;
 }
 

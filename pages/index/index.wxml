@@ -15,11 +15,16 @@
             eventYear = " 2019"
         />
     </pin-list>
-    <team-index 
+    <event-index 
         eventTitle = "Shenzhen Regional"
         eventLocation = "Tuanjie Rd, Longgang Qu, Shenzhen Shi, Guangdong Sheng, China, 518118"
         eventStartDate = "Mar 7"
         eventEndDate = "Mar 10"
         eventYear = " 2019"
+    />
+    <team-index 
+        teamName = "Pharma Atom Storm"
+        registedLocation = "Shenzhen, Guangdong, China"
+        organization = "Atom Creative Town&Atom robot education"
     />
 </view>

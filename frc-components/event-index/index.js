@@ -4,9 +4,11 @@ Component({
      * 组件的属性列表
      */
     properties: {
-        teamName : String,
-        registedLocation : String,
-        organization : String
+        eventTitle: String,
+        eventLocation: String,
+        eventStartDate: String,
+        eventEndDate: String,
+        eventYear: String
     },
 
     /**

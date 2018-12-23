@@ -2,7 +2,7 @@
 	"pages": [
 		"pages/index/index",
 		"pages/eventData/eventData",
-		"pages/gameData/teamData",
+		"pages/teamData/teamData",
 		"pages/myFavorite/myFavorite"
 	],
 	"window": {
@@ -31,7 +31,7 @@
 			},
 			{
 				"text": "队伍",
-				"pagePath": "pages/gameData/teamData",
+				"pagePath": "pages/teamData/teamData",
 				"iconPath": "res/icons/tabBar/default/clothesfill.png",
 				"selectedIconPath": "res/icons/tabBar/selected/clothesfill.png"
 			},
