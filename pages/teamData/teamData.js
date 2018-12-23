@@ -5,7 +5,8 @@ Page({
 	 * 页面的初始数据
 	 */
 	data: {
-
+        teamYear: ["2019", "2018", "2017"],
+        index: 0
 	},
 
 	/**
@@ -62,5 +63,12 @@ Page({
 	 */
 	onShareAppMessage: function () {
 
-	}
+	},
+
+    bindPickerChange: function (e) {
+        console.log('picker发送选择改变，携带值为', e.detail.value)
+        this.setData({
+            index: e.detail.value
+        })
+    }
 })

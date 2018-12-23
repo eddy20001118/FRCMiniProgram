@@ -1,4 +1,4 @@
-<view class='event'>
+<view hidden='{{eventInfo.isEmpty}}' class='event'>
     <text class='eventTitle'>{{eventInfo.eventTitle}}</text>
     <view class='location-date'>
         <text class='location'>{{eventInfo.eventLocation}}</text>

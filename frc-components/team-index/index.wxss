@@ -12,7 +12,7 @@
 }
 
 .text{
+    width: 600rpx;
     margin-left : 50rpx;
     font-size: 30rpx;
-    width: 600rpx;
 }

@@ -41,12 +41,9 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.setData({
-            windowsTitle: options.eventName
-        })
-        if (this.data.windowsTitle != null)
+        if (options.eventName != null)
             wx.setNavigationBarTitle({
-                title: this.data.windowsTitle
+                title: options.eventName
             })
     },
 

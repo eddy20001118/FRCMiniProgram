@@ -7,16 +7,18 @@ Page({
     data: {
         windowsTitle : String,
         eventInfo: {
-            eventTitle: "Shenzhen Regional",
+            isEmpty : true
+            /* eventTitle: "Shenzhen Regional",
             eventLocation: "Shenzhen Shi, Guangdong Sheng, China",
             eventStartDate: "Mar 7",
             eventEndDate: "Mar 10",
-            eventYear: "2019"
+            eventYear: "2019" */
         },
         teamIndex : {
             teamName : "Pharma Atom Storm",
             registedLocation : "Shenzhen, Guangdong, China", 
-            organization  :"Atom Creative Town&Atom robot education"
+            organization  :"Atom Creative Town&Atom robot education",
+            teamYearArray : ["2019","2018","2017"]
         }
     },
 
@@ -24,12 +26,9 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.setData({
-            windowsTitle : "Team " + options.teamNumber 
-        })
-        if(this.data.windowsTitle != null)
+        if (options.teamNumber != null)
             wx.setNavigationBarTitle({
-                title : this.data.windowsTitle
+                title: "Team " + options.teamNumber 
             })
     },
 
@@ -44,7 +43,6 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
     },
 
     /**
@@ -84,7 +82,19 @@ Page({
 
     onEventCardClick: function () {
         wx.navigateTo({
-            url: '/pages/eventDetail/eventDetail?id=1'
+            url: "/pages/eventDetail/eventDetail?eventName=" + this.data.eventInfo.eventTitle,
+        })
+    },
+
+    getTeamYear: function (e){
+        this.setData({
+            eventInfo: {
+                eventTitle: "Shenzhen Regional",
+                eventLocation: "Shenzhen Shi, Guangdong Sheng, China",
+                eventStartDate: "Mar 7",
+                eventEndDate: "Mar 10",
+                eventYear: e.detail
+            }
         })
     }
 })

@@ -1,12 +1,12 @@
 <view class="container">
-    <van-tabs style="width:750rpx;" color="#3f51b5" animated active="{{ active }}" bind:change="onChange">
+    <van-tabs style="width:750rpx;" color="#3f51b5" animated swipeable active="{{ active }}" bind:change="onChange">
         <van-tab title="Info">
             <view class='container'>
-                <team-index teamIndex="{{teamIndex}}" />
+                <team-index teamIndex="{{teamIndex}}" bind:event="getTeamYear" />
             </view>
         </van-tab>
         <van-tab title="Event">
-            <view bindtap='onEventCardClick'>
+            <view class='container' bindtap='onEventCardClick'>
                 <pin-list>
                     <event-card eventInfo="{{eventInfo}}" />
                 </pin-list>
