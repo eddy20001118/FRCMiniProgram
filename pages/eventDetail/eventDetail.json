@@ -1,0 +1,11 @@
+{
+    "usingComponents": {
+        "event-index": "/frc-components/event-index/index",
+        "title-list": "/frc-components/title-list/index",
+        "title-list-content": "/frc-components/title-list-content/index",
+        "pin-list": "/frc-components/pin-list/index",
+        "team-card": "/frc-components/team-card/index",
+        "van-tab": "/dist/tab/index",
+        "van-tabs": "/dist/tabs/index"
+    }
+}

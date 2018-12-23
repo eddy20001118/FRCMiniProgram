@@ -1,0 +1,25 @@
+<view class="container">
+    <van-tabs style="width:750rpx;" color="#3f51b5" animated active="{{ active }}" bind:change="onChange">
+        <van-tab title="Info">
+            <view class='container'>
+                <team-index 
+                    teamName="Pharma Atom Storm" 
+                    registedLocation="Shenzhen, Guangdong, China" 
+                    organization="Atom Creative Town&Atom robot education" />
+            </view>
+        </van-tab>
+        <van-tab title="Event">
+            <view bindtap='onEventCardClick'>
+                <pin-list>
+                    <event-card 
+                        eventTitle="Shenzhen Regional" 
+                        eventLocation="Shenzhen Shi, Guangdong Sheng, China" 
+                        eventStartDate="Mar 7" 
+                        eventEndDate="Mar 10" 
+                        eventYear=" 2019" 
+                        />
+                </pin-list>
+            </view>
+        </van-tab>
+    </van-tabs>
+</view>

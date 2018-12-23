@@ -3,12 +3,14 @@
 		"pages/index/index",
 		"pages/eventData/eventData",
 		"pages/teamData/teamData",
-		"pages/myFavorite/myFavorite"
+		"pages/myFavorite/myFavorite",
+        "pages/eventDetail/eventDetail",
+        "pages/teamDetail/teamDetail"
 	],
 	"window": {
 		"backgroundTextStyle": "light",
 		"navigationBarBackgroundColor": "#3f51b5",
-		"navigationBarTitleText": "FRC赛事信息",
+		"navigationBarTitleText": "FRC赛事小程序",
 		"navigationBarTextStyle": "white"
 	},
 	"tabBar": {

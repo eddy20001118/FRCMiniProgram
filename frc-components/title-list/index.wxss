@@ -1,0 +1,16 @@
+.tank {
+    flex-direction: column;
+    display: flex;
+    width: 700rpx;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 3px 5px rgba(26, 26, 26, 0.1);
+    box-sizing: border-box;
+    margin: 5px 5px;
+} 
+
+.title{
+    margin: 20rpx;
+    font-size: 33rpx;
+    color: #3f51b5;
+}

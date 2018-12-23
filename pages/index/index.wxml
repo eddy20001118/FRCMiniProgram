@@ -1,30 +1,22 @@
 <!--index.wxml-->
 <view class="container">
-    <pin-list wx:for="{{list}}" wx:key="{{index}}">
-        <team-card 
-        teamNumber="6766" 
-        teamName="Pharma Atom Storm" 
-        teamLocation="Shenzhen, Guangdong, China"/>
-    </pin-list>
     <pin-list>
-        <event-card
-            eventTitle = "Shenzhen Regional"
-            eventLocation = "Shenzhen Shi, Guangdong Sheng, China"
-            eventStartDate = "Mar 7"
-            eventEndDate = "Mar 10"
-            eventYear = " 2019"
-        />
+        <view bindtap='onTeamCardClick'>
+            <team-card 
+                teamNumber="{{teamInfo.teamNumber}}" 
+                teamName="{{teamInfo.teamName}}" 
+                teamLocation="{{teamInfo.teamLocation}}" />
+        </view>
     </pin-list>
-    <event-index 
-        eventTitle = "Shenzhen Regional"
-        eventLocation = "Tuanjie Rd, Longgang Qu, Shenzhen Shi, Guangdong Sheng, China, 518118"
-        eventStartDate = "Mar 7"
-        eventEndDate = "Mar 10"
-        eventYear = " 2019"
-    />
-    <team-index 
-        teamName = "Pharma Atom Storm"
-        registedLocation = "Shenzhen, Guangdong, China"
-        organization = "Atom Creative Town&Atom robot education"
-    />
+    <view bindtap='onEventCardClick'>
+        <pin-list>
+            <event-card 
+                eventTitle="{{eventInfo.eventTitle}}" 
+                eventLocation="{{eventInfo.eventLocation}}" 
+                eventStartDate="{{eventInfo.eventStartDate}}" 
+                eventEndDate="{{eventInfo.eventEndDate}}" 
+                eventYear="{{eventInfo.eventYear}}" 
+                />
+        </pin-list>
+    </view>
 </view>

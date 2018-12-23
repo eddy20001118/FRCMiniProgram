@@ -17,6 +17,8 @@
     line-height: 60px;
     margin-left: 20rpx;
     margin-right: 20rpx;
+    margin-top: 2px;
+    margin-bottom: 2px;
 }
 
 .teamName {

@@ -2,8 +2,6 @@
   "usingComponents": {
       "team-card": "/frc-components/team-card/index",
       "event-card": "/frc-components/event-card/index",
-      "pin-list": "/frc-components/pin-list/index",
-      "event-index": "/frc-components/event-index/index",
-      "team-index": "/frc-components/team-index/index"
+      "pin-list": "/frc-components/pin-list/index"
   }
 }

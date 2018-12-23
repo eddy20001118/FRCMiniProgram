@@ -1,0 +1,3 @@
+<view class='tank'>
+    {{index}}. <text class='team'>Team{{teamNumber}}</text>
+</view>
