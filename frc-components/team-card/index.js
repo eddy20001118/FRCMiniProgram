@@ -1,9 +1,6 @@
 Component({
     properties: {
-        teamNumber: String,
-        teamName: String,
-        teamLocation: String
-
+        teamInfo : null
     },
     data: {},
     methods: {}

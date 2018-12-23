@@ -1,9 +1,9 @@
 <view class='team'>
     <view class='teamNumberBox'>
-        <text class='teamNumber'>{{teamNumber}}</text>
+        <text class='teamNumber'>{{teamInfo.teamNumber}}</text>
     </view>
     <view class='teamInfo'>
-        <text class='teamName'>{{teamName}}</text>
-        <text class='teamLocation'>{{teamLocation}}</text>
+        <text class='teamName'>{{teamInfo.teamName}}</text>
+        <text class='teamLocation'>{{teamInfo.teamLocation}}</text>
     </view>
 </view>

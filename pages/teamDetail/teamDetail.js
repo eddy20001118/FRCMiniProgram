@@ -5,7 +5,19 @@ Page({
      * 页面的初始数据
      */
     data: {
-        windowsTitle : String
+        windowsTitle : String,
+        eventInfo: {
+            eventTitle: "Shenzhen Regional",
+            eventLocation: "Shenzhen Shi, Guangdong Sheng, China",
+            eventStartDate: "Mar 7",
+            eventEndDate: "Mar 10",
+            eventYear: "2019"
+        },
+        teamIndex : {
+            teamName : "Pharma Atom Storm",
+            registedLocation : "Shenzhen, Guangdong, China", 
+            organization  :"Atom Creative Town&Atom robot education"
+        }
     },
 
     /**

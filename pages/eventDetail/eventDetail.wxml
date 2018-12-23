@@ -3,27 +3,20 @@
         <van-tab title="Summary">
             <view class='container'>
                 <event-index 
-                    eventTitle="Shenzhen Regional" 
-                    eventLocation="Tuanjie Rd, Longgang Qu, Shenzhen Shi, Guangdong Sheng, China, 518118" 
-                    eventStartDate="Mar 7" 
-                    eventEndDate="Mar 10" 
-                    eventYear=" 2019" />
+                    eventIndex="{{eventIndex}}" />
                 <title-list title="Top Team">
                     <title-list-content 
                     wx:for="{{teamlist}}" 
                     wx:key="{{index}}" 
                     index="{{index}}" 
-                    teamNumber="{{item}}" />
+                    teamNumber="{{item.teamNumber}}" />
                 </title-list>
             </view>
         </van-tab>
         <van-tab title="Teams">
             <view class='container'>
                 <pin-list wx:for="{{teamlist}}" wx:key="{{index}}">
-                    <team-card 
-                        teamNumber="{{item}}" 
-                        teamName="Pharma Atom Storm" 
-                        teamLocation="Shenzhen, Guangdong, China" />
+                    <team-card teamInfo="{{item}}"/>
                 </pin-list>
             </view>
         </van-tab>

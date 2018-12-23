@@ -1,7 +1,9 @@
 <view class='event'>
-    <text class='eventTitle'>{{eventTitle}}</text>
+    <text class='eventTitle'>{{eventInfo.eventTitle}}</text>
     <view class='location-date'>
-        <text class='location'>{{eventLocation}}</text>
-        <text class='date'>{{eventStartDate}} to {{eventEndDate}}, {{eventYear}}</text>
+        <text class='location'>{{eventInfo.eventLocation}}</text>
+        <text class='date'>
+            {{eventInfo.eventStartDate}} to {{eventInfo.eventEndDate}}, {{eventInfo.eventYear}}
+        </text>
     </view>
 </view>

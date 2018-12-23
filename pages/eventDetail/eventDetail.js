@@ -6,7 +6,34 @@ Page({
      */
     data: {
         windowsTitle : String,
-        teamlist : [6766, 5555, 4444, 3333],
+        teamlist: [
+            {
+            teamNumber: "6766",
+            teamName: "Pharma Atom Storm",
+            teamLocation: "Shenzhen, Guangdong, China"
+            }, 
+            {
+                teamNumber: "5555",
+                teamName: "Pharma Atom Storm",
+                teamLocation: "Shenzhen, Guangdong, China"
+            }, 
+            {
+                teamNumber: "4444",
+                teamName: "Pharma Atom Storm",
+                teamLocation: "Shenzhen, Guangdong, China"
+            }, 
+            {
+                teamNumber: "3333",
+                teamName: "Pharma Atom Storm",
+                teamLocation: "Shenzhen, Guangdong, China"
+            }/*  */],
+        eventIndex : {
+            eventTitle : "Shenzhen Regional",
+            eventLocation : "Tuanjie Rd, Longgang Qu, Shenzhen Shi, Guangdong Sheng, China, 518118",
+            eventStartDate : "Mar 7",
+            eventEndDate : "Mar 10",
+            eventYear : "2019"
+        },
         activeNames : ["1"]
     },
 

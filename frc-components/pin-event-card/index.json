@@ -1,0 +1,7 @@
+{
+    "component": true,
+    "usingComponents": {
+        "van-steps": "/dist/steps/index",
+        "event-card": "/frc-components/event-card/index"
+    }
+}
