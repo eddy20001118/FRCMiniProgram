@@ -1,0 +1,16 @@
+<view class="container">
+    <van-tabs style="width:750rpx;" color="#3f51b5" animated swipeable active="{{ active }}" bind:change="onChange">
+        <van-tab title="Summary">
+            hello
+        </van-tab>
+        <van-tab title="Matches">
+
+        </van-tab>
+        <van-tab title="Stats">
+            
+        </van-tab>
+        <van-tab title="Awards">
+            
+        </van-tab>
+    </van-tabs>
+</view>

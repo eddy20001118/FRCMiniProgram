@@ -16,7 +16,9 @@
         <van-tab title="Teams">
             <view class='container'>
                 <pin-list wx:for="{{teamlist}}" wx:key="{{index}}">
-                    <team-card teamInfo="{{item}}"/>
+                    <view data-id="{{index}}" bindtap='onEventCardClick'>
+                        <team-card teamInfo="{{item}}"/>
+                    </view>
                 </pin-list>
             </view>
         </van-tab>

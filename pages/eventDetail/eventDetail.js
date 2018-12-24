@@ -94,5 +94,11 @@ Page({
      */
     onShareAppMessage: function () {
 
+    },
+    onEventCardClick: function (e) {
+        var index = e.currentTarget.dataset.id;
+        wx.navigateTo({
+            url: `/pages/teamAtEvent/teamAtEvent?eventName=${this.data.eventIndex.eventTitle}&teamNumber=${this.data.teamlist[index].teamNumber}`,
+        })
     }
 })

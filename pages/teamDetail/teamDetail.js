@@ -15,10 +15,11 @@ Page({
             eventYear: "2019" */
         },
         teamIndex : {
+            /* teamNumber : String,
             teamName : "Pharma Atom Storm",
             registedLocation : "Shenzhen, Guangdong, China", 
             organization  :"Atom Creative Town&Atom robot education",
-            teamYearArray : ["2019","2018","2017"]
+            teamYearArray : ["2019","2018","2017"] */
         }
     },
 
@@ -26,6 +27,15 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        this.setData({
+            teamIndex: {
+                teamNumber: options.teamNumber,
+                teamName: "Pharma Atom Storm",
+                registedLocation: "Shenzhen, Guangdong, China",
+                organization: "Atom Creative Town&Atom robot education",
+                teamYearArray: ["2019", "2018", "2017"]
+            }
+        })
         if (options.teamNumber != null)
             wx.setNavigationBarTitle({
                 title: "Team " + options.teamNumber 
@@ -82,7 +92,7 @@ Page({
 
     onEventCardClick: function () {
         wx.navigateTo({
-            url: "/pages/eventDetail/eventDetail?eventName=" + this.data.eventInfo.eventTitle,
+            url: `/pages/teamAtEvent/teamAtEvent?eventName=${this.data.eventInfo.eventTitle}&teamNumber=${this.data.teamIndex.teamNumber}`,
         })
     },
 

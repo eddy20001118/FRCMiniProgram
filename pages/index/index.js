@@ -1,7 +1,7 @@
 Page({
     data : {
         teamInfo: { 
-            teamNumber : "6766",
+            teamNumber : "6866",
             teamName : "Pharma Atom Storm",
             teamLocation: "Shenzhen, Guangdong, China"
         },

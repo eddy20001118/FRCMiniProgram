@@ -5,7 +5,8 @@
 		"pages/teamData/teamData",
 		"pages/myFavorite/myFavorite",
         "pages/eventDetail/eventDetail",
-        "pages/teamDetail/teamDetail"
+        "pages/teamDetail/teamDetail",
+        "pages/teamAtEvent/teamAtEvent"
 	],
 	"window": {
 		"backgroundTextStyle": "light",
