@@ -5,42 +5,42 @@ Page({
      * 页面的初始数据
      */
     data: {
-        windowsTitle : String,
-        teamlist: [
-            {
-            teamNumber: "6766",
-            teamName: "Pharma Atom Storm",
-            teamLocation: "Shenzhen, Guangdong, China"
-            }, 
+        windowsTitle: String,
+        teamlist: [{
+                teamNumber: "6766",
+                teamName: "Pharma Atom Storm",
+                teamLocation: "Shenzhen, Guangdong, China"
+            },
             {
                 teamNumber: "5555",
                 teamName: "Pharma Atom Storm",
                 teamLocation: "Shenzhen, Guangdong, China"
-            }, 
+            },
             {
                 teamNumber: "4444",
                 teamName: "Pharma Atom Storm",
                 teamLocation: "Shenzhen, Guangdong, China"
-            }, 
+            },
             {
                 teamNumber: "3333",
                 teamName: "Pharma Atom Storm",
                 teamLocation: "Shenzhen, Guangdong, China"
-            }/*  */],
-        eventIndex : {
-            eventTitle : "Shenzhen Regional",
-            eventLocation : "Tuanjie Rd, Longgang Qu, Shenzhen Shi, Guangdong Sheng, China, 518118",
-            eventStartDate : "Mar 7",
-            eventEndDate : "Mar 10",
-            eventYear : "2019"
+            } /*  */
+        ],
+        eventIndex: {
+            eventTitle: "Shenzhen Regional",
+            eventLocation: "Tuanjie Rd, Longgang Qu, Shenzhen Shi, Guangdong Sheng, China, 518118",
+            eventStartDate: "Mar 7",
+            eventEndDate: "Mar 10",
+            eventYear: "2019"
         },
-        activeNames : ["1"]
+        activeNames: []
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: function(options) {
         if (options.eventName != null)
             wx.setNavigationBarTitle({
                 title: options.eventName
@@ -50,55 +50,62 @@ Page({
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function () {
+    onReady: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
+    onShow: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面隐藏
      */
-    onHide: function () {
+    onHide: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
-    onUnload: function () {
+    onUnload: function() {
 
     },
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function () {
+    onPullDownRefresh: function() {
 
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function () {
+    onReachBottom: function() {
 
     },
 
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    onShareAppMessage: function() {
 
     },
-    onEventCardClick: function (e) {
+
+    onEventCardClick: function(e) {
         var index = e.currentTarget.dataset.id;
         wx.navigateTo({
             url: `/pages/teamAtEvent/teamAtEvent?eventName=${this.data.eventIndex.eventTitle}&teamNumber=${this.data.teamlist[index].teamNumber}`,
+        })
+    },
+    
+    onCollapseChange(event) {
+        this.setData({
+            activeNames : event.detail
         })
     }
 })

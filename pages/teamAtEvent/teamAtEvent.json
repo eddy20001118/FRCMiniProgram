@@ -5,6 +5,7 @@
         "pin-list": "/frc-components/pin-list/index",
         "teamatevent-summary": "/frc-components/teamatevent-summary/index",
         "teamatevent-status": "/frc-components/teamatevent-status/index",
-        "teamatevent-awards" : "/frc-components/teamatevent-awards/index"
+        "awards-card" : "/frc-components/awards-card/index",
+        "match-card": "/frc-components/match-card/index"
     }
 }

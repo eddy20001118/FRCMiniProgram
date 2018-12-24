@@ -1,0 +1,8 @@
+<pin-list>
+    <view class="alliance-container">
+        <view class='alliance-title'>Alliance 1</view>
+        <view class='alliance-team'>6766</view>
+        <view class='alliance-team'>6766</view>
+        <view class='alliance-team'>6766</view>
+    </view>
+</pin-list>

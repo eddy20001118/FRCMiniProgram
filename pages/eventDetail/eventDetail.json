@@ -6,6 +6,11 @@
         "pin-list": "/frc-components/pin-list/index",
         "team-card": "/frc-components/team-card/index",
         "van-tab": "/dist/tab/index",
-        "van-tabs": "/dist/tabs/index"
+        "van-tabs": "/dist/tabs/index",
+        "match-card": "/frc-components/match-card/index",
+        "awards-card": "/frc-components/awards-card/index",
+        "alliance-card": "/frc-components/alliance-card/index",
+        "van-collapse": "/dist/collapse/index",
+        "van-collapse-item": "/dist/collapse-item/index"
     }
 }

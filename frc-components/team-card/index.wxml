@@ -1,9 +1,12 @@
-<view class='team'>
-    <view class='teamNumberBox'>
-        <text class='teamNumber'>{{teamInfo.teamNumber}}</text>
+<pin-list>
+    <view class='team'>
+        <view class='teamNumberBox'>
+            <text class='teamNumber'>{{teamInfo.teamNumber}}</text>
+        </view>
+        <view class='teamInfo'>
+            <text class='teamName'>{{teamInfo.teamName}}</text>
+            <text class='teamLocation'>{{teamInfo.teamLocation}}</text>
+        </view>
     </view>
-    <view class='teamInfo'>
-        <text class='teamName'>{{teamInfo.teamName}}</text>
-        <text class='teamLocation'>{{teamInfo.teamLocation}}</text>
-    </view>
-</view>
+    <slot></slot>
+</pin-list>

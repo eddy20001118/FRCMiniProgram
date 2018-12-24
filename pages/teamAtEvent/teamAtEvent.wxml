@@ -7,7 +7,9 @@
         </van-tab>
         <van-tab title="Matches">
             <view class="container">
-                empty1
+                <match-card></match-card>
+                <match-card></match-card>
+                <match-card></match-card>
             </view>
         </van-tab>
         <van-tab title="Stats">
@@ -17,7 +19,7 @@
         </van-tab>
         <van-tab title="Awards">
             <view class="container">
-                <teamatevent-awards></teamatevent-awards>
+                <awards-card></awards-card>
             </view>
         </van-tab>
     </van-tabs>

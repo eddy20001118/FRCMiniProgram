@@ -1,3 +1,6 @@
 {
-    "component": true
+    "component": true,
+    "usingComponents": {
+        "pin-list": "/frc-components/pin-list/index"
+    }
 }
