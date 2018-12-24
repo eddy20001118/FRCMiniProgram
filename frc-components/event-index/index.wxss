@@ -14,5 +14,5 @@
 .text{
     margin-left : 50rpx;
     font-size: 30rpx;
-    width: 600rpx;
+    width: 550rpx;
 }

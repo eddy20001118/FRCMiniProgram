@@ -1,0 +1,9 @@
+<view>
+    <pin-list>
+        <view class='list'>
+            <view class='list-title'>Regional Finalists</view>
+            <view class='list-content'>6766</view>
+            <view class='list-content'>Pharma Atom Storm</view>
+        </view>
+    </pin-list>
+</view>

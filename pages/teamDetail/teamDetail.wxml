@@ -6,7 +6,7 @@
             </view>
         </van-tab>
         <van-tab title="Event">
-            <view class='container' bindtap='onEventCardClick'>
+            <view class='container' hidden='{{eventInfo.isEmpty}}' bindtap='onEventCardClick'>
                 <pin-list>
                     <event-card eventInfo="{{eventInfo}}" />
                 </pin-list>

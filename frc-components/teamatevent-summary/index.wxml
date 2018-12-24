@@ -1,0 +1,35 @@
+<view>
+    <pin-list>
+        <view class='list'>
+            <view class='list-title'>Rank</view>
+            <view class='list-content'>15th</view>
+        </view>
+    </pin-list>
+    <pin-list>
+        <view class='list'>
+            <view class='list-title'>Awards</view>
+            <view class='list-content'>Won 4 awards</view>
+        </view>
+    </pin-list>
+    <pin-list>
+        <view class='list'>
+            <view class='list-title'>Qual Record</view>
+            <view class='list-content'>10-3-0</view>
+        </view>
+    </pin-list>
+    <pin-list>
+        <view class='list'>
+            <view class='list-title'>Alliance</view>
+            <view class='list-content'>
+                Captain of Alliance 2
+            </view>
+        </view>
+    </pin-list>
+    <pin-list>
+        <view class='list'>
+            <view class='list-title'>Team Status</view>
+            <view class='list-content'>Eliminated in the Finals</view>
+            <view class='list-content-nonbold'>Playoff record 4-3-0</view>
+        </view>
+    </pin-list>
+</view>

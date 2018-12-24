@@ -1,0 +1,20 @@
+<view>
+    <pin-list>
+        <view class='list'>
+            <view class='list-title'>OPR</view>
+            <view class='list-content'>145.03</view>
+        </view>
+    </pin-list>
+    <pin-list>
+        <view class='list'>
+            <view class='list-title'>DPR</view>
+            <view class='list-content'>35.28</view>
+        </view>
+    </pin-list>
+    <pin-list>
+        <view class='list'>
+            <view class='list-title'>CCWM</view>
+            <view class='list-content'>109.75</view>
+        </view>
+    </pin-list>
+</view>

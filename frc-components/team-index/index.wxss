@@ -12,7 +12,9 @@
 }
 
 .text{
-    width: 600rpx;
+    width: 550rpx;
     margin-left : 50rpx;
+    margin-right: 25rpx;
+    overflow: hidden;
     font-size: 30rpx;
 }

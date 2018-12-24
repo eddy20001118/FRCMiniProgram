@@ -13,5 +13,7 @@
             active="{{active}}"/>
         </view>
     </pin-list>
-   
+    <pin-list>
+        <match-card></match-card>
+    </pin-list>
 </view>
