@@ -12,7 +12,7 @@
             <view class='container'>
                 <view wx:for="{{teamlist}}" wx:key="{{index}}">
                     <view data-id="{{index}}" bindtap='onEventCardClick'>
-                        <team-card teamInfo="{{item}}" />
+                        <team-card teamInfo="{{item}}" noBottomPadding="{{false}}" />
                     </view>
                 </view>
             </view>

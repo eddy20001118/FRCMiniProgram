@@ -1,6 +1,7 @@
 Component({
     properties: {
-        teamInfo : null
+        teamInfo : null,
+        noBottomPadding : Boolean
     },
     data: {},
     methods: {}

@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="container">
     <view bindtap='onTeamCardClick'>
-        <team-card teamInfo="{{teamInfo}}">
+        <team-card teamInfo="{{teamInfo}}" noBottomPadding="{{true}}">
             <text class='text'>当前比赛:</text>
             <match-card></match-card>
         </team-card>
