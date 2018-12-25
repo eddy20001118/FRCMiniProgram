@@ -7,9 +7,28 @@
         </van-tab>
         <van-tab title="Matches">
             <view class="container">
-                <match-card></match-card>
-                <match-card></match-card>
-                <match-card></match-card>
+                <van-collapse value="{{ activeNames }}" bind:change="onCollapseChange">
+                    <van-collapse-item title="Qualification Matches" name="Qual">
+                        <pin-list>
+                        <match-card></match-card>
+                        </pin-list>
+                    </van-collapse-item>
+                    <van-collapse-item title="Quarterfinal Matches" name="Quarter">
+                        <pin-list>
+                        <match-card></match-card>
+                        </pin-list>
+                    </van-collapse-item>
+                    <van-collapse-item title="Semifinal Matches" name="Semi">
+                        <pin-list>
+                        <match-card></match-card>
+                        </pin-list>
+                    </van-collapse-item>
+                    <van-collapse-item title="Finals Matches" name="Final">
+                        <pin-list>
+                        <match-card></match-card>
+                        </pin-list>
+                    </van-collapse-item>
+                </van-collapse>
             </view>
         </van-tab>
         <van-tab title="Stats">

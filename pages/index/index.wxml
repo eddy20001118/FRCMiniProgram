@@ -1,7 +1,10 @@
 <!--index.wxml-->
 <view class="container">
     <view bindtap='onTeamCardClick'>
-        <team-card teamInfo="{{teamInfo}}" />
+        <team-card teamInfo="{{teamInfo}}">
+            <text class='text'>当前比赛:</text>
+            <match-card></match-card>
+        </team-card>
     </view>
     <view bindtap='onEventCardClick'>
         <pin-event-card eventInfo="{{eventInfo}}" steps="{{steps}}

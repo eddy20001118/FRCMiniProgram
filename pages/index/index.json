@@ -3,6 +3,7 @@
       "team-card": "/frc-components/team-card/index",
       "event-card": "/frc-components/event-card/index",
       "pin-event-card": "/frc-components/pin-event-card/index",
-      "pin-list": "/frc-components/pin-list/index"
+      "pin-list": "/frc-components/pin-list/index",
+      "match-card": "/frc-components/match-card/index"
   }
 }

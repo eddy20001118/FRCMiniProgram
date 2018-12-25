@@ -18,32 +18,48 @@
             </view>
         </van-tab>
         <van-tab title="Rankings">
-            Empty
+            <view class='container'>
+                <rank-card></rank-card>
+            </view>
         </van-tab>
         <van-tab title="Matches">
             <view class='container'>
                 <van-collapse value="{{ activeNames }}" bind:change="onCollapseChange">
                     <van-collapse-item title="Qualification Matches" name="Qual">
-                        <match-card></match-card>
-                        <match-card></match-card>
-                        <match-card></match-card>
+                        <pin-list>
+                            <match-card></match-card>
+                        </pin-list>
+                        <pin-list>
+                            <match-card></match-card>
+                        </pin-list>
+                        <pin-list>
+                            <match-card></match-card>
+                        </pin-list>
                     </van-collapse-item>
                     <van-collapse-item title="Quarterfinal Matches" name="Quarter">
-                        <match-card></match-card>
+                        <pin-list>
+                            <match-card></match-card>
+                        </pin-list>
                     </van-collapse-item>
                     <van-collapse-item title="Semifinal Matches" name="Semi">
-                        <match-card></match-card>
+                        <pin-list>
+                            <match-card></match-card>
+                        </pin-list>
                     </van-collapse-item>
                     <van-collapse-item title="Finals Matches" name="Final">
-                        <match-card></match-card>
+                        <pin-list>
+                            <match-card></match-card>
+                        </pin-list>
                     </van-collapse-item>
                 </van-collapse>
             </view>
         </van-tab>
         <van-tab title="Alliances">
-            <alliance-card></alliance-card>
-            <alliance-card></alliance-card>
-            <alliance-card></alliance-card>
+            <view class='container'>
+                <alliance-card></alliance-card>
+                <alliance-card></alliance-card>
+                <alliance-card></alliance-card>
+            </view>
         </van-tab>
         <van-tab title="Awards">
             <view class='container'>
