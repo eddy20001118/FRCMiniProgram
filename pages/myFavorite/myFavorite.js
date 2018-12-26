@@ -12,7 +12,15 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-
+		wx.request({
+			url: `https://www.thebluealliance.com/api/v3/team/frc254/simple?X-TBA-Auth-Key=${myKey}`,
+			header: {
+				'content-type': 'application/json' // 默认值
+			},
+			success: function(res) {
+			  console.log(res.data)
+			}
+		  })
 	},
 
 	/**

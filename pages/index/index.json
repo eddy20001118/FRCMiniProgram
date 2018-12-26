@@ -1,4 +1,6 @@
 {
+  "backgroundTextStyle": "dark",
+  "enablePullDownRefresh": true,
   "usingComponents": {
       "team-card": "/frc-components/team-card/index",
       "event-card": "/frc-components/event-card/index",

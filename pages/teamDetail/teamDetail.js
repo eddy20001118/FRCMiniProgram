@@ -5,43 +5,16 @@ Page({
      * 页面的初始数据
      */
     data: {
-        windowsTitle : String,
-        eventInfo: {
-            isEmpty : true
-            /* eventTitle: "Shenzhen Regional",
-            eventLocation: "Shenzhen Shi, Guangdong Sheng, China",
-            eventStartDate: "Mar 7",
-            eventEndDate: "Mar 10",
-            eventYear: "2019" */
-        },
-        teamIndex : {
-            /* teamNumber : String,
-            teamName : "Pharma Atom Storm",
-            registedLocation : "Shenzhen, Guangdong, China", 
-            organization  :"Atom Creative Town&Atom robot education",
-            teamYearArray : ["2019","2018","2017"] */
-        }
+        windowsTitle: String,
+        eventInfo: Object,
+        teamIndex: Object
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        var teamInfo = JSON.parse(decodeURIComponent(options.teamInfo));
-        this.setData({
-            teamIndex: {
-                teamNumber: teamInfo.teamNumber,
-                teamName: teamInfo.teamName,
-                teamLocation: teamInfo.teamLocation,
-                registedLocation: "Shenzhen, Guangdong, China",
-                organization: "Atom Creative Town&Atom robot education",
-                teamYearArray: ["2019", "2018", "2017"]
-            }
-        })
-        if (teamInfo.teamNumber != null)
-            wx.setNavigationBarTitle({
-                title: "Team " + teamInfo.teamNumber 
-            })
+        this.onRequireData(options);
     },
 
     /**
@@ -100,15 +73,38 @@ Page({
         })
     },
 
-    getTeamYear: function (e){
+    onRequireData: function (options) {
+        //TODO: 换成从服务器请求来的数据
+        var teamInfo = JSON.parse(decodeURIComponent(options.teamInfo));
         this.setData({
+            teamIndex: {
+                teamNumber: teamInfo.teamNumber,
+                teamName: teamInfo.teamName,
+                teamLocation: teamInfo.teamLocation,
+                registedLocation: "Shenzhen, Guangdong, China",
+                organization: "Atom Creative Town&Atom robot education",
+                teamYearArray: ["2019", "2018", "2017"]
+            },
             eventInfo: {
                 eventTitle: "Shenzhen Regional",
                 eventLocation: "Shenzhen Shi, Guangdong Sheng, China",
                 eventStartDate: "Mar 7",
-                eventEndDate: "Mar 10",
-                eventYear: e.detail
+                eventEndDate: "Mar 10"
             }
+        })
+        if (teamInfo.teamNumber != null)
+            wx.setNavigationBarTitle({
+                title: "Team " + teamInfo.teamNumber
+            })
+    },
+    onCallBack: function () {
+
+    },
+
+    getTeamYear: function (e) {
+        this.data.eventInfo.eventYear = e.detail;
+        this.setData({
+            eventInfo: this.data.eventInfo
         })
     }
 })

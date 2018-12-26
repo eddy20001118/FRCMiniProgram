@@ -116,7 +116,6 @@ Page({
     onLoad: function(options) {
         var eventIndex = JSON.parse(decodeURIComponent(options.eventIndex));
         var team = JSON.parse(decodeURIComponent(options.team));
-        console.log(team.organization)
         if (eventIndex != null){
             this.setData({
                 eventIndex: eventIndex
