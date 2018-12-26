@@ -35,15 +35,15 @@ Page({
         }
     },
     onEventCardClick:function(){
-        var eventInfo = JSON.stringify(this.data.eventInfo);
+        var eventInfo = encodeURIComponent(JSON.stringify(this.data.eventInfo));
         wx.navigateTo({
-            url: "/pages/eventDetail/eventDetail?eventInfo="+eventInfo
+            url: `/pages/eventDetail/eventDetail?eventInfo=${eventInfo}`
         })
     },
     onTeamCardClick: function () {
-        var teamInfo = JSON.stringify(this.data.teamInfo);
+        var teamInfo = encodeURIComponent(JSON.stringify(this.data.teamInfo));
         wx.navigateTo({
-            url: '/pages/teamDetail/teamDetail?teamInfo=' + teamInfo
+            url: `/pages/teamDetail/teamDetail?teamInfo=${teamInfo}`
         })
     }
 })

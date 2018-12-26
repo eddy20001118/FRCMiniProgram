@@ -114,8 +114,9 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        var eventIndex = JSON.parse(options.eventIndex);
-        var team = JSON.parse(options.team);
+        var eventIndex = JSON.parse(decodeURIComponent(options.eventIndex));
+        var team = JSON.parse(decodeURIComponent(options.team));
+        console.log(team.organization)
         if (eventIndex != null){
             this.setData({
                 eventIndex: eventIndex

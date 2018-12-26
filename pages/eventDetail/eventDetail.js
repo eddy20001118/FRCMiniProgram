@@ -136,7 +136,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        var eventInfo = JSON.parse(options.eventInfo);
+        var eventInfo = JSON.parse(decodeURIComponent(options.eventInfo));
         if (eventInfo != null) {
             this.setData({
                 eventIndex: eventInfo
@@ -200,8 +200,8 @@ Page({
 
     onTeamCardClick: function(e) {
         var index = e.currentTarget.dataset.id;
-        var eventIndex = JSON.stringify(this.data.eventIndex);
-        var team = JSON.stringify(this.data.teamlist[index]);
+        var eventIndex = encodeURIComponent(JSON.stringify(this.data.eventIndex));
+        var team = encodeURIComponent(JSON.stringify(this.data.teamlist[index]));
         wx.navigateTo({
             url: `/pages/teamAtEvent/teamAtEvent?eventIndex=${eventIndex}&team=${team}`,
         })
