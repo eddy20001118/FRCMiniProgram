@@ -1,11 +1,11 @@
 <pin-list>
     <view class='rank'>
         <view class='rankNumberBox'>
-            <view class='rankNumber'>#11</view>
+            <view class='rankNumber'>#{{rank}}</view>
         </view>
         <view class='rankInfo'>
-            <view class='teamName'>Pharma Atom Storm 6766</view>
-            <view class='rankScore'>Ranking Score: 2.07</view>
+            <view class='teamName'>{{team[0]}} {{team[1]}}</view>
+            <view class='rankScore'>Ranking Score: {{rankScore}}</view>
         </view>
     </view>
 </pin-list>

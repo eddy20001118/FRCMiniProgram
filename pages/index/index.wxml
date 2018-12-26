@@ -3,7 +3,12 @@
     <view bindtap='onTeamCardClick'>
         <team-card teamInfo="{{teamInfo}}" noBottomPadding="{{true}}">
             <text class='text'>当前比赛:</text>
-            <match-card></match-card>
+            <match-card 
+                matchType="{{matchCard.matchType}}"
+                redAlliance="{{matchCard.redAlliance}}"
+                blueAlliance="{{matchCard.blueAlliance}}"
+                score="{{matchCard.score}}"
+                />
         </team-card>
     </view>
     <view bindtap='onEventCardClick'>

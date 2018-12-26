@@ -1,35 +1,37 @@
 <view>
     <pin-list>
-        <view class='list'>
+        <view hidden='{{summaryInfo.rank==null}}' class='list'>
             <view class='list-title'>Rank</view>
-            <view class='list-content'>15th</view>
+            <view class='list-content'>{{summaryInfo.rank}}th</view>
         </view>
     </pin-list>
     <pin-list>
-        <view class='list'>
+        <view hidden='{{summaryInfo.award==null}}' class='list'>
             <view class='list-title'>Awards</view>
-            <view class='list-content'>Won 4 awards</view>
+            <view class='list-content'>Won {{summaryInfo.award}} awards</view>
         </view>
     </pin-list>
     <pin-list>
-        <view class='list'>
+        <view hidden='{{summaryInfo.qualrecord==null}}' class='list'>
             <view class='list-title'>Qual Record</view>
-            <view class='list-content'>10-3-0</view>
+            <view class='list-content'>{{summaryInfo.qualrecord[0]}}-{{summaryInfo.qualrecord[1]}}-{{summaryInfo.qualrecord[2]}}</view>
         </view>
     </pin-list>
     <pin-list>
-        <view class='list'>
+        <view hidden='{{summaryInfo.alliance==null}}' class='list'>
             <view class='list-title'>Alliance</view>
             <view class='list-content'>
-                Captain of Alliance 2
+                {{summaryInfo.alliance.allianceMember}} of Alliance {{summaryInfo.alliance.allianceNumber}}
             </view>
         </view>
     </pin-list>
     <pin-list>
-        <view class='list'>
+        <view hidden='{{summaryInfo.status==null}}' class='list'>
             <view class='list-title'>Team Status</view>
-            <view class='list-content'>Eliminated in the Finals</view>
-            <view class='list-content-nonbold'>Playoff record 4-3-0</view>
+            <view hidden="{{!summaryInfo.status.inFinals}}">
+                <view class='list-content'>Eliminated in the {{summaryInfo.status.end}}</view>
+                <view class='list-content-nonbold'>Playoff record {{summaryInfo.status.record[0]}}-{{summaryInfo.status.record[1]}}-{{summaryInfo.status.record[2]}}</view>
+            </view>
         </view>
     </pin-list>
 </view>

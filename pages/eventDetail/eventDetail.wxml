@@ -11,7 +11,7 @@
         <van-tab title="Teams">
             <view class='container'>
                 <view wx:for="{{teamlist}}" wx:key="{{index}}">
-                    <view data-id="{{index}}" bindtap='onEventCardClick'>
+                    <view data-id="{{index}}" bindtap='onTeamCardClick'>
                         <team-card teamInfo="{{item}}" noBottomPadding="{{false}}" />
                     </view>
                 </view>
@@ -19,36 +19,54 @@
         </van-tab>
         <van-tab title="Rankings">
             <view class='container'>
-                <rank-card></rank-card>
+                <rank-card
+                    rank="{{rankCard.rank}}"
+                    team="{{rankCard.team}}"
+                    rankScore="{{rankCard.rankScore}}"
+                />
             </view>
         </van-tab>
         <van-tab title="Matches">
             <view class='container'>
                 <van-collapse value="{{ activeNames }}" bind:change="onCollapseChange">
                     <van-collapse-item title="Qualification Matches" name="Qual">
-                        <pin-list>
-                            <match-card></match-card>
-                        </pin-list>
-                        <pin-list>
-                            <match-card></match-card>
-                        </pin-list>
-                        <pin-list>
-                            <match-card></match-card>
+                        <pin-list wx:for="{{match.qual.matchlist}}" wx:key="{{index}}">
+                            <match-card 
+                            matchType="{{match.qual.matchlist[index].matchType}}" 
+                            redAlliance="{{match.qual.matchlist[index].redAlliance}}" 
+                            blueAlliance="{{match.qual.matchlist[index].blueAlliance}}" 
+                            score="{{match.qual.matchlist[index].score}}" 
+                            />
                         </pin-list>
                     </van-collapse-item>
                     <van-collapse-item title="Quarterfinal Matches" name="Quarter">
-                        <pin-list>
-                            <match-card></match-card>
+                        <pin-list wx:for="{{match.quarter.matchlist}}" wx:key="{{index}}">
+                            <match-card 
+                            matchType="{{match.quarter.matchlist[index].matchType}}" 
+                            redAlliance="{{match.quarter.matchlist[index].redAlliance}}" 
+                            blueAlliance="{{match.quarter.matchlist[index].blueAlliance}}" 
+                            score="{{match.quarter.matchlist[index].score}}" 
+                            />
                         </pin-list>
                     </van-collapse-item>
                     <van-collapse-item title="Semifinal Matches" name="Semi">
-                        <pin-list>
-                            <match-card></match-card>
+                        <pin-list wx:for="{{match.semi.matchlist}}" wx:key="{{index}}">
+                            <match-card 
+                            matchType="{{match.semi.matchlist[index].matchType}}" 
+                            redAlliance="{{match.semi.matchlist[index].redAlliance}}" 
+                            blueAlliance="{{match.semi.matchlist[index].blueAlliance}}" 
+                            score="{{match.semi.matchlist[index].score}}" 
+                            />
                         </pin-list>
                     </van-collapse-item>
                     <van-collapse-item title="Finals Matches" name="Final">
-                        <pin-list>
-                            <match-card></match-card>
+                        <pin-list wx:for="{{match.final.matchlist}}" wx:key="{{index}}">
+                            <match-card 
+                            matchType="{{match.final.matchlist[index].matchType}}" 
+                            redAlliance="{{match.final.matchlist[index].redAlliance}}" 
+                            blueAlliance="{{match.final.matchlist[index].blueAlliance}}" 
+                            score="{{match.final.matchlist[index].score}}" 
+                            />
                         </pin-list>
                     </van-collapse-item>
                 </van-collapse>
@@ -56,14 +74,18 @@
         </van-tab>
         <van-tab title="Alliances">
             <view class='container'>
-                <alliance-card></alliance-card>
-                <alliance-card></alliance-card>
-                <alliance-card></alliance-card>
+                <alliance-card
+                    allianceNumber="{{allianceCard.allianceNumber}}"
+                    allianceTeam="{{allianceCard.allianceTeam}}"
+                />
             </view>
         </van-tab>
         <van-tab title="Awards">
             <view class='container'>
-                <awards-card></awards-card>
+                <awards-card
+                    awardTitle="{{awardCard.awardTitle}}"
+                    awardTeamList="{{awardCard.awardTeamList}}"
+                />
             </view>
         </van-tab>
     </van-tabs>

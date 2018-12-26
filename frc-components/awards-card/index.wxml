@@ -1,9 +1,11 @@
 <view>
     <pin-list>
         <view class='list'>
-            <view class='list-title'>Regional Finalists</view>
-            <view class='list-content'>6766</view>
-            <view class='list-content'>Pharma Atom Storm</view>
+            <view class='list-title'>{{awardTitle}}</view>
+            <view wx:for="{{awardTeamList}}" wx:key="{{index}}">
+                <view class='list-content'>{{awardTeamList[index].teamNumber}}</view>
+                <view class='list-content'>{{awardTeamList[index].teamName}}</view>
+            </view>
         </view>
     </pin-list>
 </view>

@@ -27,18 +27,20 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        var teamInfo = JSON.parse(options.teamInfo);
         this.setData({
             teamIndex: {
-                teamNumber: options.teamNumber,
-                teamName: "Pharma Atom Storm",
+                teamNumber: teamInfo.teamNumber,
+                teamName: teamInfo.teamName,
+                teamLocation: teamInfo.teamLocation,
                 registedLocation: "Shenzhen, Guangdong, China",
-                organization: "Atom Creative Town&Atom robot education",
+                organization: "Atom Creative Town Atom robot education",
                 teamYearArray: ["2019", "2018", "2017"]
             }
         })
-        if (options.teamNumber != null)
+        if (teamInfo.teamNumber != null)
             wx.setNavigationBarTitle({
-                title: "Team " + options.teamNumber 
+                title: "Team " + teamInfo.teamNumber 
             })
     },
 
@@ -91,8 +93,10 @@ Page({
     },
 
     onEventCardClick: function () {
+        var eventInfo = JSON.stringify(this.data.eventInfo);
+        var teamIndex = JSON.stringify(this.data.teamIndex);
         wx.navigateTo({
-            url: `/pages/teamAtEvent/teamAtEvent?eventName=${this.data.eventInfo.eventTitle}&teamNumber=${this.data.teamIndex.teamNumber}`,
+            url: `/pages/teamAtEvent/teamAtEvent?eventIndex=${eventInfo}&team=${teamIndex}`
         })
     },
 

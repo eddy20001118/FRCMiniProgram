@@ -6,6 +6,7 @@ Page({
      */
     data: {
         windowsTitle: String,
+        //TODO 在onLoad请求服务器队伍列表
         teamlist: [{
                 teamNumber: "6766",
                 teamName: "Pharma Atom Storm",
@@ -28,11 +29,105 @@ Page({
             } /*  */
         ],
         eventIndex: {
-            eventTitle: "Shenzhen Regional",
+            /* eventTitle: "Shenzhen Regional",
             eventLocation: "Tuanjie Rd, Longgang Qu, Shenzhen Shi, Guangdong Sheng, China, 518118",
             eventStartDate: "Mar 7",
             eventEndDate: "Mar 10",
-            eventYear: "2019"
+            eventYear: "2019" */
+        },
+        rankCard: {
+            rank : 11,
+            team: ["Pharma Atom Storm","6766"],
+            rankScore: 2.07
+        },
+        allianceCard: {
+            allianceNumber: 1,
+            allianceTeam: [6766,6866,6966]
+        },
+        awardCard: {
+            awardTitle: "Regional Finalists",
+            awardTeamList: [
+            {
+                teamNumber : 6766,
+                teamName: "Pharma Atom Storm"
+            },
+            {
+                teamNumber: 6766,
+                teamName: "Pharma Atom Storm"
+            }]
+        },
+        match :{
+            qual :{
+                matchlist : [
+                    {
+                        matchType : ["Qual","11"],
+                        redAlliance : [6766,6666,6566],
+                        blueAlliance : [6866,6966,7066],
+                        score : [312,300]
+                    },
+                    {
+                        matchType : ["Qual","11"],
+                        redAlliance : [6766,6666,6566],
+                        blueAlliance : [6866,6966,7066],
+                        score : [312,300]
+                    }
+                ]
+            },
+            quarter :{
+                matchlist : [
+                    {
+                        matchType : ["Qual","11"],
+                        redAlliance : [6766,6666,6566],
+                        blueAlliance : [6866,6966,7066],
+                        score : [312,300]
+                    },
+                    {
+                        matchType : ["Qual","11"],
+                        redAlliance : [6766,6666,6566],
+                        blueAlliance : [6866,6966,7066],
+                        score : [312,300]
+                    },
+                    {
+                        matchType : ["Qual","11"],
+                        redAlliance : [6766,6666,6566],
+                        blueAlliance : [6866,6966,7066],
+                        score : [312,300]
+                    }
+                ]
+            },
+            semi :{
+                matchlist : [
+                    {
+                        matchType : ["Qual","11"],
+                        redAlliance : [6766,6666,6566],
+                        blueAlliance : [6866,6966,7066],
+                        score : [312,300]
+                    },
+                    {
+                        matchType : ["Qual","11"],
+                        redAlliance : [6766,6666,6566],
+                        blueAlliance : [6866,6966,7066],
+                        score : [312,300]
+                    }
+                ]
+            },
+            final :{
+                matchlist : [
+                    {
+                        matchType : ["Qual","11"],
+                        redAlliance : [6766,6666,6566],
+                        blueAlliance : [6866,6966,7066],
+                        score : [312,300]
+                    },
+                    {
+                        matchType : ["Qual","11"],
+                        redAlliance : [6766,6666,6566],
+                        blueAlliance : [6866,6966,7066],
+                        score : [312,300]
+                    }
+                ]
+            }
+
         },
         activeNames: []
     },
@@ -41,10 +136,17 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        if (options.eventName != null)
-            wx.setNavigationBarTitle({
-                title: options.eventName
+        var eventInfo = JSON.parse(options.eventInfo);
+        if (eventInfo != null) {
+            this.setData({
+                eventIndex: eventInfo
             })
+            if (this.data.eventIndex.eventTitle != null) {
+                wx.setNavigationBarTitle({
+                    title: this.data.eventIndex.eventTitle
+                })
+            }
+        }
     },
 
     /**
@@ -96,16 +198,18 @@ Page({
 
     },
 
-    onEventCardClick: function(e) {
+    onTeamCardClick: function(e) {
         var index = e.currentTarget.dataset.id;
+        var eventIndex = JSON.stringify(this.data.eventIndex);
+        var team = JSON.stringify(this.data.teamlist[index]);
         wx.navigateTo({
-            url: `/pages/teamAtEvent/teamAtEvent?eventName=${this.data.eventIndex.eventTitle}&teamNumber=${this.data.teamlist[index].teamNumber}`,
+            url: `/pages/teamAtEvent/teamAtEvent?eventIndex=${eventIndex}&team=${team}`,
         })
     },
-    
+
     onCollapseChange(event) {
         this.setData({
-            activeNames : event.detail
+            activeNames: event.detail
         })
     }
 })

@@ -1,8 +1,8 @@
 <pin-list>
     <view class="alliance-container">
-        <view class='alliance-title'>Alliance 1</view>
-        <view class='alliance-team'>6766</view>
-        <view class='alliance-team'>6766</view>
-        <view class='alliance-team'>6766</view>
+        <view class='alliance-title'>Alliance {{allianceNumber}}</view>
+        <view class='alliance-team'>{{allianceTeam[0]}}</view>
+        <view class='alliance-team'>{{allianceTeam[1]}}</view>
+        <view class='alliance-team'>{{allianceTeam[2]}}</view>
     </view>
 </pin-list>

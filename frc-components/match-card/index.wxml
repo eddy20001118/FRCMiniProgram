@@ -1,26 +1,26 @@
 <view class='match'>
     <view class='matchNumberBox'>
-        <text class='matchNumber'>Qual</text>
-        <text class='matchNumber'>5</text>
+        <text class='matchNumber'>{{matchType[0]}}</text>
+        <text class='matchNumber'>{{matchType[1]}}</text>
     </view>
     <view class='matchInfo'>
         <view class='redAlliance match'>
-            <view class='teamNumber'>6766</view>
-            <view class='teamNumber'>6766</view>
-            <view class='teamNumber'>6766</view>
+            <view class='teamNumber'>{{redAlliance[0]}}</view>
+            <view class='teamNumber'>{{redAlliance[1]}}</view>
+            <view class='teamNumber'>{{redAlliance[2]}}</view>
         </view>
         <view class='blueAlliance match'>
-            <view class='teamNumber'>6766</view>
-            <view class='teamNumber'>6766</view>
-            <view class='teamNumber'>6766</view>
+            <view class='teamNumber'>{{blueAlliance[0]}}</view>
+            <view class='teamNumber'>{{blueAlliance[1]}}</view>
+            <view class='teamNumber'>{{blueAlliance[2]}}</view>
         </view>
     </view>
     <view class='matchInfo'>
         <view class='redScore'>
-            <view class='score'>300</view>
+            <view class='score'>{{score[0]}}</view>
         </view>
         <view class='blueScore'>
-            <view class='score'>300</view>
+            <view class='score'>{{score[1]}}</view>
         </view>
     </view>
 </view>

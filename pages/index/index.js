@@ -1,7 +1,7 @@
 Page({
     data : {
         teamInfo: { 
-            teamNumber : "6866",
+            teamNumber : "6766",
             teamName : "Pharma Atom Storm",
             teamLocation: "Shenzhen, Guangdong, China"
         },
@@ -26,16 +26,24 @@ Page({
             {
                 text: '决赛'
             }
-        ]
+        ],
+        matchCard : {
+            matchType : ["Qual","11"],
+            redAlliance : [6766,6666,6566],
+            blueAlliance : [6866,6966,7066],
+            score : [312,300]
+        }
     },
     onEventCardClick:function(){
+        var eventInfo = JSON.stringify(this.data.eventInfo);
         wx.navigateTo({
-            url: "/pages/eventDetail/eventDetail?eventName="+this.data.eventInfo.eventTitle,
+            url: "/pages/eventDetail/eventDetail?eventInfo="+eventInfo
         })
     },
     onTeamCardClick: function () {
+        var teamInfo = JSON.stringify(this.data.teamInfo);
         wx.navigateTo({
-            url: '/pages/teamDetail/teamDetail?teamNumber='+this.data.teamInfo.teamNumber
+            url: '/pages/teamDetail/teamDetail?teamInfo=' + teamInfo
         })
     }
 })

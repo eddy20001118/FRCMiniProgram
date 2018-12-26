@@ -4,7 +4,9 @@ Component({
      * 组件的属性列表
      */
     properties: {
-
+        rank : Number,
+        team : Array, //[0]-teamname, [1]-teamnumber
+        rankScore : Number
     },
 
     /**
