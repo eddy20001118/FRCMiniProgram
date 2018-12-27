@@ -2,12 +2,12 @@
     <van-tabs style="width:750rpx;" color="#3f51b5" animated swipeable active="{{ active }}" bind:change="onChange">
         <van-tab title="Info">
             <view class='container'>
-                <team-index teamIndex="{{teamIndex}}" bind:event="getTeamYear" />
+                <team-index teamIndex="{{teamIndex}}" teamYearArray="{{teamYearArray}}" bind:event="getTeamYear" />
             </view>
         </van-tab>
         <van-tab title="Event">
-            <view class='container' hidden='{{eventInfo.eventYear==null}}' bindtap='onEventCardClick'>
-                <event-card eventInfo="{{eventInfo}}" />
+            <view class='container' wx:for="{{eventInfo}}" wx:key="{{index}}" id="{{index}}" bindtap='onEventCardClick'>
+                <event-card eventInfo="{{item}}" />
             </view>
         </van-tab>
     </van-tabs>

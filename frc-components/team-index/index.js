@@ -4,7 +4,8 @@ Component({
      * 组件的属性列表
      */
     properties: {
-        teamIndex: null
+        teamIndex: null,
+        teamYearArray: Array
     },
 
     /**
@@ -20,9 +21,9 @@ Component({
     methods: {
         bindPickerChange: function (e) {
             this.setData({
-                yearValue: this.properties.teamIndex.teamYearArray[e.detail.value]
-            })
-            this.triggerEvent('event', this.data.yearValue)
+                yearValue: this.properties.teamYearArray[e.detail.value]
+            });
+            this.triggerEvent('event', e.detail.value);
         }
     }
 })
