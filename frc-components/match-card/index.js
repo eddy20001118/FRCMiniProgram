@@ -7,7 +7,8 @@ Component({
         matchType : Array, //[0]-Qual,[1]-5
         redAlliance : Array,
         blueAlliance : Array,
-        score : Array //[0]-red [1]-blue
+        score : Array, //[0]-red [1]-blue
+        currentTeamNumber : Number
     },
 
     /**

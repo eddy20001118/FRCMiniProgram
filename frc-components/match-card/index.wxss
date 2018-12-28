@@ -56,11 +56,24 @@
     line-height: 34px;
 }
 
-.score {
+.underline {
+    text-decoration: underline;
+}
+
+.winnerscore {
     font-size : 28rpx;
     width: 140rpx;
     justify-content: center;
     text-align: center;
     line-height: 34px;
     font-weight: bold;
+    text-decoration: underline;
+}
+
+.loserscore {
+    font-size : 28rpx;
+    width: 140rpx;
+    justify-content: center;
+    text-align: center;
+    line-height: 34px;
 }

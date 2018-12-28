@@ -5,22 +5,22 @@
     </view>
     <view class='matchInfo'>
         <view class='redAlliance match'>
-            <view class='teamNumber'>{{redAlliance[0]}}</view>
-            <view class='teamNumber'>{{redAlliance[1]}}</view>
-            <view class='teamNumber'>{{redAlliance[2]}}</view>
+            <view class="{{redAlliance[0]==currentTeamNumber ? 'teamNumber underline' : 'teamNumber'}}">{{redAlliance[0]}}</view>
+            <view class="{{redAlliance[1]==currentTeamNumber ? 'teamNumber underline' : 'teamNumber'}}">{{redAlliance[1]}}</view>
+            <view class="{{redAlliance[2]==currentTeamNumber ? 'teamNumber underline' : 'teamNumber'}}">{{redAlliance[2]}}</view>
         </view>
         <view class='blueAlliance match'>
-            <view class='teamNumber'>{{blueAlliance[0]}}</view>
-            <view class='teamNumber'>{{blueAlliance[1]}}</view>
-            <view class='teamNumber'>{{blueAlliance[2]}}</view>
+            <view class="{{blueAlliance[0]==currentTeamNumber ? 'teamNumber underline' : 'teamNumber'}}">{{blueAlliance[0]}}</view>
+            <view class="{{blueAlliance[1]==currentTeamNumber ? 'teamNumber underline' : 'teamNumber'}}">{{blueAlliance[1]}}</view>
+            <view class="{{blueAlliance[2]==currentTeamNumber ? 'teamNumber underline' : 'teamNumber'}}">{{blueAlliance[2]}}</view>
         </view>
     </view>
     <view class='matchInfo'>
         <view class='redScore'>
-            <view class='score'>{{score[0]}}</view>
+            <view class="{{score[0] > score[1] ? 'winnerscore' : 'loserscore'}}">{{score[0]}}</view>
         </view>
         <view class='blueScore'>
-            <view class='score'>{{score[1]}}</view>
+            <view class="{{score[1] > score[0] ? 'winnerscore' : 'loserscore'}}">{{score[1]}}</view>
         </view>
     </view>
 </view>

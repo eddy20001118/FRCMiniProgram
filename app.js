@@ -20,6 +20,9 @@ App({
         },
         matchesArraySort: function(x,y) {
             return x.matchType[1]-y.matchType[1];
+        },
+        eventsAtYearSort: function(x,y) {
+            return x.startDateObj - y.startDateObj;
         }
     }
 })

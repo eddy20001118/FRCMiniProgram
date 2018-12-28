@@ -114,17 +114,24 @@ Page({
     onEventatYearCallback: function (res) {
         var eventInfo = new Array(res.length);
         for (var j = 0; j < res.length; j++) {
-            var eventStartDate = res[j].start_date.split("-");
+            var eventStartDate =res[j].start_date.split("-");
             var eventEndDate = res[j].end_date.split("-");
+            var startDate = new Date(eventStartDate[0],eventStartDate[1]-1,eventStartDate[2]);
+            var endDate = new Date(eventEndDate[0],eventEndDate[1]-1,eventEndDate[2]);
+            var startMonth = startDate.toLocaleString('en-us', { month: 'short' });
+            var endMonth = endDate.toLocaleString('en-us', { month: 'short' })
             eventInfo[j] = {
                 eventTitle: res[j].name,
                 eventLocation: `${res[j].city}, ${res[j].state_prov}, ${res[j].country}`,
-                eventStartDate: eventStartDate[1] + "-" + eventStartDate[2],
-                eventEndDate: eventEndDate[1] + "-" + eventEndDate[2],
+                eventStartDate: startMonth + " " + eventStartDate[2],
+                eventEndDate: endMonth + " " + eventEndDate[2],
                 eventYear: res[j].year,
-                eventCode: res[j].event_code
+                eventCode: res[j].event_code,
+                startDateObj : startDate,
+                endDateObj : endDate
             }
         }
+        eventInfo.sort(app.globalMethod.eventsAtYearSort);
         this.setData({
             eventInfo: eventInfo
         })
