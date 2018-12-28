@@ -1,4 +1,4 @@
-<view>
+<view hidden="{{summaryInfo==null}}">
     <pin-list>
         <view hidden='{{summaryInfo.rank==null}}' class='list'>
             <view class='list-title'>Rank</view>
@@ -6,7 +6,7 @@
         </view>
     </pin-list>
     <pin-list>
-        <view hidden='{{summaryInfo.award==null}}' class='list'>
+        <view hidden='{{summaryInfo.award==null || summaryInfo.award==0}}' class='list'>
             <view class='list-title'>Awards</view>
             <view class='list-content'>Won {{summaryInfo.award}} awards</view>
         </view>
@@ -18,19 +18,18 @@
         </view>
     </pin-list>
     <pin-list>
-        <view hidden='{{summaryInfo.alliance==null}}' class='list'>
+        <view hidden='{{summaryInfo.alliance=="--"}}' class='list'>
             <view class='list-title'>Alliance</view>
             <view class='list-content'>
-                {{summaryInfo.alliance.allianceMember}} of Alliance {{summaryInfo.alliance.allianceNumber}}
+                {{summaryInfo.alliance}}
             </view>
         </view>
     </pin-list>
     <pin-list>
-        <view hidden='{{summaryInfo.status==null}}' class='list'>
+        <view hidden='{{summaryInfo.status=="--"}}' class='list'>
             <view class='list-title'>Team Status</view>
-            <view hidden="{{!summaryInfo.status.inFinals}}">
-                <view class='list-content'>Eliminated in the {{summaryInfo.status.end}}</view>
-                <view class='list-content-nonbold'>Playoff record {{summaryInfo.status.record[0]}}-{{summaryInfo.status.record[1]}}-{{summaryInfo.status.record[2]}}</view>
+            <view hidden="{{summaryInfo.status==null}}">
+                <view class='list-content'>{{summaryInfo.status}}</view>
             </view>
         </view>
     </pin-list>

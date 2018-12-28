@@ -22,8 +22,8 @@ Page({
             wx.setNavigationBarTitle({
                 title: "Team " + teamInfo.teamNumber
             })
-        this.onRequireData(teamapi, this.onTeamCallBack);
-        this.onRequireData(eventapi, this.onEventCallBack);
+        app.globalMethod.httpsRequest(app, teamapi, this.onTeamCallBack);
+        app.globalMethod.httpsRequest(app, eventapi, this.onEventCallBack);
     },
 
     /**
@@ -83,20 +83,6 @@ Page({
         })
     },
 
-    onRequireData: function (api, callback) {
-        //TODO: 换成从服务器请求来的数据
-
-        wx.request({
-            url: app.globalData.tbaApi + api + `?X-TBA-Auth-Key=${app.globalData.tbaKey}`,
-            header: {
-                'content-type': 'application/json' // 默认值
-            },
-            success: function (res) {
-                callback(res.data);
-            }
-        })
-    },
-
     onTeamCallBack: function (res) {
         var teamIndex = {
             teamNumber: res.team_number,
@@ -135,17 +121,18 @@ Page({
                 eventLocation: `${res[j].city}, ${res[j].state_prov}, ${res[j].country}`,
                 eventStartDate: eventStartDate[1] + "-" + eventStartDate[2],
                 eventEndDate: eventEndDate[1] + "-" + eventEndDate[2],
-                eventYear: res[j].year/*  */
+                eventYear: res[j].year,
+                eventCode: res[j].event_code
             }
         }
         this.setData({
-            eventInfo : eventInfo
+            eventInfo: eventInfo
         })
     },
 
     getTeamYear: function (e) {
         var index = e.detail;
         var eventAtYearApi = `team/frc${this.data.teamIndex.teamNumber}/events/${this.data.teamYearArray[index]}`;
-        this.onRequireData(eventAtYearApi , this.onEventatYearCallback);
+        app.globalMethod.httpsRequest(app, eventAtYearApi, this.onEventatYearCallback);
     }
 })
