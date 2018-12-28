@@ -2,7 +2,7 @@ var app = getApp();
 Page({
     data: {
         teamInfo: {
-            teamNumber: "6766",
+            teamNumber: "254",
             teamName: "Pharma Atom Storm",
             teamLocation: "Shenzhen, Guangdong, China"
         },
@@ -11,7 +11,8 @@ Page({
             eventLocation: "Shenzhen Shi, Guangdong Sheng, China",
             eventStartDate: "Mar 7",
             eventEndDate: "Mar 10",
-            eventYear: "2019"
+            eventYear: "2018",
+            eventCode: "gush"
         },
         active: 1,
         steps: [

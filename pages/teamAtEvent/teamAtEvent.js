@@ -105,11 +105,6 @@ Page({
 
     onTabChange: function (e) {
         var activeTab = e.detail.index;
-        switch (activeTab) {
-            case 1: //matches标签页要加载的内容比较多，所以滑到该页再加载
-
-                break;
-        }
     },
 
     onStatusCallback: function (res) {
@@ -139,35 +134,35 @@ Page({
                     var qual = match.qual;
                     qual.push({
                         matchType: ["Qual", res[j].match_number],
-                        redAlliance: this.teamFilter(res[j].alliances.red.team_keys),
-                        blueAlliance: this.teamFilter(res[j].alliances.blue.team_keys),
+                        redAlliance: app.globalMethod.teamFilter(res[j].alliances.red.team_keys),
+                        blueAlliance: app.globalMethod.teamFilter(res[j].alliances.blue.team_keys),
                         score: [res[j].alliances.red.score, res[j].alliances.blue.score]
                     })
                     qual.sort(app.globalMethod.matchesArraySort);
                 } else if (res[j].comp_level == "qf") { //四分之一决赛
                     var quarter = match.quarter;
                     quarter.push({
-                        matchType: ["quarter", res[j].match_number],
-                        redAlliance: this.teamFilter(res[j].alliances.red.team_keys),
-                        blueAlliance: this.teamFilter(res[j].alliances.blue.team_keys),
+                        matchType: ["Quarter", res[j].match_number],
+                        redAlliance: app.globalMethod.teamFilter(res[j].alliances.red.team_keys),
+                        blueAlliance: app.globalMethod.teamFilter(res[j].alliances.blue.team_keys),
                         score: [res[j].alliances.red.score, res[j].alliances.blue.score]
                     })
                     quarter.sort(app.globalMethod.matchesArraySort);
                 } else if (res[j].comp_level == "sf") { //四分之一决赛
                     var semi = match.semi;
                     semi.push({
-                        matchType: ["semi", res[j].match_number],
-                        redAlliance: this.teamFilter(res[j].alliances.red.team_keys),
-                        blueAlliance: this.teamFilter(res[j].alliances.blue.team_keys),
+                        matchType: ["Semi", res[j].match_number],
+                        redAlliance: app.globalMethod.teamFilter(res[j].alliances.red.team_keys),
+                        blueAlliance: app.globalMethod.teamFilter(res[j].alliances.blue.team_keys),
                         score: [res[j].alliances.red.score, res[j].alliances.blue.score]
                     })
                     semi.sort(app.globalMethod.matchesArraySort);
                 } else if (res[j].comp_level == "f") { //四分之一决赛
                     var final = match.final;
                     final.push({
-                        matchType: ["final", res[j].match_number],
-                        redAlliance: this.teamFilter(res[j].alliances.red.team_keys),
-                        blueAlliance: this.teamFilter(res[j].alliances.blue.team_keys),
+                        matchType: ["Final", res[j].match_number],
+                        redAlliance: app.globalMethod.teamFilter(res[j].alliances.red.team_keys),
+                        blueAlliance: app.globalMethod.teamFilter(res[j].alliances.blue.team_keys),
                         score: [res[j].alliances.red.score, res[j].alliances.blue.score]
                     })
                     final.sort(app.globalMethod.matchesArraySort);
@@ -182,11 +177,11 @@ Page({
 
     onSummaryCallback: function (res) {
         if (res != null) {
-            var allianceStatus = this.dataFilter(res.alliance_status_str);
-            var status = (res.playoff_status_str == "--") ? this.dataFilter(res.overall_status_str) : this.dataFilter(res.playoff_status_str);
+            var allianceStatus = app.globalMethod.dataFilter(res.alliance_status_str);
+            var status = (res.playoff_status_str == "--") ? app.globalMethod.dataFilter(res.overall_status_str) : app.globalMethod.dataFilter(res.playoff_status_str);
             var award = (this.data.awardCard != null) ? this.data.awardCard.length : null;
-            var rank = (res.qual!=null) ? res.qual.ranking.rank : null;
-            var qualrecord = (res.qual!=null) ? [res.qual.ranking.record.wins, res.qual.ranking.record.losses, res.qual.ranking.record.ties] : null;
+            var rank = (res.qual != null) ? res.qual.ranking.rank : null;
+            var qualrecord = (res.qual != null) ? [res.qual.ranking.record.wins, res.qual.ranking.record.losses, res.qual.ranking.record.ties] : null;
             var summaryInfo = {
                 rank: rank,
                 award: award,
@@ -207,9 +202,11 @@ Page({
                 var awardTeamList = new Array(res[j].recipient_list.length);
                 for (var i = 0; i < res[j].recipient_list.length; i++) {
                     var teamNumber = res[j].recipient_list[i].team_key;
-                    teamNumber = teamNumber.replace("frc", "");
+                    var awardee = res[j].recipient_list[i].awardee
+                    teamNumber = (teamNumber != null) ? teamNumber.replace("frc", "") : null;
                     awardTeamList[i] = {
-                        teamNumber: teamNumber
+                        teamNumber: teamNumber,
+                        awardee: awardee
                     }
                 }
 
@@ -218,25 +215,11 @@ Page({
                     awardTeamList: awardTeamList
                 }
             }
-
+            this.data.summaryInfo.award = res.length;
             this.setData({
-                awardCard: awardCard
-            }) 
+                awardCard: awardCard,
+                summaryInfo: this.data.summaryInfo
+            })
         }
     },
-
-    dataFilter: function (str) {
-        var temp = str;
-        temp = temp.replace(/<b>/g, "");
-        temp = temp.replace(/<\/b>/g, "");
-        return temp;
-    },
-
-    teamFilter: function (array) {
-        var temp = array;
-        for (var j = 0; j < temp.length; j++) {
-            temp[j] = array[j].replace("frc", "")
-        }
-        return temp
-    }
 })
