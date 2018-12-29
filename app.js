@@ -2,7 +2,7 @@
 App({
     globalData: {
         tbaApi: "https://www.thebluealliance.com/api/v3/",
-        tbaKey: "kbxvOnS2csBH6fzQ8zijLw2f1k135fWp8NgTEfPRg1n8hYqh7SSUo9VJ3JEBlnIg"
+        tbaKey: ""
     },
     globalMethod: {
         httpsRequest: function (app, api, callback) {
