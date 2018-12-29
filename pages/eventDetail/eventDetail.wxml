@@ -6,6 +6,7 @@
                 <title-list title="Top Team">
                     <title-list-content wx:for="{{topTeamList}}" wx:key="{{index}}" index="{{index+1}}" teamNumber="{{item.team[1]}}" />
                 </title-list>
+                <pin-button status="{{dataBase}}" bind:onclick="onPinButtonClick"/>
             </view>
         </van-tab>
         <van-tab title="Teams">

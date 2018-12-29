@@ -2,7 +2,7 @@
     <view class='event'>
         <text class='eventTitle'>{{eventInfo.eventTitle}}</text>
         <view class='location-date'>
-            <text class='location'>{{eventInfo.eventLocation}}</text>
+            <text class='location'>{{eventInfo.eventLocationShort}}</text>
             <text class='date'>{{eventInfo.eventStartDate}} to {{eventInfo.eventEndDate}}, {{eventInfo.eventYear}}</text>
         </view>
     </view>

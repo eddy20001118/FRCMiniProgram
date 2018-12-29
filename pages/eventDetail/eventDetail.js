@@ -13,7 +13,8 @@ Page({
         awardCard: Array,
         match: Object,
         topTeamList: Array,
-        activeNames: []
+        activeNames: [],
+        dataBase: Boolean
     },
 
     /**
@@ -21,6 +22,25 @@ Page({
      */
     onLoad: function (options) {
         var eventInfo = JSON.parse(decodeURIComponent(options.eventInfo));
+
+
+        var that = this;
+        var key = "e" + eventInfo.eventYear + eventInfo.eventCode;
+        var onSuccess = function (value) {
+            that.setData({
+                dataBase: true
+            })
+            console.log("已有收藏")
+        }
+        var onFail = function () {
+            that.setData({
+                dataBase: false
+            })
+            console.log("无已有收藏")
+        }
+        app.dataBaseMethod.get(key, onSuccess, onFail)
+
+
         var summaryApi = `event/${eventInfo.eventYear}${eventInfo.eventCode}`;
         app.globalMethod.httpsRequest(app, summaryApi, this.onSummaryCallBack);
     },
@@ -129,6 +149,23 @@ Page({
             eventEndDate: endMonth + " " + eventEndDate[2],
             eventYear: res.year,
             eventCode: res.event_code,
+            eventLocationShort: `${res.city}, ${res.state_prov}, ${res.country}`,
+            //TODO: 补齐状态信息
+            active: 1,
+            steps: [
+                {
+                    text: '资格赛'
+                },
+                {
+                    text: '四分之一决赛'
+                },
+                {
+                    text: '半决赛'
+                },
+                {
+                    text: '决赛'
+                }
+            ],
         }
         this.setData({
             eventIndex: eventIndex
@@ -284,5 +321,46 @@ Page({
         this.setData({
             activeNames: event.detail
         })
+    },
+
+    onSaveStatus: function () {
+        if (!this.data.dataBase) {
+            var data = {
+                key: "e" + this.data.eventIndex.eventYear + this.data.eventIndex.eventCode,
+                data: this.data.eventIndex
+            }
+            var onSuccess = function () {
+                wx.showToast({
+                    title: '收藏成功,返回首页下拉刷新即可查看',
+                    icon: 'none',
+                    duration: 2000
+                });
+            }
+            app.dataBaseMethod.set(data, onSuccess);
+        } else {
+            var key = "e" + this.data.eventIndex.eventYear + this.data.eventIndex.eventCode
+            var onSuccess = function () {
+                wx.showToast({
+                    title: '取消收藏',
+                    icon: 'none',
+                    duration: 2000
+                });
+            }
+            var onFail = function () {
+                wx.showToast({
+                    title: '无收藏，无法删除',
+                    icon: 'none',
+                    duration: 2000
+                });
+            }
+            app.dataBaseMethod.remove(key, onSuccess, onFail);
+        }
+        this.setData({
+            dataBase: !this.data.dataBase
+        })
+    },
+
+    onPinButtonClick: function () {
+        this.onSaveStatus();
     }
 })

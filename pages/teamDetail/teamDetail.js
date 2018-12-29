@@ -122,7 +122,7 @@ Page({
             var endMonth = endDate.toDateString().split(" ")[1]
             eventInfo[j] = {
                 eventTitle: res[j].name,
-                eventLocation: `${res[j].city}, ${res[j].state_prov}, ${res[j].country}`,
+                eventLocationShort: `${res[j].city}, ${res[j].state_prov}, ${res[j].country}`,
                 eventStartDate: startMonth + " " + eventStartDate[2],
                 eventEndDate: endMonth + " " + eventEndDate[2],
                 eventYear: res[j].year,

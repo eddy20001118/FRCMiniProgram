@@ -1,4 +1,4 @@
-<!--index.wxml-->
+<!-- index.wxml -->
 <view class="container">
     <view bindtap='onTeamCardClick'>
         <team-card teamInfo="{{teamInfo}}" noBottomPadding="{{true}}">
@@ -6,8 +6,7 @@
             <match-card matchType="{{matchCard.matchType}}" redAlliance="{{matchCard.redAlliance}}" blueAlliance="{{matchCard.blueAlliance}}" score="{{matchCard.score}}" />
         </team-card>
     </view>
-    <view bindtap='onEventCardClick'>
-        <pin-event-card eventInfo="{{eventInfo}}" steps="{{steps}}"  active="{{active}}"/>
+    <view bindtap='onEventCardClick' wx:for="{{eventInfo}}" wx:key="{{index}}" id="{{index}}">
+        <pin-event-card eventInfo="{{eventInfo[index]}}" steps="{{eventInfo[index].steps}}" active="{{eventInfo[index].active}}" />
     </view>
-    <pin-button status="{{dataBase}}" bind:onclick="onPinButtonClick"></pin-button>
 </view>

@@ -12,6 +12,7 @@
         "alliance-card": "/frc-components/alliance-card/index",
         "van-collapse": "/dist/collapse/index",
         "van-collapse-item": "/dist/collapse-item/index",
-        "rank-card": "/frc-components/rank-card/index"
+        "rank-card": "/frc-components/rank-card/index",
+        "pin-button" : "/frc-components/pin-button/index"
     }
 }

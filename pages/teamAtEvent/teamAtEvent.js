@@ -177,18 +177,20 @@ Page({
 
     onSummaryCallback: function (res) {
         if (res != null) {
-            var allianceStatus = app.globalMethod.dataFilter(res.alliance_status_str);
-            var status = (res.playoff_status_str == "--") ? app.globalMethod.dataFilter(res.overall_status_str) : app.globalMethod.dataFilter(res.playoff_status_str);
-            var award = (this.data.awardCard != null) ? this.data.awardCard.length : null;
-            var rank = (res.qual != null) ? res.qual.ranking.rank : null;
-            var qualrecord = (res.qual != null) ? [res.qual.ranking.record.wins, res.qual.ranking.record.losses, res.qual.ranking.record.ties] : null;
-            var summaryInfo = {
-                rank: rank,
-                award: award,
-                qualrecord: qualrecord,
-                alliance: allianceStatus,
-                status: status
-            }
+            try {
+                var qualrecord = (res.qual != null) ? [res.qual.ranking.record.wins, res.qual.ranking.record.losses, res.qual.ranking.record.ties] : null;
+                var allianceStatus = app.globalMethod.dataFilter(res.alliance_status_str);
+                var status = (res.playoff_status_str == "--") ? app.globalMethod.dataFilter(res.overall_status_str) : app.globalMethod.dataFilter(res.playoff_status_str);
+                var award = (this.data.awardCard != null) ? this.data.awardCard.length : null;
+                var rank = (res.qual != null) ? res.qual.ranking.rank : null;
+            } catch (e) {}
+                var summaryInfo = {
+                    rank: rank,
+                    award: award,
+                    qualrecord: qualrecord,
+                    alliance: allianceStatus,
+                    status: status
+                }
             this.setData({
                 summaryInfo: summaryInfo
             })

@@ -24,10 +24,10 @@ App({
         eventsAtYearSort: function (x, y) {
             return x.startDateObj - y.startDateObj;
         },
-        ranksArraySort: function (x,y) {
+        ranksArraySort: function (x, y) {
             return x.rank - y.rank;
         },
-        teamArraySort: function (x,y) {
+        teamArraySort: function (x, y) {
             return x.teamNumber - y.teamNumber;
         },
         dataFilter: function (str) {
@@ -42,6 +42,45 @@ App({
                 temp[j] = array[j].replace("frc", "")
             }
             return temp
+        }
+    },
+    dataBaseMethod: {
+        set: function (data, onSuccess) {
+            try {
+                wx.setStorageSync(data.key, data.data);
+                onSuccess();
+            } catch (error) {
+
+            }
+        },
+        remove: function (key, onSuccess, onFail) {
+            try {
+                wx.removeStorageSync(key);
+                onSuccess();
+            } catch (error) {
+                onFail();
+            }
+        },
+        get: function (key, onSuccess, onFail) {
+            try {
+                const value = wx.getStorageSync(key);
+                if (value != null && value.length != 0) {
+                    onSuccess(value)
+                } else {
+                    onFail()
+                }
+            } catch (error) {
+                onFail();
+            }
+        },
+        getInfo: function (onSuccess) {
+            try {
+                const res = wx.getStorageInfoSync();
+                onSuccess(res)
+            } catch (error) {
+
+            }
+
         }
     }
 })
