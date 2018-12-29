@@ -1,0 +1,3 @@
+<view bind:tap="isClicked" class="circle">
+    <image class="img" src="{{status ? '/res/icons/pin/gou.png' : '/res/icons/pin/pin.png'}}" />
+</view>

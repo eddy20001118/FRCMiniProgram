@@ -22,11 +22,10 @@
 
 .van-collapse-item__wrapper {
     overflow: hidden;
-    will-change: max-height;
-    transition: max-height 0.3s ease-in-out;
 }
 
 .van-collapse-item__content {
+    padding: 15px;
     font-size: 13px;
     line-height: 1.5;
     background-color: #fff;

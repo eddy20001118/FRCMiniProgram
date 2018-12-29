@@ -118,8 +118,8 @@ Page({
             var eventEndDate = res[j].end_date.split("-");
             var startDate = new Date(eventStartDate[0],eventStartDate[1]-1,eventStartDate[2]);
             var endDate = new Date(eventEndDate[0],eventEndDate[1]-1,eventEndDate[2]);
-            var startMonth = startDate.toLocaleString('en-us', { month: 'short' });
-            var endMonth = endDate.toLocaleString('en-us', { month: 'short' })
+            var startMonth = startDate.toDateString().split(" ")[1]
+            var endMonth = endDate.toDateString().split(" ")[1]
             eventInfo[j] = {
                 eventTitle: res[j].name,
                 eventLocation: `${res[j].city}, ${res[j].state_prov}, ${res[j].country}`,

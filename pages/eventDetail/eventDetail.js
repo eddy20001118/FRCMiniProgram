@@ -8,10 +8,11 @@ Page({
     data: {
         teamlist: Array,
         eventIndex: Object,
-        rankCard: Object,
-        allianceCard: Object,
-        awardCard: Object,
+        rankCard: Array,
+        allianceCard: Array,
+        awardCard: Array,
         match: Object,
+        topTeamList: Array,
         activeNames: []
     },
 
@@ -20,16 +21,8 @@ Page({
      */
     onLoad: function (options) {
         var eventInfo = JSON.parse(decodeURIComponent(options.eventInfo));
-
         var summaryApi = `event/${eventInfo.eventYear}${eventInfo.eventCode}`;
-
-
-        if (eventInfo.eventTitle != null)
-            wx.setNavigationBarTitle({
-                title: eventInfo.eventTitle
-            })
-
-        app.globalMethod.httpsRequest(app, summaryApi, this.onSummaryCallBack);        
+        app.globalMethod.httpsRequest(app, summaryApi, this.onSummaryCallBack);
     },
 
     /**
@@ -82,10 +75,10 @@ Page({
     },
 
     onLoadOtherRequests: function (eventInfo) {
-        var alliancesApi = `event/${eventInfo.eventYear}${eventInfo.eventCode}/alliances`;
-        var awardsApi = `event/${eventInfo.eventYear}${eventInfo.eventCode}/awards`
-        var matchesApi = `event/${eventInfo.eventYear}${eventInfo.eventCode}/matches/simple`;
-        var teamListApi = `event/${eventInfo.eventYear}${eventInfo.eventCode}/teams`;
+        var alliancesApi = `event/${eventInfo.eventYear}${eventInfo.eventCode}/alliances`; //object
+        var awardsApi = `event/${eventInfo.eventYear}${eventInfo.eventCode}/awards` //list
+        var matchesApi = `event/${eventInfo.eventYear}${eventInfo.eventCode}/matches/simple`; //list
+        var teamListApi = `event/${eventInfo.eventYear}${eventInfo.eventCode}/teams`; //list
         app.globalMethod.httpsRequest(app, teamListApi, this.onTeamsCallBack);
         app.globalMethod.httpsRequest(app, alliancesApi, this.onAlliancesCallBack);
         app.globalMethod.httpsRequest(app, awardsApi, this.onAwardsCallBack);
@@ -97,27 +90,29 @@ Page({
     },
 
     onAwardsCallBack: function (res) {
-        var awardCard = new Array(res.length);
-        for (var j = 0; j < res.length; j++) {
-            var awardTeamList = new Array(res[j].recipient_list.length);
-            for (var i = 0; i < res[j].recipient_list.length; i++) {
-                var teamNumber = res[j].recipient_list[i].team_key;
-                var awardee = res[j].recipient_list[i].awardee
-                teamNumber = (teamNumber != null) ? teamNumber.replace("frc", "") : null;
-                awardTeamList[i] = {
-                    teamNumber: teamNumber,
-                    awardee : awardee
+        if (res != null && res.length != 0) {
+            var awardCard = new Array(res.length);
+            for (var j = 0; j < res.length; j++) {
+                var awardTeamList = new Array(res[j].recipient_list.length);
+                for (var i = 0; i < res[j].recipient_list.length; i++) {
+                    var teamNumber = res[j].recipient_list[i].team_key;
+                    var awardee = res[j].recipient_list[i].awardee
+                    teamNumber = (teamNumber != null) ? teamNumber.replace("frc", "") : null;
+                    awardTeamList[i] = {
+                        teamNumber: teamNumber,
+                        awardee: awardee
+                    }
+                }
+
+                awardCard[j] = {
+                    awardTitle: res[j].name,
+                    awardTeamList: awardTeamList
                 }
             }
-
-            awardCard[j] = {
-                awardTitle: res[j].name,
-                awardTeamList: awardTeamList
-            }
+            this.setData({
+                awardCard: awardCard
+            })
         }
-        this.setData({
-            awardCard : awardCard
-        })
     },
 
     onSummaryCallBack: function (res) {
@@ -125,8 +120,8 @@ Page({
         var eventEndDate = res.end_date.split("-");
         var startDate = new Date(eventStartDate[0], eventStartDate[1] - 1, eventStartDate[2]);
         var endDate = new Date(eventEndDate[0], eventEndDate[1] - 1, eventEndDate[2]);
-        var startMonth = startDate.toLocaleString('en-us', { month: 'short' });
-        var endMonth = endDate.toLocaleString('en-us', { month: 'short' })
+        var startMonth = startDate.toDateString().split(" ")[1]
+        var endMonth = endDate.toDateString().split(" ")[1]
         var eventIndex = {
             eventTitle: res.name,
             eventLocation: res.address,
@@ -138,113 +133,142 @@ Page({
         this.setData({
             eventIndex: eventIndex
         })
-
+        if (eventIndex.eventTitle != null)
+            wx.setNavigationBarTitle({
+                title: eventIndex.eventTitle
+            })
         //只有summary加载完了才会完成其他的请求
         this.onLoadOtherRequests(eventIndex);
     },
 
     onAlliancesCallBack: function (res) {
-        var allianceCard = new Array(res.length);
-        for (var j = 0; j < res.length; j++) {
-            var alliance = res[j].name.split(" ");
-            var team = app.globalMethod.teamFilter(res[j].picks);
-            allianceCard[j] = {
-                allianceNumber: alliance[1],
-                allianceTeam: team
+        if (res != null) {
+            var allianceCard = new Array(res.length);
+            for (var j = 0; j < res.length; j++) {
+                var alliance = res[j].name.split(" ");
+                var team = app.globalMethod.teamFilter(res[j].picks);
+                allianceCard[j] = {
+                    allianceNumber: alliance[1],
+                    allianceTeam: team
+                }
             }
+            this.setData({
+                allianceCard: allianceCard
+            })
         }
-        this.setData({
-            allianceCard: allianceCard
-        })
     },
 
     onMatchesCallBack: function (res) {
-        var match = {
-            qual: new Array(),
-            quarter: new Array(),
-            semi: new Array(),
-            final: new Array()
-        }
-
-        for (var j = 0; j < res.length; j++) {
-            if (res[j].comp_level == "qm") { //资格赛
-                var qual = match.qual;
-                qual.push({
-                    matchType: ["Qual", res[j].match_number],
-                    redAlliance: app.globalMethod.teamFilter(res[j].alliances.red.team_keys),
-                    blueAlliance: app.globalMethod.teamFilter(res[j].alliances.blue.team_keys),
-                    score: [res[j].alliances.red.score, res[j].alliances.blue.score]
-                })
-                qual.sort(app.globalMethod.matchesArraySort);
-            } else if (res[j].comp_level == "qf") { //四分之一决赛
-                var quarter = match.quarter;
-                quarter.push({
-                    matchType: ["Quarter", res[j].match_number],
-                    redAlliance: app.globalMethod.teamFilter(res[j].alliances.red.team_keys),
-                    blueAlliance: app.globalMethod.teamFilter(res[j].alliances.blue.team_keys),
-                    score: [res[j].alliances.red.score, res[j].alliances.blue.score]
-                })
-                quarter.sort(app.globalMethod.matchesArraySort);
-            } else if (res[j].comp_level == "sf") { //四分之一决赛
-                var semi = match.semi;
-                semi.push({
-                    matchType: ["Semi", res[j].match_number],
-                    redAlliance: app.globalMethod.teamFilter(res[j].alliances.red.team_keys),
-                    blueAlliance: app.globalMethod.teamFilter(res[j].alliances.blue.team_keys),
-                    score: [res[j].alliances.red.score, res[j].alliances.blue.score]
-                })
-                semi.sort(app.globalMethod.matchesArraySort);
-            } else if (res[j].comp_level == "f") { //四分之一决赛
-                var final = match.final;
-                final.push({
-                    matchType: ["Final", res[j].match_number],
-                    redAlliance: app.globalMethod.teamFilter(res[j].alliances.red.team_keys),
-                    blueAlliance: app.globalMethod.teamFilter(res[j].alliances.blue.team_keys),
-                    score: [res[j].alliances.red.score, res[j].alliances.blue.score]
-                })
-                final.sort(app.globalMethod.matchesArraySort);
+        if (res != null && res.length != 0) {
+            var match = {
+                qual: new Array(),
+                quarter: new Array(),
+                semi: new Array(),
+                final: new Array()
             }
-        }
 
-        this.setData({
-            match: match
-        })
+            for (var j = 0; j < res.length; j++) {
+                if (res[j].comp_level == "qm") { //资格赛
+                    var qual = match.qual;
+                    qual.push({
+                        matchType: ["Qual", res[j].match_number],
+                        redAlliance: app.globalMethod.teamFilter(res[j].alliances.red.team_keys),
+                        blueAlliance: app.globalMethod.teamFilter(res[j].alliances.blue.team_keys),
+                        score: [res[j].alliances.red.score, res[j].alliances.blue.score]
+                    })
+                    qual.sort(app.globalMethod.matchesArraySort);
+                } else if (res[j].comp_level == "qf") { //四分之一决赛
+                    var quarter = match.quarter;
+                    quarter.push({
+                        matchType: ["Quarter", res[j].match_number],
+                        redAlliance: app.globalMethod.teamFilter(res[j].alliances.red.team_keys),
+                        blueAlliance: app.globalMethod.teamFilter(res[j].alliances.blue.team_keys),
+                        score: [res[j].alliances.red.score, res[j].alliances.blue.score]
+                    })
+                    quarter.sort(app.globalMethod.matchesArraySort);
+                } else if (res[j].comp_level == "sf") { //四分之一决赛
+                    var semi = match.semi;
+                    semi.push({
+                        matchType: ["Semi", res[j].match_number],
+                        redAlliance: app.globalMethod.teamFilter(res[j].alliances.red.team_keys),
+                        blueAlliance: app.globalMethod.teamFilter(res[j].alliances.blue.team_keys),
+                        score: [res[j].alliances.red.score, res[j].alliances.blue.score]
+                    })
+                    semi.sort(app.globalMethod.matchesArraySort);
+                } else if (res[j].comp_level == "f") { //四分之一决赛
+                    var final = match.final;
+                    final.push({
+                        matchType: ["Final", res[j].match_number],
+                        redAlliance: app.globalMethod.teamFilter(res[j].alliances.red.team_keys),
+                        blueAlliance: app.globalMethod.teamFilter(res[j].alliances.blue.team_keys),
+                        score: [res[j].alliances.red.score, res[j].alliances.blue.score]
+                    })
+                    final.sort(app.globalMethod.matchesArraySort);
+                }
+            }
+
+            this.setData({
+                match: match
+            })
+        }
     },
 
     onRankingCallBack: function (res) {
         var teamList = this.data.teamlist;
-        var rankCard = new Array(teamList.length);
+        var rankCard = new Array();
+
         for (var j = 0; j < teamList.length; j++) {
-            var sortOrders = res["frc" + teamList[j].teamNumber].qual.ranking.sort_orders;
-            var rankScore = sortOrders[0];
-            rankCard[j] = {
-                team: [teamList[j].teamName, teamList[j].teamNumber],
-                rank: res["frc" + teamList[j].teamNumber].qual.ranking.rank,
-                rankScore: rankScore
+            if (res["frc" + teamList[j].teamNumber] != null) {
+                if (res["frc" + teamList[j].teamNumber].qual != null) {
+                    var sortOrders = res["frc" + teamList[j].teamNumber].qual.ranking.sort_orders;
+                    var rankScore = sortOrders[0];
+                    var rank = res["frc" + teamList[j].teamNumber].qual.ranking.rank
+                    rankCard[j] = {
+                        team: [teamList[j].teamName, teamList[j].teamNumber],
+                        rank: rank,
+                        rankScore: rankScore
+                    }
+                }
             }
         }
         rankCard.sort(app.globalMethod.ranksArraySort);
+
+        if (rankCard.length < 5) {
+            var topTeamList = new Array(rankCard.length);
+            for (var j = 0; j < rankCard.length; j++) {
+                topTeamList[j] = rankCard[j]
+            }
+        } else {
+            var topTeamList = new Array(5);
+            for (var j = 0; j < 5; j++) {
+                topTeamList[j] = rankCard[j]
+            }
+        }
         this.setData({
-            rankCard: rankCard
+            rankCard: rankCard,
+            topTeamList: topTeamList
         })
     },
 
     onTeamsCallBack: function (res) {
-        var teamlist = new Array(res.length);
-        for (var j = 0; j < res.length; j++) {
-            teamlist[j] = {
-                teamNumber: res[j].team_number,
-                teamName: res[j].nickname,
-                teamLocation: `${res[j].city}, ${res[j].state_prov}, ${res[j].country}`
+        if (res != null && res.length != 0) {
+            var teamlist = new Array(res.length);
+            for (var j = 0; j < res.length; j++) {
+                teamlist[j] = {
+                    teamNumber: res[j].team_number,
+                    teamName: res[j].nickname,
+                    teamLocation: `${res[j].city}, ${res[j].state_prov}, ${res[j].country}`
+                }
             }
+            teamlist.sort(app.globalMethod.teamArraySort);
+            this.setData({
+                teamlist: teamlist
+            })
+
+            //只有teamlist加载完了才去请求rank
+            var rankingApi = `event/${this.data.eventIndex.eventYear}${this.data.eventIndex.eventCode}/teams/statuses`;
+            app.globalMethod.httpsRequest(app, rankingApi, this.onRankingCallBack);
         }
-        this.setData({
-            teamlist: teamlist
-        })
-        
-        //只有teamlist加载完了才去请求rank
-        var rankingApi = `event/${this.data.eventIndex.eventYear}${this.data.eventIndex.eventCode}/teams/statuses`;
-        app.globalMethod.httpsRequest(app, rankingApi, this.onRankingCallBack);
     },
 
     onTeamCardClick: function (e) {

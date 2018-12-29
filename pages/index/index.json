@@ -6,6 +6,7 @@
       "event-card": "/frc-components/event-card/index",
       "pin-event-card": "/frc-components/pin-event-card/index",
       "pin-list": "/frc-components/pin-list/index",
-      "match-card": "/frc-components/match-card/index"
+      "match-card": "/frc-components/match-card/index",
+      "pin-button" : "/frc-components/pin-button/index"
   }
 }

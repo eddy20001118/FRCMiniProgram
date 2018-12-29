@@ -3,16 +3,11 @@
     <view bindtap='onTeamCardClick'>
         <team-card teamInfo="{{teamInfo}}" noBottomPadding="{{true}}">
             <text class='text'>当前比赛:</text>
-            <match-card 
-                matchType="{{matchCard.matchType}}"
-                redAlliance="{{matchCard.redAlliance}}"
-                blueAlliance="{{matchCard.blueAlliance}}"
-                score="{{matchCard.score}}"
-                />
+            <match-card matchType="{{matchCard.matchType}}" redAlliance="{{matchCard.redAlliance}}" blueAlliance="{{matchCard.blueAlliance}}" score="{{matchCard.score}}" />
         </team-card>
     </view>
     <view bindtap='onEventCardClick'>
-        <pin-event-card eventInfo="{{eventInfo}}" steps="{{steps}}
-            active=" {{active}} "/>
+        <pin-event-card eventInfo="{{eventInfo}}" steps="{{steps}}"  active="{{active}}"/>
     </view>
+    <pin-button status="{{dataBase}}" bind:onclick="onPinButtonClick"></pin-button>
 </view>

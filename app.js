@@ -27,6 +27,9 @@ App({
         ranksArraySort: function (x,y) {
             return x.rank - y.rank;
         },
+        teamArraySort: function (x,y) {
+            return x.teamNumber - y.teamNumber;
+        },
         dataFilter: function (str) {
             var temp = str;
             temp = temp.replace(/<b>/g, "");

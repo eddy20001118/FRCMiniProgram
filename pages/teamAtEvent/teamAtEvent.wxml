@@ -7,7 +7,7 @@
         </van-tab>
         <van-tab title="Matches">
             <view class="container" hidden="{{match==null}}">
-                <van-collapse value="{{ activeNames }}" bind:change="onCollapseChange">
+                <van-collapse style="width : 750rpx;" value="{{ activeNames }}" bind:change="onCollapseChange">
                     <van-collapse-item disabled="{{match.qual == null || match.qual.length == 0}}" title="Qualification Matches" name="Qual">
                         <pin-list wx:for="{{match.qual}}" wx:key="{{index}}">
                             <match-card 
