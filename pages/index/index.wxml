@@ -1,9 +1,9 @@
 <!-- index.wxml -->
 <view class="container">
-    <view bindtap='onTeamCardClick'>
-        <team-card teamInfo="{{teamInfo}}" noBottomPadding="{{true}}">
+    <view bindtap='onTeamCardClick' wx:for="{{teamInfo}}" wx:key="{{index}}" id="{{index}}">
+        <team-card teamInfo="{{item}}" noBottomPadding="{{true}}">
             <text class='text'>当前比赛:</text>
-            <match-card matchType="{{matchCard.matchType}}" redAlliance="{{matchCard.redAlliance}}" blueAlliance="{{matchCard.blueAlliance}}" score="{{matchCard.score}}" />
+            <match-card hidden="{{item.matchCard == null}}" matchType="{{item.matchCard.matchType}}" redAlliance="{{item.matchCard.redAlliance}}" blueAlliance="{{item.matchCard.blueAlliance}}" score="{{item.matchCard.score}}" />
         </team-card>
     </view>
     <view bindtap='onEventCardClick' wx:for="{{eventInfo}}" wx:key="{{index}}" id="{{index}}">

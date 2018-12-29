@@ -4,6 +4,7 @@
         "van-tabs": "/dist/tabs/index",
         "pin-list": "/frc-components/pin-list/index",
         "team-index": "/frc-components/team-index/index",
-        "event-card": "/frc-components/event-card/index"
+        "event-card": "/frc-components/event-card/index",
+        "pin-button" : "/frc-components/pin-button/index"
     }
 }

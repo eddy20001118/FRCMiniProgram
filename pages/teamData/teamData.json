@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-      "van-search": "/dist/search/index"
+      "van-search": "/dist/search/index",
+      "team-card": "/frc-components/team-card/index"
   }
 }

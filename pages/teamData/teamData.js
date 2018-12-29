@@ -1,74 +1,73 @@
 // pages/gameData/teamData.js
 Page({
-
-	/**
-	 * 页面的初始数据
-	 */
 	data: {
-        teamYear: ["2019", "2018", "2017"],
-        index: 0
+		teamInfo : Array
 	},
 
-	/**
-	 * 生命周期函数--监听页面加载
-	 */
 	onLoad: function (options) {
 
 	},
 
-	/**
-	 * 生命周期函数--监听页面初次渲染完成
-	 */
 	onReady: function () {
 
 	},
 
-	/**
-	 * 生命周期函数--监听页面显示
-	 */
 	onShow: function () {
 
 	},
 
-	/**
-	 * 生命周期函数--监听页面隐藏
-	 */
 	onHide: function () {
 
 	},
 
-	/**
-	 * 生命周期函数--监听页面卸载
-	 */
 	onUnload: function () {
 
 	},
 
-	/**
-	 * 页面相关事件处理函数--监听用户下拉动作
-	 */
 	onPullDownRefresh: function () {
 
 	},
 
-	/**
-	 * 页面上拉触底事件的处理函数
-	 */
 	onReachBottom: function () {
 
 	},
 
-	/**
-	 * 用户点击右上角分享
-	 */
 	onShareAppMessage: function () {
 
 	},
 
-    bindPickerChange: function (e) {
-        console.log('picker发送选择改变，携带值为', e.detail.value)
-        this.setData({
-            index: e.detail.value
-        })
-    }
+	onSearch: function (event) {
+		var code = event.detail
+		//TODO: 请求服务器模糊搜索函数,返回一个teamInfo数组，以下为假数据
+		var teamInfo = [
+			{
+				teamNumber : code,
+				teamName :  "Pharma Atom Storm",
+				teamLocation : "Shenzhen, Guangdong, China"
+			}
+			,
+			{
+				teamNumber : code-1,
+				teamName :  "Pharma Atom Storm",
+				teamLocation : "Shenzhen, Guangdong, China"
+			}
+		]
+		this.setData({
+			teamInfo : teamInfo
+		});
+	},
+
+	onCancel: function () {
+		this.setData({
+			search: ""
+		})
+	},
+
+	onTeamCardClick: function (e) {
+		var index = e.currentTarget.id;
+		var teamInfo = encodeURIComponent(JSON.stringify(this.data.teamInfo[index]));
+		wx.navigateTo({
+			url: `/pages/teamDetail/teamDetail?teamInfo=${teamInfo}`
+		})
+	},
 })

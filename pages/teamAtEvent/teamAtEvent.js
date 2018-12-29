@@ -177,14 +177,12 @@ Page({
 
     onSummaryCallback: function (res) {
         if (res != null) {
-            try {
-                var qualrecord = (res.qual != null) ? [res.qual.ranking.record.wins, res.qual.ranking.record.losses, res.qual.ranking.record.ties] : null;
-                var allianceStatus = app.globalMethod.dataFilter(res.alliance_status_str);
-                var status = (res.playoff_status_str == "--") ? app.globalMethod.dataFilter(res.overall_status_str) : app.globalMethod.dataFilter(res.playoff_status_str);
-                var award = (this.data.awardCard != null) ? this.data.awardCard.length : null;
-                var rank = (res.qual != null) ? res.qual.ranking.rank : null;
-            } catch (e) {}
-                var summaryInfo = {
+            try { var qualrecord = (res.qual != null) ? [res.qual.ranking.record.wins, res.qual.ranking.record.losses, res.qual.ranking.record.ties] : null; } catch (e) {}
+            try {var allianceStatus = app.globalMethod.dataFilter(res.alliance_status_str);} catch(e){}
+            try {var status = (res.playoff_status_str == "--") ? app.globalMethod.dataFilter(res.overall_status_str) : app.globalMethod.dataFilter(res.playoff_status_str);} catch (e) {}
+            try {var award = (this.data.awardCard != null) ? this.data.awardCard.length : null;} catch(e){}
+            try {var rank = (res.qual != null) ? res.qual.ranking.rank : null;} catch(e){}
+            var summaryInfo = {
                     rank: rank,
                     award: award,
                     qualrecord: qualrecord,

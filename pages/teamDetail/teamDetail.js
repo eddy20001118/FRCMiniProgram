@@ -8,7 +8,8 @@ Page({
     data: {
         eventInfo: Array,
         teamIndex: Object,
-        teamYearArray: Array
+        teamYearArray: Array,
+        dataBase: Boolean
     },
 
     /**
@@ -22,6 +23,23 @@ Page({
             wx.setNavigationBarTitle({
                 title: "Team " + teamInfo.teamNumber
             })
+
+        var that = this;
+        var key = "t" + teamInfo.teamNumber;
+        var onSuccess = function (value) {
+            that.setData({
+                dataBase: true
+            })
+            console.log("已有收藏")
+        }
+        var onFail = function () {
+            that.setData({
+                dataBase: false
+            })
+            console.log("无已有收藏")
+        }
+
+        app.dataBaseMethod.get(key, onSuccess, onFail)
         app.globalMethod.httpsRequest(app, teamapi, this.onTeamCallBack);
         app.globalMethod.httpsRequest(app, eventapi, this.onEventCallBack);
     },
@@ -87,8 +105,16 @@ Page({
         var teamIndex = {
             teamNumber: res.team_number,
             teamName: res.nickname,
+            teamLocation: `${res.city}, ${res.state_prov}, ${res.country}`,
             registedLocation: `${res.city}, ${res.state_prov}, ${res.country}`,
             organization: res.name,
+            //TODO: 完善matchCard信息请求
+            matchCard: {
+                matchType: ["Qual", "11"],
+                redAlliance: [6766, 6666, 6566],
+                blueAlliance: [6866, 6966, 7066],
+                score: [312, 300]
+            }
         }
         this.setData({
             teamIndex: teamIndex,
@@ -114,10 +140,10 @@ Page({
     onEventatYearCallback: function (res) {
         var eventInfo = new Array(res.length);
         for (var j = 0; j < res.length; j++) {
-            var eventStartDate =res[j].start_date.split("-");
+            var eventStartDate = res[j].start_date.split("-");
             var eventEndDate = res[j].end_date.split("-");
-            var startDate = new Date(eventStartDate[0],eventStartDate[1]-1,eventStartDate[2]);
-            var endDate = new Date(eventEndDate[0],eventEndDate[1]-1,eventEndDate[2]);
+            var startDate = new Date(eventStartDate[0], eventStartDate[1] - 1, eventStartDate[2]);
+            var endDate = new Date(eventEndDate[0], eventEndDate[1] - 1, eventEndDate[2]);
             var startMonth = startDate.toDateString().split(" ")[1]
             var endMonth = endDate.toDateString().split(" ")[1]
             eventInfo[j] = {
@@ -127,14 +153,55 @@ Page({
                 eventEndDate: endMonth + " " + eventEndDate[2],
                 eventYear: res[j].year,
                 eventCode: res[j].event_code,
-                startDateObj : startDate,
-                endDateObj : endDate
+                startDateObj: startDate,
+                endDateObj: endDate
             }
         }
         eventInfo.sort(app.globalMethod.eventsAtYearSort);
         this.setData({
             eventInfo: eventInfo
         })
+    },
+
+    onSaveStatus: function () {
+        if (!this.data.dataBase) {
+            var data = {
+                key: "t" + this.data.teamIndex.teamNumber,
+                data: this.data.teamIndex
+            }
+            var onSuccess = function () {
+                wx.showToast({
+                    title: '收藏成功,返回首页下拉刷新即可查看',
+                    icon: 'none',
+                    duration: 2000
+                });
+            }
+            app.dataBaseMethod.set(data, onSuccess);
+        } else {
+            var key = "t" + this.data.teamIndex.teamNumber;
+            var onSuccess = function () {
+                wx.showToast({
+                    title: '取消收藏',
+                    icon: 'none',
+                    duration: 2000
+                });
+            }
+            var onFail = function () {
+                wx.showToast({
+                    title: '无收藏，无法删除',
+                    icon: 'none',
+                    duration: 2000
+                });
+            }
+            app.dataBaseMethod.remove(key, onSuccess, onFail);
+        }
+        this.setData({
+            dataBase: !this.data.dataBase
+        })
+    },
+
+    onPinButtonClick: function () {
+        this.onSaveStatus();
     },
 
     getTeamYear: function (e) {

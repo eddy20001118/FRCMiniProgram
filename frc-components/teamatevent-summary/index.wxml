@@ -18,7 +18,7 @@
         </view>
     </pin-list>
     <pin-list>
-        <view hidden='{{summaryInfo.alliance=="--"}}' class='list'>
+        <view hidden='{{summaryInfo.alliance=="--" || summaryInfo.alliance==null}}' class='list'>
             <view class='list-title'>Alliance</view>
             <view class='list-content'>
                 {{summaryInfo.alliance}}
@@ -26,7 +26,7 @@
         </view>
     </pin-list>
     <pin-list>
-        <view hidden='{{summaryInfo.status=="--"}}' class='list'>
+        <view hidden='{{summaryInfo.status=="--" || summaryInfo.status==null}}' class='list'>
             <view class='list-title'>Team Status</view>
             <view hidden="{{summaryInfo.status==null}}">
                 <view class='list-content'>{{summaryInfo.status}}</view>
