@@ -6,6 +6,15 @@ Page({
     },
 
     onLoad: function (options) {
+        wx.cloud.callFunction({
+            name : "test",
+            data : {
+                a : 3,
+                b : 4
+            }
+        }).then(res => {
+            console.log(res.result.sum)
+        })
         this.onRequireData();
     },
 

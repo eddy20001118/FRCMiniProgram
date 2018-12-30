@@ -2,7 +2,7 @@
 App({
     globalData: {
         tbaApi: "https://www.thebluealliance.com/api/v3/",
-        tbaKey: ""
+        tbaKey: "kbxvOnS2csBH6fzQ8zijLw2f1k135fWp8NgTEfPRg1n8hYqh7SSUo9VJ3JEBlnIg"
     },
     globalMethod: {
         httpsRequest: function (app, api, callback) {
@@ -82,5 +82,11 @@ App({
             }
 
         }
+    },
+
+    onLaunch : function(){
+        wx.cloud.init({
+            env: 'frceven-e04c8c'
+          })
     }
 })
