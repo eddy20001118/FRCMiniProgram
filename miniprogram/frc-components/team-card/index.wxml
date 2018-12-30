@@ -1,0 +1,14 @@
+<pin-list>
+<view class="{{noBottomPadding ? 'teamContainerA' : 'teamContainer'}}">
+    <view class='team'>
+        <view class='teamNumberBox'>
+            <text class='teamNumber'>{{teamInfo.teamNumber}}</text>
+        </view>
+        <view class='teamInfo'>
+            <text class='teamName'>{{teamInfo.teamName}}</text>
+            <text class='teamLocation'>{{teamInfo.teamLocation}}</text>
+        </view>
+    </view>
+    <slot></slot>
+</view>
+</pin-list>

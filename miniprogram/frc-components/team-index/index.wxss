@@ -1,0 +1,20 @@
+.data-list{
+    flex-direction: row;
+    padding: 15px 10px;
+    width: 700rpx;
+    display: flex;
+    align-items: center;
+}
+
+.icon{
+    height: 20px;
+    width: 20px;
+}
+
+.text{
+    width: 550rpx;
+    margin-left : 50rpx;
+    margin-right: 25rpx;
+    overflow: hidden;
+    font-size: 30rpx;
+}

@@ -1,0 +1,45 @@
+.team {
+    display: flex;
+    flex-direction: row;
+}
+
+.teamContainer {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.teamContainerA {
+    padding-top: 10px;
+}
+.teamInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+}
+
+.teamNumber {
+    font-size: 40rpx;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 40px;
+    margin-left: 20rpx;
+    margin-right: 20rpx;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.teamName {
+    font-size: 30rpx;
+}
+
+.teamLocation {
+    color: #424242;
+    font-size: 25rpx;
+    font-weight: lighter;
+}
+
+.teamNumberBox {
+    height: 40px;
+}

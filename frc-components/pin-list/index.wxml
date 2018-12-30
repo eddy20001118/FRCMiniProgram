@@ -1,3 +1,0 @@
-<view class="List">
-    <slot></slot>
-</view>
