@@ -42,10 +42,10 @@ Page({
             title: this.data.eventIndex.eventTitle + " " + this.data.team.teamNumber
         });
 
-        app.globalMethod.httpsRequest(app, awardsApi, this.onAwardsCallback);
-        app.globalMethod.httpsRequest(app, summaryApi, this.onSummaryCallback);
-        app.globalMethod.httpsRequest(app, matchesApi, this.onMatchesCallback);
-        app.globalMethod.httpsRequest(app, statusApi, this.onStatusCallback);
+        app.globalMethod.httpsRequest(awardsApi, this.onAwardsCallback);
+        app.globalMethod.httpsRequest(summaryApi, this.onSummaryCallback);
+        app.globalMethod.httpsRequest(matchesApi, this.onMatchesCallback);
+        app.globalMethod.httpsRequest(statusApi, this.onStatusCallback);
     },
 
     /**
@@ -108,6 +108,7 @@ Page({
     },
 
     onStatusCallback: function (res) {
+        var res = res.result.data;
         if (res != null) {
             var teamKey = `frc${this.data.team.teamNumber}`
             var statusInfo = new Array(3);
@@ -121,6 +122,7 @@ Page({
     },
 
     onMatchesCallback: function (res) {
+        var res = res.result.data;
         if (res != null && res.length > 0) {
             var match = {
                 qual: new Array(),
@@ -176,6 +178,7 @@ Page({
     },
 
     onSummaryCallback: function (res) {
+        var res = res.result.data;
         if (res != null) {
             try { var qualrecord = (res.qual != null) ? [res.qual.ranking.record.wins, res.qual.ranking.record.losses, res.qual.ranking.record.ties] : null; } catch (e) {}
             try {var allianceStatus = app.globalMethod.dataFilter(res.alliance_status_str);} catch(e){}
@@ -196,6 +199,7 @@ Page({
     },
 
     onAwardsCallback: function (res) {
+        var res = res.result.data;
         if (res != null && res.length > 0) {
             var awardCard = new Array(res.length);
             for (var j = 0; j < res.length; j++) {

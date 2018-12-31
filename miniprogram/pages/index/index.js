@@ -6,15 +6,6 @@ Page({
     },
 
     onLoad: function (options) {
-        wx.cloud.callFunction({
-            name : "test",
-            data : {
-                a : 3,
-                b : 4
-            }
-        }).then(res => {
-            console.log(res.result.sum)
-        })
         this.onRequireData();
     },
 
@@ -75,7 +66,8 @@ Page({
                 for (var j = 0; j < keys.length; j++) {
                     if (keys[j].substring(0, 1) == 'e') { //event用e打头
                         var onGetSuccess = function (res) {
-                            eventInfo.push(res);
+                            console.log(res);
+                            eventInfo.push(res.eventIndex);
                         }
                         var onGetFail = function () {
                         }
@@ -94,7 +86,8 @@ Page({
         app.dataBaseMethod.getInfo(onSuccess);
         this.setData({
             eventInfo: eventInfo,
-            teamInfo : teamInfo
+            teamInfo: teamInfo
         })
     },
+
 })

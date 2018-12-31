@@ -7,9 +7,9 @@
         </van-tab>
         <van-tab title="Matches">
             <view class="container" hidden="{{match==null}}">
-                <van-collapse style="width : 750rpx;" value="{{ activeNames }}" bind:change="onCollapseChange">
+                <van-collapse  style="width : 750rpx;" value="{{ activeNames }}" bind:change="onCollapseChange">
                     <van-collapse-item disabled="{{match.qual == null || match.qual.length == 0}}" title="Qualification Matches" name="Qual">
-                        <pin-list wx:for="{{match.qual}}" wx:key="{{index}}">
+                        <pin-list class="container" wx:for="{{match.qual}}" wx:key="{{index}}">
                             <match-card 
                             matchType="{{match.qual[index].matchType}}" 
                             redAlliance="{{match.qual[index].redAlliance}}" 
@@ -19,7 +19,7 @@
                         </pin-list>
                     </van-collapse-item>
                     <van-collapse-item disabled="{{match.quarter == null || match.quarter.length == 0}}" title="Quarterfinal Matches" name="Quarter">
-                        <pin-list wx:for="{{match.quarter}}" wx:key="{{index}}">
+                        <pin-list class="container" wx:for="{{match.quarter}}" wx:key="{{index}}">
                             <match-card 
                             matchType="{{match.quarter[index].matchType}}" 
                             redAlliance="{{match.quarter[index].redAlliance}}" 
@@ -29,7 +29,7 @@
                         </pin-list>
                     </van-collapse-item>
                     <van-collapse-item disabled="{{match.semi == null || match.semi.length == 0}}" title="Semifinal Matches" name="Semi">
-                        <pin-list wx:for="{{match.semi}}" wx:key="{{index}}">
+                        <pin-list class="container" wx:for="{{match.semi}}" wx:key="{{index}}">
                             <match-card 
                             matchType="{{match.semi[index].matchType}}" 
                             redAlliance="{{match.semi[index].redAlliance}}" 
@@ -39,7 +39,7 @@
                         </pin-list>
                     </van-collapse-item>
                     <van-collapse-item disabled="{{match.final == null || match.final.length == 0}}" title="Finals Matches" name="Final">
-                        <pin-list wx:for="{{match.final}}" wx:key="{{index}}">
+                        <pin-list class="container" wx:for="{{match.final}}" wx:key="{{index}}">
                             <match-card 
                             matchType="{{match.final[index].matchType}}" 
                             redAlliance="{{match.final[index].redAlliance}}" 

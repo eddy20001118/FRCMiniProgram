@@ -40,8 +40,8 @@ Page({
         }
 
         app.dataBaseMethod.get(key, onSuccess, onFail)
-        app.globalMethod.httpsRequest(app, teamapi, this.onTeamCallBack);
-        app.globalMethod.httpsRequest(app, eventapi, this.onEventCallBack);
+        app.globalMethod.httpsRequest(teamapi, this.onTeamCallBack);
+        app.globalMethod.httpsRequest(eventapi, this.onEventCallBack);
     },
 
     /**
@@ -102,6 +102,7 @@ Page({
     },
 
     onTeamCallBack: function (res) {
+        var res = res.result.data;
         var teamIndex = {
             teamNumber: res.team_number,
             teamName: res.nickname,
@@ -122,7 +123,7 @@ Page({
     },
 
     onEventCallBack: function (res) {
-        var eventIndex = new Array(res.length);
+        var res = res.result.data;
         var teamYearArray = new Array();
         var lastyear = (res.length >= 1) ? res[0].year : null;
         if (lastyear != null) teamYearArray.push(lastyear);
@@ -138,6 +139,7 @@ Page({
     },
 
     onEventatYearCallback: function (res) {
+        var res = res.result.data;
         var eventInfo = new Array(res.length);
         for (var j = 0; j < res.length; j++) {
             var eventStartDate = res[j].start_date.split("-");
@@ -207,6 +209,6 @@ Page({
     getTeamYear: function (e) {
         var index = e.detail;
         var eventAtYearApi = `team/frc${this.data.teamIndex.teamNumber}/events/${this.data.teamYearArray[index]}`;
-        app.globalMethod.httpsRequest(app, eventAtYearApi, this.onEventatYearCallback);
+        app.globalMethod.httpsRequest(eventAtYearApi, this.onEventatYearCallback);
     }
 })

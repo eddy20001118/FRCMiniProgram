@@ -1,21 +1,14 @@
-//app.js
+
 App({
-    globalData: {
-        tbaApi: "https://www.thebluealliance.com/api/v3/",
-        tbaKey: "kbxvOnS2csBH6fzQ8zijLw2f1k135fWp8NgTEfPRg1n8hYqh7SSUo9VJ3JEBlnIg"
-    },
     globalMethod: {
-        httpsRequest: function (app, api, callback) {
-            var url = app.globalData.tbaApi + api + `?X-TBA-Auth-Key=${app.globalData.tbaKey}`;
-            console.log(url);
-            wx.request({
-                url: url,
-                header: {
-                    'content-type': 'application/json' // 默认值
+        httpsRequest: function (api, callback) {
+            wx.cloud.callFunction({
+                name: 'httpsRequest',
+                data: {
+                    api: api
                 },
-                success: function (res) {
-                    callback(res.data);
-                }
+                success : callback,
+                fail: console.error
             })
         },
         matchesArraySort: function (x, y) {
@@ -81,12 +74,43 @@ App({
 
             }
 
+        },
+        search: function (type, msg, callback) {
+            const db = wx.cloud.database({
+                env: "frceven-e04c8c"
+            });
+            if (type == "team") {
+                var teamsInfoCollection = db.collection('teams_info');
+                var name = msg.match(/^[A-Za-z][A-Za-z\s]*[A-Za-z]$/gi);
+                var num = msg.match(/\d+$/gi);
+                if (name != null) {
+                    teamsInfoCollection.where({
+                        nickname: db.RegExp({
+                            regexp: name.toString(),
+                            options: "i"
+                        })
+                    }).get().then(callback)
+                }
+                if (num != null) {
+                    teamsInfoCollection.where({
+                        team_number: parseInt(num.toString())
+                    }).get().then(callback)
+                }
+            } else if (type == "event") {
+                var eventsInfoCollection = db.collection('events_info');
+                eventsInfoCollection.where({
+                    name: db.RegExp({
+                        regexp: msg,
+                        options: "i"
+                    })
+                }).get().then(callback)
+            }
         }
     },
 
-    onLaunch : function(){
+    onLaunch: function () {
         wx.cloud.init({
             env: 'frceven-e04c8c'
-          })
+        })
     }
 })

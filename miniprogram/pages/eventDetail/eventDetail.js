@@ -12,7 +12,7 @@ Page({
         allianceCard: Array,
         awardCard: Array,
         match: Object,
-        topTeamList: Array,
+        topTeamList: null,
         activeNames: [],
         dataBase: Boolean
     },
@@ -28,7 +28,9 @@ Page({
         var key = "e" + eventInfo.eventYear + eventInfo.eventCode;
         var onSuccess = function (value) {
             that.setData({
-                dataBase: true
+                dataBase: true,
+                topTeamList: value.topTeamList,
+                eventIndex: value.eventIndex
             })
             console.log("已有收藏")
         }
@@ -42,7 +44,7 @@ Page({
 
 
         var summaryApi = `event/${eventInfo.eventYear}${eventInfo.eventCode}`;
-        app.globalMethod.httpsRequest(app, summaryApi, this.onSummaryCallBack);
+        app.globalMethod.httpsRequest(summaryApi, this.onSummaryCallBack);
     },
 
     /**
@@ -99,10 +101,10 @@ Page({
         var awardsApi = `event/${eventInfo.eventYear}${eventInfo.eventCode}/awards` //list
         var matchesApi = `event/${eventInfo.eventYear}${eventInfo.eventCode}/matches/simple`; //list
         var teamListApi = `event/${eventInfo.eventYear}${eventInfo.eventCode}/teams`; //list
-        app.globalMethod.httpsRequest(app, teamListApi, this.onTeamsCallBack);
-        app.globalMethod.httpsRequest(app, alliancesApi, this.onAlliancesCallBack);
-        app.globalMethod.httpsRequest(app, awardsApi, this.onAwardsCallBack);
-        app.globalMethod.httpsRequest(app, matchesApi, this.onMatchesCallBack);
+        app.globalMethod.httpsRequest(teamListApi, this.onTeamsCallBack);
+        app.globalMethod.httpsRequest(alliancesApi, this.onAlliancesCallBack);
+        app.globalMethod.httpsRequest(awardsApi, this.onAwardsCallBack);
+        app.globalMethod.httpsRequest(matchesApi, this.onMatchesCallBack);
     },
 
     onTabChange: function (e) {
@@ -110,6 +112,7 @@ Page({
     },
 
     onAwardsCallBack: function (res) {
+        var res = res.result.data;
         if (res != null && res.length != 0) {
             var awardCard = new Array(res.length);
             for (var j = 0; j < res.length; j++) {
@@ -136,6 +139,7 @@ Page({
     },
 
     onSummaryCallBack: function (res) {
+        var res = res.result.data;
         var eventStartDate = res.start_date.split("-");
         var eventEndDate = res.end_date.split("-");
         var startDate = new Date(eventStartDate[0], eventStartDate[1] - 1, eventStartDate[2]);
@@ -179,6 +183,7 @@ Page({
     },
 
     onAlliancesCallBack: function (res) {
+        var res = res.result.data;
         if (res != null) {
             var allianceCard = new Array(res.length);
             for (var j = 0; j < res.length; j++) {
@@ -196,6 +201,7 @@ Page({
     },
 
     onMatchesCallBack: function (res) {
+        var res = res.result.data;
         if (res != null && res.length != 0) {
             var match = {
                 qual: new Array(),
@@ -251,6 +257,7 @@ Page({
     },
 
     onRankingCallBack: function (res) {
+        var res = res.result.data;
         var teamList = this.data.teamlist;
         var rankCard = new Array();
 
@@ -269,7 +276,6 @@ Page({
             }
         }
         rankCard.sort(app.globalMethod.ranksArraySort);
-
         if (rankCard.length < 5) {
             var topTeamList = new Array(rankCard.length);
             for (var j = 0; j < rankCard.length; j++) {
@@ -281,13 +287,15 @@ Page({
                 topTeamList[j] = rankCard[j]
             }
         }
+
         this.setData({
-            rankCard: rankCard,
-            topTeamList: topTeamList
+            topTeamList: topTeamList,
+            rankCard: rankCard
         })
     },
 
     onTeamsCallBack: function (res) {
+        var res = res.result.data;
         if (res != null && res.length != 0) {
             var teamlist = new Array(res.length);
             for (var j = 0; j < res.length; j++) {
@@ -304,7 +312,7 @@ Page({
 
             //只有teamlist加载完了才去请求rank
             var rankingApi = `event/${this.data.eventIndex.eventYear}${this.data.eventIndex.eventCode}/teams/statuses`;
-            app.globalMethod.httpsRequest(app, rankingApi, this.onRankingCallBack);
+            app.globalMethod.httpsRequest(rankingApi, this.onRankingCallBack);
         }
     },
 
@@ -327,7 +335,10 @@ Page({
         if (!this.data.dataBase) {
             var data = {
                 key: "e" + this.data.eventIndex.eventYear + this.data.eventIndex.eventCode,
-                data: this.data.eventIndex
+                data: {
+                    eventIndex: this.data.eventIndex,
+                    topTeamList: this.data.topTeamList
+                }
             }
             var onSuccess = function () {
                 wx.showToast({

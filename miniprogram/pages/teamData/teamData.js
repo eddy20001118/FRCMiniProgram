@@ -1,4 +1,4 @@
-// pages/gameData/teamData.js
+var app = getApp();
 Page({
 	data: {
 		teamInfo : Array
@@ -37,24 +37,42 @@ Page({
 	},
 
 	onSearch: function (event) {
-		var code = event.detail
-		//TODO: 请求服务器模糊搜索函数,返回一个teamInfo数组，以下为假数据
-		var teamInfo = [
-			{
-				teamNumber : code,
-				teamName :  "Pharma Atom Storm",
-				teamLocation : "Shenzhen, Guangdong, China"
+		var that = this;
+		var callback = function(res){
+			var teamInfo = new Array(res.data.length);
+			for(var j =0; j<res.data.length; j++){
+				var info = res.data[j];
+				teamInfo[j] = {
+					teamNumber : info.team_number,
+					teamName : info.nickname,
+					teamLocation : `${info.city} ${info.state_prov} ${info.country}`
+				}
 			}
-			,
-			{
-				teamNumber : code-1,
-				teamName :  "Pharma Atom Storm",
-				teamLocation : "Shenzhen, Guangdong, China"
-			}
-		]
-		this.setData({
-			teamInfo : teamInfo
-		});
+			teamInfo.sort(app.globalMethod.teamArraySort);
+			that.setData({
+				teamInfo : teamInfo
+			})
+		}
+		var data = app.dataBaseMethod.search("team",event.detail,callback);
+		
+		// var code = event.detail
+		// //TODO: 请求服务器模糊搜索函数,返回一个teamInfo数组，以下为假数据
+		// var teamInfo = [
+		// 	{
+		// 		teamNumber : code,
+		// 		teamName :  "Pharma Atom Storm",
+		// 		teamLocation : "Shenzhen, Guangdong, China"
+		// 	}
+		// 	,
+		// 	{
+		// 		teamNumber : code-1,
+		// 		teamName :  "Pharma Atom Storm",
+		// 		teamLocation : "Shenzhen, Guangdong, China"
+		// 	}
+		// ]
+		// this.setData({
+		// 	teamInfo : teamInfo
+		// });
 	},
 
 	onCancel: function () {
