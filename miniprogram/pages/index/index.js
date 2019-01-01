@@ -3,9 +3,18 @@ Page({
     data: {
         teamInfo: Array,
         eventInfo: Array,
+        height : Number
     },
 
     onLoad: function (options) {
+        var that = this;
+		wx.getSystemInfo({
+            success : res =>{
+                that.setData({
+                    height : res.windowHeight-44
+                })
+            }
+        })
         this.onRequireData();
     },
 

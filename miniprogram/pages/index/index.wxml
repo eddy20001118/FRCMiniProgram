@@ -9,4 +9,5 @@
     <view bindtap='onEventCardClick' wx:for="{{eventInfo}}" wx:key="{{index}}" id="{{index}}">
         <pin-event-card eventInfo="{{eventInfo[index]}}" steps="{{eventInfo[index].steps}}" active="{{eventInfo[index].active}}" />
     </view>
+    <empty-pages hidden="{{(teamInfo != null && teamInfo.length != 0)|| (eventInfo != null && eventInfo.length != 0)}}" type="I" height="{{height}}"/>
 </view>
