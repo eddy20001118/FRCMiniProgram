@@ -1,14 +1,14 @@
 <pin-list>
-<view class="{{noBottomPadding ? 'teamContainerA' : 'teamContainer'}}">
-    <view class='team'>
-        <view class='teamNumberBox'>
-            <text class='teamNumber'>{{teamInfo.teamNumber}}</text>
+    <view class="{{noBottomPadding ? 'teamContainerA' : 'teamContainer'}}" hover-class="hover">
+        <view class='team'>
+            <view class='teamNumberBox'>
+                <text class='teamNumber'>{{teamInfo.teamNumber}}</text>
+            </view>
+            <view class='teamInfo'>
+                <text class='teamName'>{{teamInfo.teamName}}</text>
+                <text class='teamLocation'>{{teamInfo.teamLocation}}</text>
+            </view>
         </view>
-        <view class='teamInfo'>
-            <text class='teamName'>{{teamInfo.teamName}}</text>
-            <text class='teamLocation'>{{teamInfo.teamLocation}}</text>
-        </view>
+        <slot></slot>
     </view>
-    <slot></slot>
-</view>
 </pin-list>

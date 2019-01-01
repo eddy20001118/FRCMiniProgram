@@ -31,7 +31,7 @@
 			{
 				"text": "赛事",
 				"pagePath": "pages/eventData/eventData",
-				"iconPath": "res/icons/tabBar/default/news_hot_fill_light.png",
+				"iconPath": "res/icons/tabBar/default/newshotfill.png",
 				"selectedIconPath": "res/icons/tabBar/selected/news_hot_fill_light.png"
 			},
 			{
@@ -43,8 +43,8 @@
 			{
 				"text": "我的",
 				"pagePath": "pages/myAccount/myAccount",
-				"iconPath": "res/icons/tabBar/default/favorfill.png",
-				"selectedIconPath": "res/icons/tabBar/selected/favorfill.png"
+				"iconPath": "res/icons/tabBar/default/myfill.png",
+				"selectedIconPath": "res/icons/tabBar/selected/myfill.png"
 			}
 		]
 	},

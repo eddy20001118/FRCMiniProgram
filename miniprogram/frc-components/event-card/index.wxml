@@ -1,10 +1,12 @@
 <pin-list>
-    <view class='event'>
+    <view class='event' hover-class="hover">
         <text class='eventTitle'>{{eventInfo.eventTitle}}</text>
         <view class='location-date'>
             <text class='location'>{{eventInfo.eventLocationShort}}</text>
-            <text class='date'>{{eventInfo.eventStartDate}} to {{eventInfo.eventEndDate}}, {{eventInfo.eventYear}}</text>
+            <text class='date'>
+                {{eventInfo.eventStartDate}} to {{eventInfo.eventEndDate}}, {{eventInfo.eventYear}}
+            </text>
         </view>
+        <slot></slot>
     </view>
-    <slot></slot>
 </pin-list>

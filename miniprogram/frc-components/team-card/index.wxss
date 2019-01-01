@@ -43,3 +43,7 @@
 .teamNumberBox {
     height: 40px;
 }
+
+.hover{
+    background-color: #eee;
+}
