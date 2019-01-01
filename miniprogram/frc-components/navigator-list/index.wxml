@@ -1,0 +1,5 @@
+<view bind:tap="navigate" class="list-content" hover-class="hover">
+    <image class='icon' src="{{icon}}"/>
+    <text class="title">{{title}}</text>
+    <image class="icon-right" src="/res/icons/myAccount/navigatenext.png" />
+</view>

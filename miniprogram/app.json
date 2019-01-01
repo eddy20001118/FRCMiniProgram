@@ -3,7 +3,10 @@
 		"pages/index/index",
 		"pages/eventData/eventData",
 		"pages/teamData/teamData",
-		"pages/myFavorite/myFavorite",
+		"pages/myAccount/about/about",
+        "pages/myAccount/favorite/favorite",
+        "pages/myAccount/setting/setting",
+        "pages/myAccount/myAccount",
 		"pages/eventDetail/eventDetail",
 		"pages/teamDetail/teamDetail",
 		"pages/teamAtEvent/teamAtEvent"
@@ -38,8 +41,8 @@
 				"selectedIconPath": "res/icons/tabBar/selected/clothesfill.png"
 			},
 			{
-				"text": "收藏",
-				"pagePath": "pages/myFavorite/myFavorite",
+				"text": "我的",
+				"pagePath": "pages/myAccount/myAccount",
 				"iconPath": "res/icons/tabBar/default/favorfill.png",
 				"selectedIconPath": "res/icons/tabBar/selected/favorfill.png"
 			}

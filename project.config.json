@@ -40,18 +40,19 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 0,
 			"list": [
 				{
-					"id": -1,
+					"id": 0,
 					"name": "testpage",
-					"pathName": "pages/myFavorite/myFavorite",
+					"pathName": "pages/myAccount/myAccount",
 					"query": ""
 				},
 				{
 					"id": -1,
 					"name": "teamdetail",
-					"pathName": "pages/teamDetail/teamDetail"
+					"pathName": "pages/teamDetail/teamDetail",
+					"query": ""
 				}
 			]
 		}

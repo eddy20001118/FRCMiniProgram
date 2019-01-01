@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "wux-avatar": "/miniprogram_npm/wux-weapp/avatar/index",
+    "navigator-list": "/frc-components/navigator-list/index"
+  }
+}

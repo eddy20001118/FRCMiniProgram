@@ -1,0 +1,42 @@
+.colView {
+    flex-direction: column;
+    display: flex;
+}
+
+.avatar-block{
+    height: 150px;
+    width: 750rpx;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.user-avatar{
+    height: 68px;
+    width: 68px;
+    overflow: hidden;
+    border-radius: 34px;
+}
+
+.user-name{
+    color: #424242;
+    font-size: 30rpx;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.navigator-list{
+    margin-top: 20px;
+    width: 750rpx;
+    font-size: 13pt;
+}
+
+.list-content{
+    height: 50px;
+}
+
+.shadow {
+    box-shadow: 0 3px 5px rgba(26, 26, 26, 0.1);
+    box-sizing: border-box;
+}

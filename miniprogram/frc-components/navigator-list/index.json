@@ -1,0 +1,6 @@
+{
+    "component": true,
+    "usingComponents": {
+        "wux-divider": "/miniprogram_npm/wux-weapp/divider/index"
+    }
+}

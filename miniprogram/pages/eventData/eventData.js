@@ -83,14 +83,16 @@ Page({
         app.dataBaseMethod.search("event", event.detail, callback);
     },
     onCancel: function () {
-
+        this.setData({
+            search : null,
+            eventInfo : null
+        })
     },
     onEventCardClick: function (e) {
         var index = e.currentTarget.id;
         var curInfo = encodeURIComponent(JSON.stringify(this.data.eventInfo[index]))
         wx.navigateTo({
-            url: `/pages/eventDetail/eventDetail?eventInfo=${curInfo}`,
-            search : ""
+            url: `/pages/eventDetail/eventDetail?eventInfo=${curInfo}`
         })
     }
 })

@@ -1,3 +1,5 @@
+const dbObj = {env : "frceven-e04c8c"}
+
 App({
     globalMethod: {
         httpsRequest: function (api, callback) {
@@ -52,6 +54,7 @@ App({
         }
     },
     dataBaseMethod: {
+        
         set: function (data, onSuccess) {
             try {
                 wx.setStorageSync(data.key, data.data);
@@ -89,10 +92,45 @@ App({
             }
 
         },
+        // set: function (data, onSuccess) {
+        //     try {
+        //         wx.setStorageSync(data.key, data.data);
+        //         onSuccess();
+        //     } catch (error) {
+
+        //     }
+        // },
+        // remove: function (key, onSuccess, onFail) {
+        //     try {
+        //         wx.removeStorageSync(key);
+        //         onSuccess();
+        //     } catch (error) {
+        //         onFail();
+        //     }
+        // },
+        // get: function (key, onSuccess, onFail) {
+        //     try {
+        //         const value = wx.getStorageSync(key);
+        //         if (value != null && value.length != 0) {
+        //             onSuccess(value)
+        //         } else {
+        //             onFail()
+        //         }
+        //     } catch (error) {
+        //         onFail();
+        //     }
+        // },
+        // getInfo: function (onSuccess) {
+        //     try {
+        //         const res = wx.getStorageInfoSync();
+        //         onSuccess(res)
+        //     } catch (error) {
+
+        //     }
+
+        // },
         search: function (type, msg, callback) {
-            const db = wx.cloud.database({
-                env: "frceven-e04c8c"
-            });
+            const db = wx.cloud.database(dbObj);
             if (type == "team") {
                 var teamsInfoCollection = db.collection('teams_info');
                 var name = msg.match(/^[A-Za-z][A-Za-z\s]*[A-Za-z]$/gi);
