@@ -3,4 +3,5 @@
     <view wx:for="{{eventInfo}}" wx:key="{{index}}" id="{{index}}" bindtap='onEventCardClick'>
         <event-card eventInfo="{{item}}" />
     </view>
+    <empty-pages wx:if="{{(eventInfo == null || eventInfo.length==0) && search != null}}" type="E" msg="No event found" height="{{height}}"/>
 </view>

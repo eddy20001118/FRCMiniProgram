@@ -5,11 +5,13 @@
                 <team-index teamIndex="{{teamIndex}}" teamYearArray="{{teamYearArray}}" bind:event="getTeamYear" />
                 <pin-button status="{{dataBase}}" bind:onclick="onPinButtonClick"/>
             </view>
+            <empty-pages hidden="{{teamIndex != null}}" type="E" msg="No team Info found" height="{{height}}"/>
         </van-tab>
         <van-tab title="Event">
             <view class='container' wx:for="{{eventInfo}}" wx:key="{{index}}" id="{{index}}" bindtap='onEventCardClick'>
                 <event-card eventInfo="{{item}}" />
             </view>
+            <empty-pages hidden="{{eventInfo != null}}" type="E" msg="No event Info found" height="{{height}}"/>
         </van-tab>
     </van-tabs>
 </view>

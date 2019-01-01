@@ -9,13 +9,22 @@ Page({
         eventInfo: Array,
         teamIndex: Object,
         teamYearArray: Array,
-        dataBase: Boolean
+        dataBase: Boolean,
+        height : Number
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        var that = this;
+        wx.getSystemInfo({
+            success : res =>{
+                that.setData({
+                    height : res.windowHeight-44
+                })
+            }
+        })
         var teamInfo = JSON.parse(decodeURIComponent(options.teamInfo));
         var teamapi = `team/frc${teamInfo.teamNumber}`;
         var eventapi = `team/frc${teamInfo.teamNumber}/events`
@@ -102,52 +111,68 @@ Page({
     },
 
     onTeamCallBack: function (res) {
-        var res = res.result.data;
-        var teamIndex = {
-            teamNumber: res.team_number,
-            teamName: res.nickname,
-            teamLocation: `${res.city}, ${res.state_prov}, ${res.country}`,
-            registedLocation: `${res.city}, ${res.state_prov}, ${res.country}`,
-            organization: res.name,
-            //TODO: 完善matchCard信息请求
-            matchCard: {
-                matchType: ["Qual", "11"],
-                redAlliance: [6766, 6666, 6566],
-                blueAlliance: [6866, 6966, 7066],
-                score: [312, 300]
+        if (res != null) {
+            try { var teamNumber = res.team_number; } catch (error) { }
+            try { var teamName = res.nickname; } catch (error) { }
+            try { var teamLocation = `${res.city}, ${res.state_prov}, ${res.country}`; } catch (error) { }
+            try { var organization = res.name; } catch (error) { }
+            try {
+                var matchCard = {
+                    matchType: ["Qual", "11"],
+                    redAlliance: [6766, 6666, 6566],
+                    blueAlliance: [6866, 6966, 7066],
+                    score: [312, 300]
+                }
+            } catch (error) { }
+
+            var teamIndex = {
+                teamNumber: teamNumber,
+                teamName: teamName,
+                teamLocation: teamLocation,
+                registedLocation: teamLocation,
+                organization: organization,
+                //TODO: 完善matchCard信息请求
+                matchCard: matchCard
             }
+            this.setData({
+                teamIndex: teamIndex,
+            })
         }
-        this.setData({
-            teamIndex: teamIndex,
-        })
     },
 
     onEventCallBack: function (res) {
-        var res = res.result.data;
         var teamYearArray = new Array();
         var lastyear = (res.length >= 1) ? res[0].year : null;
-        if (lastyear != null) teamYearArray.push(lastyear);
-        for (var j = 0; j < res.length; j++) {
-            if (res[j].year != lastyear)
-                teamYearArray.push(res[j].year);
-            lastyear = res[j].year;
+        if (lastyear != null) {
+            teamYearArray.push(lastyear);
+            for (var j = 0; j < res.length; j++) {
+                try {
+                    if (res[j].year != lastyear)
+                        teamYearArray.push(res[j].year);
+                    lastyear = res[j].year;
+                } catch (error) {
+
+                }
+            }
+            teamYearArray.reverse();
         }
-        teamYearArray.reverse();
         this.setData({
             teamYearArray: teamYearArray
         })
     },
 
     onEventatYearCallback: function (res) {
-        var res = res.result.data;
         var eventInfo = new Array(res.length);
         for (var j = 0; j < res.length; j++) {
-            var eventStartDate = res[j].start_date.split("-");
-            var eventEndDate = res[j].end_date.split("-");
-            var startDate = new Date(eventStartDate[0], eventStartDate[1] - 1, eventStartDate[2]);
-            var endDate = new Date(eventEndDate[0], eventEndDate[1] - 1, eventEndDate[2]);
-            var startMonth = startDate.toDateString().split(" ")[1]
-            var endMonth = endDate.toDateString().split(" ")[1]
+            try {
+                var eventStartDate = res[j].start_date.split("-");
+                var eventEndDate = res[j].end_date.split("-");
+                var startDate = new Date(eventStartDate[0], eventStartDate[1] - 1, eventStartDate[2]);
+                var endDate = new Date(eventEndDate[0], eventEndDate[1] - 1, eventEndDate[2]);
+                var startMonth = startDate.toDateString().split(" ")[1]
+                var endMonth = endDate.toDateString().split(" ")[1]
+            } catch (error) { }
+
             eventInfo[j] = {
                 eventTitle: res[j].name,
                 eventLocationShort: `${res[j].city}, ${res[j].state_prov}, ${res[j].country}`,

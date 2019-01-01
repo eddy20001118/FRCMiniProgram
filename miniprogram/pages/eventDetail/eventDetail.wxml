@@ -3,11 +3,12 @@
         <van-tab title="Summary">
             <view class='container'>
                 <event-index eventIndex="{{eventIndex}}" />
-                <title-list title="Top Team">
-                    <title-list-content wx:for="{{topTeamList}}" wx:key="{{index}}" index="{{index+1}}" teamNumber="{{item.team[1]}}" />
+                <title-list title="Top Team" wx:if="{{topTeamList != null && topTeamList.length != 0}}">
+                    <title-list-content  wx:for="{{topTeamList}}" wx:key="{{index}}" index="{{index+1}}" teamNumber="{{item.team[1]}}" />
                 </title-list>
                 <pin-button status="{{dataBase}}" bind:onclick="onPinButtonClick"/>
             </view>
+            <empty-pages hidden="{{eventIndex != null}}" type="E" msg="No summary found" height="{{height}}"/>
         </van-tab>
         <van-tab title="Teams">
             <view class='container'>
@@ -17,6 +18,7 @@
                     </view>
                 </view>
             </view>
+            <empty-pages hidden="{{teamlist != null && teamlist.length != 0}}" type="E" msg="No team found" height="{{height}}"/>
         </van-tab>
         <van-tab title="Rankings">
             <view class='container'>
@@ -28,6 +30,7 @@
                     rankScore="{{rankCard[index].rankScore}}"
                 />
             </view>
+            <empty-pages hidden="{{rankCard != null && rankCard.length != 0}}" type="E" msg="No ranking found" height="{{height}}"/>
         </van-tab>
         <van-tab title="Matches">
             <view class="container" hidden="{{match==null}}">
@@ -74,6 +77,7 @@
                     </van-collapse-item>
                 </van-collapse>
             </view>
+            <empty-pages hidden="{{match != null}}" type="E" msg="No match found" height="{{height}}"/>
         </van-tab>
         <van-tab title="Alliances">
             <view class='container'>
@@ -84,6 +88,7 @@
                     allianceTeam="{{allianceCard[index].allianceTeam}}"
                 />
             </view>
+            <empty-pages hidden="{{allianceCard != null && allianceCard.length != 0}}" type="E" msg="No alliance found" height="{{height}}"/>
         </van-tab>
         <van-tab title="Awards">
             <view class='container'>
@@ -94,6 +99,7 @@
                     awardTeamList="{{awardCard[index].awardTeamList}}"
                 />
             </view>
+            <empty-pages hidden="{{awardCard != null && awardCard.lenght != 0}}" type="E" msg="No award found" height="{{height}}"/>
         </van-tab>
     </van-tabs>
 </view>

@@ -3,4 +3,5 @@
     <view wx:for="{{teamInfo}}" wx:key="{{index}}" id="{{index}}" bindtap='onTeamCardClick'>
         <team-card teamInfo="{{item}}" />
     </view>
+    <empty-pages wx:if="{{(teamInfo == null || teamInfo.length==0) && search != null}}" type="E" msg="No team found" height="{{height}}"/>
 </view>

@@ -1,20 +1,20 @@
 <view hidden="{{statusInfo==null}}">
     <pin-list>
-        <view hidden="{{statusInfo[0]==null}}" class='list'>
+        <view hidden="{{statusInfo.opr==null}}" class='list'>
             <view class='list-title'>OPR</view>
-            <view class='list-content'>{{statusInfo[0]}}</view>
+            <view class='list-content'>{{statusInfo.opr}}</view>
         </view>
     </pin-list>
     <pin-list>
-        <view hidden="{{statusInfo[1]==null}}" class='list'>
+        <view hidden="{{statusInfo.dpr==null}}" class='list'>
             <view class='list-title'>DPR</view>
-            <view class='list-content'>{{statusInfo[1]}}</view>
+            <view class='list-content'>{{statusInfo.dpr}}</view>
         </view>
     </pin-list>
     <pin-list>
-        <view hidden="{{statusInfo[2]==null}}" class='list'>
+        <view hidden="{{statusInfo.ccwm==null}}" class='list'>
             <view class='list-title'>CCWM</view>
-            <view class='list-content'>{{statusInfo[2]}}</view>
+            <view class='list-content'>{{statusInfo.ccwm}}</view>
         </view>
     </pin-list>
 </view>

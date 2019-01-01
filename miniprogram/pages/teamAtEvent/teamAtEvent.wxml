@@ -1,9 +1,10 @@
 <view class="container">
     <van-tabs style="width:750rpx;" color="#3f51b5" animated swipeable active="{{ active }}" bind:change="onTabChange">
         <van-tab title="Summary">
-            <view class="container">
+            <view class="container fullheight">
                 <teamatevent-summary summaryInfo="{{summaryInfo}}" />
             </view>
+            <empty-pages hidden="{{summaryInfo != null}}" type="E" msg="No summary found" height="{{height}}"/>
         </van-tab>
         <van-tab title="Matches">
             <view class="container" hidden="{{match==null}}">
@@ -50,16 +51,19 @@
                     </van-collapse-item>
                 </van-collapse>
             </view>
+            <empty-pages hidden="{{match != null}}" type="E" msg="No match found" height="{{height}}"/>
         </van-tab>
         <van-tab title="Stats">
             <view class="container">
                 <teamatevent-status statusInfo="{{statusInfo}}" />
             </view>
+            <empty-pages hidden="{{statusInfo != null}}" type="E" msg="No status found" height="{{height}}"/>
         </van-tab>
         <van-tab title="Awards">
             <view class="container" wx:for="{{awardCard}}" wx:key="{{index}}">
                 <awards-card awardTitle="{{item.awardTitle}}" awardTeamList="{{item.awardTeamList}}" />
             </view>
+            <empty-pages hidden="{{awardCard != null && awardCard.length != 0}}" type="E" msg="No award found" height="{{height}}"/>
         </van-tab>
     </van-tabs>
 </view>

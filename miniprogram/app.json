@@ -4,9 +4,9 @@
 		"pages/eventData/eventData",
 		"pages/teamData/teamData",
 		"pages/myFavorite/myFavorite",
-        "pages/eventDetail/eventDetail",
-        "pages/teamDetail/teamDetail",
-        "pages/teamAtEvent/teamAtEvent"
+		"pages/eventDetail/eventDetail",
+		"pages/teamDetail/teamDetail",
+		"pages/teamAtEvent/teamAtEvent"
 	],
 	"window": {
 		"backgroundTextStyle": "light",
@@ -15,20 +15,19 @@
 		"navigationBarTextStyle": "white"
 	},
 	"tabBar": {
-		"color" : "#8a8a8a",
-		"selectedColor" : "#3f51b5",
-		"backgroundColor" : "#fff",
-
+		"color": "#8a8a8a",
+		"selectedColor": "#3f51b5",
+		"backgroundColor": "#fff",
 		"list": [
 			{
 				"text": "主页",
 				"pagePath": "pages/index/index",
 				"iconPath": "res/icons/tabBar/default/homefill.png",
-				"selectedIconPath" : "res/icons/tabBar/selected/homefill.png"
+				"selectedIconPath": "res/icons/tabBar/selected/homefill.png"
 			},
 			{
 				"text": "赛事",
-				"pagePath" : "pages/eventData/eventData",
+				"pagePath": "pages/eventData/eventData",
 				"iconPath": "res/icons/tabBar/default/news_hot_fill_light.png",
 				"selectedIconPath": "res/icons/tabBar/selected/news_hot_fill_light.png"
 			},
@@ -40,10 +39,13 @@
 			},
 			{
 				"text": "收藏",
-				"pagePath" : "pages/myFavorite/myFavorite",
+				"pagePath": "pages/myFavorite/myFavorite",
 				"iconPath": "res/icons/tabBar/default/favorfill.png",
 				"selectedIconPath": "res/icons/tabBar/selected/favorfill.png"
 			}
 		]
+	},
+	"usingComponents": {
+		"empty-pages": "/frc-components/empty-pages/index"
 	}
 }

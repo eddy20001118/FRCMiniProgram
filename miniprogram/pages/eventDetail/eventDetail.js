@@ -14,16 +14,23 @@ Page({
         match: Object,
         topTeamList: null,
         activeNames: [],
-        dataBase: Boolean
+        dataBase: Boolean,
+        height : Number
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        var that = this;
+        wx.getSystemInfo({
+            success : res =>{
+                that.setData({
+                    height : res.windowHeight-44
+                })
+            }
+        })
         var eventInfo = JSON.parse(decodeURIComponent(options.eventInfo));
-
-
         var that = this;
         var key = "e" + eventInfo.eventYear + eventInfo.eventCode;
         var onSuccess = function (value) {
@@ -112,24 +119,30 @@ Page({
     },
 
     onAwardsCallBack: function (res) {
-        var res = res.result.data;
         if (res != null && res.length != 0) {
             var awardCard = new Array(res.length);
             for (var j = 0; j < res.length; j++) {
-                var awardTeamList = new Array(res[j].recipient_list.length);
-                for (var i = 0; i < res[j].recipient_list.length; i++) {
-                    var teamNumber = res[j].recipient_list[i].team_key;
-                    var awardee = res[j].recipient_list[i].awardee
-                    teamNumber = (teamNumber != null) ? teamNumber.replace("frc", "") : null;
-                    awardTeamList[i] = {
-                        teamNumber: teamNumber,
-                        awardee: awardee
+                if (res[j].recipient_list != null) {
+                    var awardTeamList = new Array(res[j].recipient_list.length);
+                    for (var i = 0; i < res[j].recipient_list.length; i++) {
+                        try { var teamNumber = res[j].recipient_list[i].team_key; } catch (e) { }
+                        try { var awardee = res[j].recipient_list[i].awardee } catch (e) { }
+                        teamNumber = (teamNumber != null) ? teamNumber.replace("frc", "") : null;
+                        awardTeamList[i] = {
+                            teamNumber: teamNumber,
+                            awardee: awardee
+                        }
                     }
-                }
 
-                awardCard[j] = {
-                    awardTitle: res[j].name,
-                    awardTeamList: awardTeamList
+                    try {
+                        var awardTitle = res[j].name
+                    } catch (error) {
+                        
+                    }
+                    awardCard[j] = {
+                        awardTitle: awardTitle,
+                        awardTeamList: awardTeamList
+                    }
                 }
             }
             this.setData({
@@ -139,13 +152,16 @@ Page({
     },
 
     onSummaryCallBack: function (res) {
-        var res = res.result.data;
-        var eventStartDate = res.start_date.split("-");
-        var eventEndDate = res.end_date.split("-");
-        var startDate = new Date(eventStartDate[0], eventStartDate[1] - 1, eventStartDate[2]);
-        var endDate = new Date(eventEndDate[0], eventEndDate[1] - 1, eventEndDate[2]);
-        var startMonth = startDate.toDateString().split(" ")[1]
-        var endMonth = endDate.toDateString().split(" ")[1]
+        //只有对获取的value进行操作时才需要trycatch来捕获异常，否则如果value不存在，对应属性会被赋值null，不会抛出异常
+        try {
+            var eventStartDate = res.start_date.split("-");
+            var eventEndDate = res.end_date.split("-");
+            var startDate = new Date(eventStartDate[0], eventStartDate[1] - 1, eventStartDate[2]);
+            var endDate = new Date(eventEndDate[0], eventEndDate[1] - 1, eventEndDate[2]);
+            var startMonth = startDate.toDateString().split(" ")[1]
+            var endMonth = endDate.toDateString().split(" ")[1]
+        } catch (error) { }
+
         var eventIndex = {
             eventTitle: res.name,
             eventLocation: res.address,
@@ -183,14 +199,19 @@ Page({
     },
 
     onAlliancesCallBack: function (res) {
-        var res = res.result.data;
         if (res != null) {
             var allianceCard = new Array(res.length);
             for (var j = 0; j < res.length; j++) {
-                var alliance = res[j].name.split(" ");
-                var team = app.globalMethod.teamFilter(res[j].picks);
+                try {
+                    var alliance = res[j].name.split(" ");
+                    var choice = alliance[1]
+                } catch (e) { }
+                try {
+                    var team = app.globalMethod.teamFilter(res[j].picks);
+                }
+                catch (e) { }
                 allianceCard[j] = {
-                    allianceNumber: alliance[1],
+                    allianceNumber: choice,
                     allianceTeam: team
                 }
             }
@@ -201,7 +222,6 @@ Page({
     },
 
     onMatchesCallBack: function (res) {
-        var res = res.result.data;
         if (res != null && res.length != 0) {
             var match = {
                 qual: new Array(),
@@ -212,41 +232,49 @@ Page({
 
             for (var j = 0; j < res.length; j++) {
                 if (res[j].comp_level == "qm") { //资格赛
-                    var qual = match.qual;
-                    qual.push({
-                        matchType: ["Qual", res[j].match_number],
-                        redAlliance: app.globalMethod.teamFilter(res[j].alliances.red.team_keys),
-                        blueAlliance: app.globalMethod.teamFilter(res[j].alliances.blue.team_keys),
-                        score: [res[j].alliances.red.score, res[j].alliances.blue.score]
-                    })
-                    qual.sort(app.globalMethod.matchesArraySort);
+                    try {
+                        var qual = match.qual;
+                        qual.push({
+                            matchType: ["Qual", res[j].match_number],
+                            redAlliance: app.globalMethod.teamFilter(res[j].alliances.red.team_keys),
+                            blueAlliance: app.globalMethod.teamFilter(res[j].alliances.blue.team_keys),
+                            score: [res[j].alliances.red.score, res[j].alliances.blue.score]
+                        })
+                        qual.sort(app.globalMethod.matchesArraySort);
+                    } catch (e) { }
                 } else if (res[j].comp_level == "qf") { //四分之一决赛
-                    var quarter = match.quarter;
-                    quarter.push({
-                        matchType: ["Quarter", res[j].match_number],
-                        redAlliance: app.globalMethod.teamFilter(res[j].alliances.red.team_keys),
-                        blueAlliance: app.globalMethod.teamFilter(res[j].alliances.blue.team_keys),
-                        score: [res[j].alliances.red.score, res[j].alliances.blue.score]
-                    })
-                    quarter.sort(app.globalMethod.matchesArraySort);
+                    try {
+                        var quarter = match.quarter;
+                        quarter.push({
+                            matchType: ["Quarter", res[j].match_number],
+                            redAlliance: app.globalMethod.teamFilter(res[j].alliances.red.team_keys),
+                            blueAlliance: app.globalMethod.teamFilter(res[j].alliances.blue.team_keys),
+                            score: [res[j].alliances.red.score, res[j].alliances.blue.score]
+                        })
+                        quarter.sort(app.globalMethod.matchesArraySort);
+                    } catch (e) { }
                 } else if (res[j].comp_level == "sf") { //四分之一决赛
-                    var semi = match.semi;
-                    semi.push({
-                        matchType: ["Semi", res[j].match_number],
-                        redAlliance: app.globalMethod.teamFilter(res[j].alliances.red.team_keys),
-                        blueAlliance: app.globalMethod.teamFilter(res[j].alliances.blue.team_keys),
-                        score: [res[j].alliances.red.score, res[j].alliances.blue.score]
-                    })
-                    semi.sort(app.globalMethod.matchesArraySort);
+                    try {
+                        var semi = match.semi;
+                        semi.push({
+                            matchType: ["Semi", res[j].match_number],
+                            redAlliance: app.globalMethod.teamFilter(res[j].alliances.red.team_keys),
+                            blueAlliance: app.globalMethod.teamFilter(res[j].alliances.blue.team_keys),
+                            score: [res[j].alliances.red.score, res[j].alliances.blue.score]
+                        })
+                        semi.sort(app.globalMethod.matchesArraySort);
+                    } catch (e) { }
                 } else if (res[j].comp_level == "f") { //四分之一决赛
-                    var final = match.final;
-                    final.push({
-                        matchType: ["Final", res[j].match_number],
-                        redAlliance: app.globalMethod.teamFilter(res[j].alliances.red.team_keys),
-                        blueAlliance: app.globalMethod.teamFilter(res[j].alliances.blue.team_keys),
-                        score: [res[j].alliances.red.score, res[j].alliances.blue.score]
-                    })
-                    final.sort(app.globalMethod.matchesArraySort);
+                    try {
+                        var final = match.final;
+                        final.push({
+                            matchType: ["Final", res[j].match_number],
+                            redAlliance: app.globalMethod.teamFilter(res[j].alliances.red.team_keys),
+                            blueAlliance: app.globalMethod.teamFilter(res[j].alliances.blue.team_keys),
+                            score: [res[j].alliances.red.score, res[j].alliances.blue.score]
+                        })
+                        final.sort(app.globalMethod.matchesArraySort);
+                    } catch (e) { }
                 }
             }
 
@@ -257,20 +285,25 @@ Page({
     },
 
     onRankingCallBack: function (res) {
-        var res = res.result.data;
         var teamList = this.data.teamlist;
         var rankCard = new Array();
 
         for (var j = 0; j < teamList.length; j++) {
             if (res["frc" + teamList[j].teamNumber] != null) {
                 if (res["frc" + teamList[j].teamNumber].qual != null) {
-                    var sortOrders = res["frc" + teamList[j].teamNumber].qual.ranking.sort_orders;
-                    var rankScore = sortOrders[0];
-                    var rank = res["frc" + teamList[j].teamNumber].qual.ranking.rank
-                    rankCard[j] = {
-                        team: [teamList[j].teamName, teamList[j].teamNumber],
-                        rank: rank,
-                        rankScore: rankScore
+                    try {
+                        var sortOrders = res["frc" + teamList[j].teamNumber].qual.ranking.sort_orders;
+                        var rankScore = sortOrders[0];
+                    } catch (e) { }
+                    try {
+                        var rank = res["frc" + teamList[j].teamNumber].qual.ranking.rank
+                    } catch (e) { }
+                    if(rank != null && rankScore != null){
+                        rankCard.push({
+                            team: [teamList[j].teamName, teamList[j].teamNumber],
+                            rank: rank,
+                            rankScore: rankScore
+                        })
                     }
                 }
             }
@@ -295,15 +328,16 @@ Page({
     },
 
     onTeamsCallBack: function (res) {
-        var res = res.result.data;
         if (res != null && res.length != 0) {
             var teamlist = new Array(res.length);
             for (var j = 0; j < res.length; j++) {
-                teamlist[j] = {
-                    teamNumber: res[j].team_number,
-                    teamName: res[j].nickname,
-                    teamLocation: `${res[j].city}, ${res[j].state_prov}, ${res[j].country}`
-                }
+                try {
+                    teamlist[j] = {
+                        teamNumber: res[j].team_number,
+                        teamName: res[j].nickname,
+                        teamLocation: `${res[j].city}, ${res[j].state_prov}, ${res[j].country}`
+                    }
+                } catch (e) { }
             }
             teamlist.sort(app.globalMethod.teamArraySort);
             this.setData({

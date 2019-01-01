@@ -1,16 +1,30 @@
-
 App({
     globalMethod: {
         httpsRequest: function (api, callback) {
-            wx.cloud.callFunction({
-                name: 'httpsRequest',
-                data: {
-                    api: api
+            var url =`https://www.thebluealliance.com/api/v3/${api}?X-TBA-Auth-Key=kbxvOnS2csBH6fzQ8zijLw2f1k135fWp8NgTEfPRg1n8hYqh7SSUo9VJ3JEBlnIg`;
+            console.log(url);
+            wx.request({
+                url: url,
+                header: {
+                    'content-type': 'application/json' // 默认值
                 },
-                success : callback,
-                fail: console.error
+                success: function (res) {
+                    callback(res.data);
+                }
             })
         },
+        // httpsRequest: function (api, callback) {
+        //     wx.cloud.callFunction({
+        //         name: 'httpsRequest',
+        //         data: {
+        //             api: api
+        //         },
+        //         success : (res)=>{
+        //             callback(res.result.data);
+        //         },
+        //         fail: console.error
+        //     })
+        // },
         matchesArraySort: function (x, y) {
             return x.matchType[1] - y.matchType[1];
         },

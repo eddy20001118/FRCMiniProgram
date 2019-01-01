@@ -1,11 +1,20 @@
 var app = getApp();
 Page({
 	data: {
-		teamInfo : Array
+		teamInfo : Array,
+		height : Number,
+		search : String
 	},
 
 	onLoad: function (options) {
-
+		var that = this;
+		wx.getSystemInfo({
+            success : res =>{
+                that.setData({
+                    height : res.windowHeight-44
+                })
+            }
+        })
 	},
 
 	onReady: function () {
@@ -50,7 +59,8 @@ Page({
 			}
 			teamInfo.sort(app.globalMethod.teamArraySort);
 			that.setData({
-				teamInfo : teamInfo
+				teamInfo : teamInfo,
+				search : event.detail
 			})
 		}
 		var data = app.dataBaseMethod.search("team",event.detail,callback);
@@ -77,7 +87,7 @@ Page({
 
 	onCancel: function () {
 		this.setData({
-			search: ""
+			search: null
 		})
 	},
 

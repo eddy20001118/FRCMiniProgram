@@ -1,0 +1,4 @@
+<view hidden="{{hidden}}" class="tank" style="height : {{height}}px;">
+    <image class="myimage" wx:if="{{type=='E'}}" src="/res/icons/emptyPages/warning.png "/>
+    <text class="mytext">{{msg}}</text>
+</view>
