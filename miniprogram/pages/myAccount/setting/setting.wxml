@@ -1,2 +1,6 @@
-<!--pages/myAccount/setting/setting.wxml-->
-<text>pages/myAccount/setting/setting.wxml</text>
+<view class="container">
+    <text class="mytext">基本设置</text>
+    <view class="navigator-list shadow">
+        <navigator-list type="click" hidden="{{true}}" title="{{title}}" bind:onclick="onFreeCacheClick" />
+    </view>
+</view>

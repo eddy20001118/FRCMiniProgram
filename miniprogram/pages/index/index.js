@@ -15,7 +15,8 @@ Page({
                 })
             }
         })
-        this.onRequireData();
+        this.onRequireCloudData();
+        //this.onRequireData();
     },
 
     onReady: function () {
@@ -65,6 +66,33 @@ Page({
         })
     },
 
+    onRequireCloudData: function () {
+        //读取保存到云端的数据
+        var that = this;
+        var eventInfo = new Array();
+        var teamInfo = new Array();
+        var onSuccess = function (res) {
+            var keys = res.keys;
+            if (keys != null && keys.length != 0) {
+                for (var j = 0; j < keys.length; j++) {
+                    if (keys[j].substring(0, 1) == 'e') { //event用e打头
+                        var onGetSuccess = function (res) {
+                            console.log(res);
+                            eventInfo.push(res.eventIndex);
+                        }
+                        app.get(keys[j], onGetSuccess, ()=>{});
+                    } else if (keys[j].substring(0, 1) == 't') { //team用t打头
+                        var onGetSuccess = function (res) {
+                            teamInfo.push(res);
+                        }
+                        app.getCloud(keys[j], onGetSuccess, ()=>{});
+                    }
+                }
+            }
+        }
+        app.getInfoCloud(onSuccess);
+    },
+
     onRequireData: function () {
         //读取保存到缓存的数据
         var eventInfo = new Array();
@@ -80,19 +108,19 @@ Page({
                         }
                         var onGetFail = function () {
                         }
-                        app.dataBaseMethod.get(keys[j], onGetSuccess, onGetFail);
+                        app.get(keys[j], onGetSuccess, onGetFail);
                     } else if (keys[j].substring(0, 1) == 't') { //team用t打头
                         var onGetSuccess = function (res) {
                             teamInfo.push(res);
                         }
                         var onGetFail = function () {
                         }
-                        app.dataBaseMethod.get(keys[j], onGetSuccess, onGetFail);
+                        app.get(keys[j], onGetSuccess, onGetFail);
                     }
                 }
             }
         }
-        app.dataBaseMethod.getInfo(onSuccess);
+        app.getInfo(onSuccess);
         this.setData({
             eventInfo: eventInfo,
             teamInfo: teamInfo

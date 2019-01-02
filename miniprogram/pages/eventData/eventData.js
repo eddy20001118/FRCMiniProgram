@@ -80,7 +80,7 @@ Page({
                 search : event.detail
             })
         }
-        app.dataBaseMethod.search("event", event.detail, callback);
+        app.search("event", event.detail, callback);
     },
     onCancel: function () {
         this.setData({

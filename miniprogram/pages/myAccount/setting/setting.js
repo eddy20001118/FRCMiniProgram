@@ -1,18 +1,24 @@
-// pages/myAccount/setting/setting.js
+var app = getApp();
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
+        title : String
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        var that = this;
+        app.getInfo((res)=>{
+            var currentSize = res.currentSize.toFixed(2);
+            that.setData({
+                title : `清除缓存 (${currentSize}KB)`
+            })
+        })
     },
 
     /**
@@ -62,5 +68,16 @@ Page({
      */
     onShareAppMessage: function () {
 
+    },
+
+    onFreeCacheClick: function () {
+        app.clear(() => wx.showToast({
+            title: '清除缓存成功',
+            icon: 'none',
+            duration: 2000
+        }));
+        this.setData({
+            title : `清除缓存 (0.00KB)`
+        })
     }
 })

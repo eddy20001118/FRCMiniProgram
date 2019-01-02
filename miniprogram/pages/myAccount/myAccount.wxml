@@ -7,9 +7,10 @@
             <open-data class="user-name" type="userNickName"></open-data>
         </view>
         <view class="navigator-list shadow">
-            <navigator-list url="/pages/myAccount/favorite/favorite" icon="/res/icons/myAccount/favorfill.png" title="收藏" />
-            <navigator-list url="/pages/myAccount/setting/setting" icon="/res/icons/myAccount/setting.png " title="设置" />
-            <navigator-list url="/pages/myAccount/about/about" icon="/res/icons/myAccount/info.png" title="关于" />
+            <navigator-list url="/pages/myAccount/favorite/favorite" type="navi" icon="/res/icons/myAccount/favorfill.png" title="收藏" />
+            <navigator-list url="/pages/myAccount/setting/setting" type="navi" icon="/res/icons/myAccount/setting.png " title="设置" />
+            <navigator-list url="/pages/myAccount/about/about" type="navi" icon="/res/icons/myAccount/info.png" title="关于" />
         </view>
+        <button bind:tap="click">button</button>
     </van-transition>
 </view>

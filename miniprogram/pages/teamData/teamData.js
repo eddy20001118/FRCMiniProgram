@@ -63,7 +63,7 @@ Page({
 				search: event.detail
 			})
 		}
-		app.dataBaseMethod.search("team", event.detail, callback);
+		app.search("team", event.detail, callback);
 	},
 
 	onCancel: function () {

@@ -47,7 +47,7 @@ Page({
             })
             console.log("无已有收藏")
         }
-        app.dataBaseMethod.get(key, onSuccess, onFail)
+        app.get(key, onSuccess, onFail)
 
 
         var summaryApi = `event/${eventInfo.eventYear}${eventInfo.eventCode}`;
@@ -381,7 +381,8 @@ Page({
                     duration: 2000
                 });
             }
-            app.dataBaseMethod.set(data, onSuccess);
+            app.set(data, onSuccess);
+            app.setCloud(data,()=>{});
         } else {
             var key = "e" + this.data.eventIndex.eventYear + this.data.eventIndex.eventCode
             var onSuccess = function () {
@@ -398,7 +399,7 @@ Page({
                     duration: 2000
                 });
             }
-            app.dataBaseMethod.remove(key, onSuccess, onFail);
+            app.remove(key, onSuccess, onFail);
         }
         this.setData({
             dataBase: !this.data.dataBase

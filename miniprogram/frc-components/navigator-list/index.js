@@ -4,9 +4,11 @@ Component({
      * 组件的属性列表
      */
     properties: {
+        type : String,
         url : String,
         title : String,
-        icon : String
+        icon : String,
+        hidden : Boolean
     },
 
     /**
@@ -21,9 +23,13 @@ Component({
      */
     methods: {
         navigate : function(){
-            wx.navigateTo({
-                url: this.properties.url
-            })
+            if(this.properties.type == "navi"){
+                wx.navigateTo({
+                    url: this.properties.url
+                })
+            } else if(this.properties.type == "click"){
+                this.triggerEvent('onclick');
+            }
         }
     }
 })

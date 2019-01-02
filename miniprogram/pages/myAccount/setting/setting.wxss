@@ -1,1 +1,15 @@
-/* pages/myAccount/setting/setting.wxss */
+.navigator-list{
+    width: 750rpx;
+    font-size: 13pt;
+}
+
+.shadow {
+    box-shadow: 0 3px 5px rgba(26, 26, 26, 0.1);
+    box-sizing: border-box;
+}
+
+.mytext {
+    margin: 20rpx;
+    font-size: 33rpx;
+    color: #3f51b5;
+}
