@@ -35,20 +35,17 @@ Page({
 
         var that = this;
         var key = "t" + teamInfo.teamNumber;
-        var onSuccess = function (value) {
-            that.setData({
+        app.get(key, (value)=>{
+            this.setData({
                 dataBase: true
             })
             console.log("已有收藏")
-        }
-        var onFail = function () {
-            that.setData({
+        }, ()=>{
+            this.setData({
                 dataBase: false
             })
             console.log("无已有收藏")
-        }
-
-        app.get(key, onSuccess, onFail)
+        })
         app.globalMethod.httpsRequest(teamapi, this.onTeamCallBack);
         app.globalMethod.httpsRequest(eventapi, this.onEventCallBack);
     },
@@ -192,40 +189,38 @@ Page({
 
     onSaveStatus: function () {
         if (!this.data.dataBase) {
-            var data = {
+            app.set({
                 key: "t" + this.data.teamIndex.teamNumber,
                 data: this.data.teamIndex
-            }
-            var onSuccess = function () {
+            },()=>{
                 wx.showToast({
                     title: '收藏成功,返回首页下拉刷新即可查看',
                     icon: 'none',
                     duration: 2000
                 });
-            }
-            app.set(data, onSuccess);
-            app.setCloud(data,()=>{})
+                this.setData({
+                    dataBase: !this.data.dataBase
+                })
+            })
         } else {
             var key = "t" + this.data.teamIndex.teamNumber;
-            var onSuccess = function () {
+            app.remove(key, ()=>{
                 wx.showToast({
                     title: '取消收藏',
                     icon: 'none',
                     duration: 2000
                 });
-            }
-            var onFail = function () {
+                this.setData({
+                    dataBase: !this.data.dataBase
+                })
+            }, ()=>{
                 wx.showToast({
                     title: '无收藏，无法删除',
                     icon: 'none',
                     duration: 2000
                 });
-            }
-            app.remove(key, onSuccess, onFail);
+            });
         }
-        this.setData({
-            dataBase: !this.data.dataBase
-        })
     },
 
     onPinButtonClick: function () {

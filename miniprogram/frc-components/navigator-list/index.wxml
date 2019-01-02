@@ -1,5 +1,8 @@
-<view bind:tap="navigate" class="list-content" hover-class="hover">
-    <image hidden="{{hidden}}" class='icon' src="{{icon}}"/>
-    <text class="title">{{title}}</text>
-    <image hidden="{{hidden}}" class="icon-right" src="/res/icons/myAccount/navigatenext.png" />
+<view class="main" hover-class="hover">
+    <view bind:tap="navigate" class="list-content">
+        <image hidden="{{hidden}}" class='icon' src="{{icon}}" />
+        <text class="title">{{title}}</text>
+        <image hidden="{{type == 'click'}}" class="icon-right" src="/res/icons/myAccount/navigatenext.png" />
+    </view>
+    <text hidden="{{smallText.length == 0}}" class="link-text">{{smallText}}</text>
 </view>

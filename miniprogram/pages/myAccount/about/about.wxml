@@ -1,2 +1,16 @@
-<!--pages/myAccount/about/about.wxml-->
-<text>pages/myAccount/about/about.wxml</text>
+<view class="container">
+    <view class="index shadow">
+        <image class="logo" src="/res/icons/emptyPages/warning.png" />
+        <view class="row">
+            <text class="title margin">SOFA </text>
+            <text class="version">(v0.1.0)</text>
+        </view>
+        <text class="version margin">©2019 易室科技服务中心</text>
+    </view>
+    <view class="navigator-list shadow">
+        <!-- <navigator-list url="/pages/myAccount/favorite/favorite" type="navi" icon="/res/icons/myAccount/favorfill.png" title="收藏" /> -->
+        <navigator-list type="click" icon="/res/icons/myAccount/github.png " title="Git仓库" smallText="https://github.com/eddy20001118/FRCMiniProgram" />
+        <navigator-list type="click" icon="/res/icons/myAccount/info.png" title="开源协议 (MIT)" smallText="在软件和软件的所有副本中都必须包含以上版权声明和MIT许可声明。" />
+        <navigator-list type="click" icon="/res/icons/myAccount/emojifill.png" title="鸣谢" />
+    </view>
+</view>

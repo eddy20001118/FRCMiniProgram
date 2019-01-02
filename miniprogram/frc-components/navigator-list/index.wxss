@@ -1,8 +1,7 @@
 .list-content {
     width: 750rpx;
     height: 46px;
-    padding: 0px 15px;
-    background-color: #ffffff;
+    flex-direction: row;
     align-items: center;
     display: flex;
 }
@@ -14,11 +13,10 @@
 }
 
 .hover {
-    width: 750rpx;
-    height: 46px;
-    background-color: #eeeeee;
-    align-items: center;
+    flex-direction: column;
     display: flex;
+    padding: 0px 15px;
+    background-color: #eeeeee;
 }
 
 .icon{
@@ -31,4 +29,20 @@
     margin-left: auto;
     height: 20px;
     width: 20px;
+}
+
+.link-text{
+    margin-bottom: 15px;
+    font-size: 9pt;
+    color: #424242;
+}
+
+.none{
+    height: 0px;
+}
+
+.main {
+    flex-direction: column;
+    padding: 0px 15px;
+    display: flex;
 }

@@ -46,9 +46,9 @@ Page({
   onShareAppMessage: function() {},
 
   click: function() {
-    var callback = function(res){
+    var callback = function(res) {
       console.log(res);
-    }
+    };
     app.getInfoCloud(callback);
   }
 });

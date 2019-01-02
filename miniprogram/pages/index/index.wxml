@@ -7,7 +7,7 @@
         </team-card>
     </view>
     <view bindtap='onEventCardClick' wx:for="{{eventInfo}}" wx:key="{{index}}" id="{{index}}">
-        <pin-event-card eventInfo="{{eventInfo[index]}}" steps="{{eventInfo[index].steps}}" active="{{eventInfo[index].active}}" />
+        <pin-event-card eventInfo="{{item}}" steps="{{item.steps}}" active="{{item.active}}" />
     </view>
     <empty-pages hidden="{{(teamInfo != null && teamInfo.length != 0)|| (eventInfo != null && eventInfo.length != 0)}}" type="I" height="{{height}}" />
 </view>

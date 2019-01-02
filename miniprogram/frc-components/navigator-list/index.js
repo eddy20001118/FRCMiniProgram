@@ -8,7 +8,8 @@ Component({
         url : String,
         title : String,
         icon : String,
-        hidden : Boolean
+        hidden : Boolean,
+        smallText: String
     },
 
     /**
