@@ -1,105 +1,81 @@
 <view class='container'>
-    <van-tabs style="width:750rpx;" color="#3f51b5" animated swipeable active="{{ active }}" bind:change="onTabChange">
+    <van-tabs style="width:750rpx;" color="#3f51b5" swipeable active="{{ active }}" bind:change="onTabChange">
         <van-tab title="Summary">
-            <view class='container'>
-                <event-index eventIndex="{{eventIndex}}" />
-                <title-list title="Top Team" wx:if="{{topTeamList != null && topTeamList.length != 0}}">
-                    <title-list-content  wx:for="{{topTeamList}}" wx:key="{{index}}" index="{{index+1}}" teamNumber="{{item.team[1]}}" />
-                </title-list>
-                <pin-button status="{{dataBase}}" bind:onclick="onPinButtonClick"/>
-            </view>
-            <empty-pages hidden="{{eventIndex != null}}" type="E" msg="No summary found" height="{{height}}"/>
+            <van-transition duration="450">
+                <view class='container'>
+                    <event-index eventIndex="{{eventIndex}}" />
+                    <title-list title="Top Team" wx:if="{{topTeamList != null && topTeamList.length != 0}}">
+                        <title-list-content wx:for="{{topTeamList}}" wx:key="{{index}}" index="{{index+1}}" teamNumber="{{item.team[1]}}" />
+                    </title-list>
+                    <pin-button status="{{dataBase}}" bind:onclick="onPinButtonClick" />
+                </view>
+                <empty-pages hidden="{{eventIndex != null}}" type="E" msg="No summary found" height="{{height}}" />
+            </van-transition>
         </van-tab>
         <van-tab title="Teams">
-            <view class='container'>
-                <view wx:for="{{teamlist}}" wx:key="{{index}}">
-                    <view data-id="{{index}}" bindtap='onTeamCardClick'>
-                        <team-card teamInfo="{{item}}" noBottomPadding="{{false}}" />
+            <van-transition duration="450">
+                <view class='container'>
+                    <view wx:for="{{teamlist}}" wx:key="{{index}}">
+                        <view data-id="{{index}}" bindtap='onTeamCardClick'>
+                            <team-card teamInfo="{{item}}" noBottomPadding="{{false}}" />
+                        </view>
                     </view>
                 </view>
-            </view>
-            <empty-pages hidden="{{teamlist != null && teamlist.length != 0}}" type="E" msg="No team found" height="{{height}}"/>
+                <empty-pages hidden="{{teamlist != null && teamlist.length != 0}}" type="E" msg="No team found" height="{{height}}" />
+            </van-transition>
         </van-tab>
         <van-tab title="Rankings">
-            <view class='container'>
-                <rank-card
-                    wx:for="{{rankCard}}"
-                    wx:key="{{index}}"
-                    rank="{{rankCard[index].rank}}"
-                    team="{{rankCard[index].team}}"
-                    rankScore="{{rankCard[index].rankScore}}"
-                />
-            </view>
-            <empty-pages hidden="{{rankCard != null && rankCard.length != 0}}" type="E" msg="No ranking found" height="{{height}}"/>
+            <van-transition duration="450">
+                <view class='container'>
+                    <rank-card wx:for="{{rankCard}}" wx:key="{{index}}" rank="{{rankCard[index].rank}}" team="{{rankCard[index].team}}" rankScore="{{rankCard[index].rankScore}}" />
+                </view>
+                <empty-pages hidden="{{rankCard != null && rankCard.length != 0}}" type="E" msg="No ranking found" height="{{height}}" />
+            </van-transition>
         </van-tab>
         <van-tab title="Matches">
-            <view class="container" hidden="{{match==null}}">
-                <van-collapse style="width : 750rpx;" value="{{ activeNames }}" bind:change="onCollapseChange">
-                    <van-collapse-item disabled="{{match.qual == null || match.qual.length == 0}}" title="Qualification Matches" name="Qual">
-                        <pin-list class="container" wx:for="{{match.qual}}" wx:key="{{index}}">
-                            <match-card 
-                            matchType="{{match.qual[index].matchType}}" 
-                            redAlliance="{{match.qual[index].redAlliance}}" 
-                            blueAlliance="{{match.qual[index].blueAlliance}}" 
-                            score="{{match.qual[index].score}}"
-                            currentTeamNumber="{{team.teamNumber}}" />
-                        </pin-list>
-                    </van-collapse-item>
-                    <van-collapse-item disabled="{{match.quarter == null || match.quarter.length == 0}}" title="Quarterfinal Matches" name="Quarter">
-                        <pin-list class="container" wx:for="{{match.quarter}}" wx:key="{{index}}">
-                            <match-card 
-                            matchType="{{match.quarter[index].matchType}}" 
-                            redAlliance="{{match.quarter[index].redAlliance}}" 
-                            blueAlliance="{{match.quarter[index].blueAlliance}}" 
-                            score="{{match.quarter[index].score}}" 
-                            currentTeamNumber="{{team.teamNumber}}" />
-                        </pin-list>
-                    </van-collapse-item>
-                    <van-collapse-item disabled="{{match.semi == null || match.semi.length == 0}}" title="Semifinal Matches" name="Semi">
-                        <pin-list class="container" wx:for="{{match.semi}}" wx:key="{{index}}">
-                            <match-card 
-                            matchType="{{match.semi[index].matchType}}" 
-                            redAlliance="{{match.semi[index].redAlliance}}" 
-                            blueAlliance="{{match.semi[index].blueAlliance}}" 
-                            score="{{match.semi[index].score}}"
-                            currentTeamNumber="{{team.teamNumber}}" />
-                        </pin-list>
-                    </van-collapse-item>
-                    <van-collapse-item disabled="{{match.final == null || match.final.length == 0}}" title="Finals Matches" name="Final">
-                        <pin-list class="container" wx:for="{{match.final}}" wx:key="{{index}}">
-                            <match-card 
-                            matchType="{{match.final[index].matchType}}" 
-                            redAlliance="{{match.final[index].redAlliance}}" 
-                            blueAlliance="{{match.final[index].blueAlliance}}" 
-                            score="{{match.final[index].score}}"
-                            currentTeamNumber="{{team.teamNumber}}" />
-                        </pin-list>
-                    </van-collapse-item>
-                </van-collapse>
-            </view>
-            <empty-pages hidden="{{match != null}}" type="E" msg="No match found" height="{{height}}"/>
+            <van-transition duration="450">
+                <view class="container" hidden="{{match==null}}">
+                    <van-collapse style="width : 750rpx;" value="{{ activeNames }}" bind:change="onCollapseChange">
+                        <van-collapse-item disabled="{{match.qual == null || match.qual.length == 0}}" title="Qualification Matches" name="Qual">
+                            <pin-list class="container" wx:for="{{match.qual}}" wx:key="{{index}}">
+                                <match-card matchType="{{match.qual[index].matchType}}" redAlliance="{{match.qual[index].redAlliance}}" blueAlliance="{{match.qual[index].blueAlliance}}" score="{{match.qual[index].score}}" currentTeamNumber="{{team.teamNumber}}" />
+                            </pin-list>
+                        </van-collapse-item>
+                        <van-collapse-item disabled="{{match.quarter == null || match.quarter.length == 0}}" title="Quarterfinal Matches" name="Quarter">
+                            <pin-list class="container" wx:for="{{match.quarter}}" wx:key="{{index}}">
+                                <match-card matchType="{{match.quarter[index].matchType}}" redAlliance="{{match.quarter[index].redAlliance}}" blueAlliance="{{match.quarter[index].blueAlliance}}" score="{{match.quarter[index].score}}" currentTeamNumber="{{team.teamNumber}}" />
+                            </pin-list>
+                        </van-collapse-item>
+                        <van-collapse-item disabled="{{match.semi == null || match.semi.length == 0}}" title="Semifinal Matches" name="Semi">
+                            <pin-list class="container" wx:for="{{match.semi}}" wx:key="{{index}}">
+                                <match-card matchType="{{match.semi[index].matchType}}" redAlliance="{{match.semi[index].redAlliance}}" blueAlliance="{{match.semi[index].blueAlliance}}" score="{{match.semi[index].score}}" currentTeamNumber="{{team.teamNumber}}" />
+                            </pin-list>
+                        </van-collapse-item>
+                        <van-collapse-item disabled="{{match.final == null || match.final.length == 0}}" title="Finals Matches" name="Final">
+                            <pin-list class="container" wx:for="{{match.final}}" wx:key="{{index}}">
+                                <match-card matchType="{{match.final[index].matchType}}" redAlliance="{{match.final[index].redAlliance}}" blueAlliance="{{match.final[index].blueAlliance}}" score="{{match.final[index].score}}" currentTeamNumber="{{team.teamNumber}}" />
+                            </pin-list>
+                        </van-collapse-item>
+                    </van-collapse>
+                </view>
+                <empty-pages hidden="{{match != null}}" type="E" msg="No match found" height="{{height}}" />
+            </van-transition>
         </van-tab>
         <van-tab title="Alliances">
-            <view class='container'>
-                <alliance-card
-                    wx:for="{{allianceCard}}"
-                    wx:key="{{index}}"
-                    allianceNumber="{{allianceCard[index].allianceNumber}}"
-                    allianceTeam="{{allianceCard[index].allianceTeam}}"
-                />
-            </view>
-            <empty-pages hidden="{{allianceCard != null && allianceCard.length != 0}}" type="E" msg="No alliance found" height="{{height}}"/>
+            <van-transition duration="450">
+                <view class='container'>
+                    <alliance-card wx:for="{{allianceCard}}" wx:key="{{index}}" allianceNumber="{{allianceCard[index].allianceNumber}}" allianceTeam="{{allianceCard[index].allianceTeam}}" />
+                </view>
+                <empty-pages hidden="{{allianceCard != null && allianceCard.length != 0}}" type="E" msg="No alliance found" height="{{height}}" />
+            </van-transition>
         </van-tab>
         <van-tab title="Awards">
-            <view class='container'>
-                <awards-card
-                    wx:for="{{awardCard}}"
-                    wx:key="{{index}}"
-                    awardTitle="{{awardCard[index].awardTitle}}"
-                    awardTeamList="{{awardCard[index].awardTeamList}}"
-                />
-            </view>
-            <empty-pages hidden="{{awardCard != null && awardCard.lenght != 0}}" type="E" msg="No award found" height="{{height}}"/>
+            <van-transition duration="450">
+                <view class='container'>
+                    <awards-card wx:for="{{awardCard}}" wx:key="{{index}}" awardTitle="{{awardCard[index].awardTitle}}" awardTeamList="{{awardCard[index].awardTeamList}}" />
+                </view>
+                <empty-pages hidden="{{awardCard != null && awardCard.lenght != 0}}" type="E" msg="No award found" height="{{height}}" />
+            </van-transition>
         </van-tab>
     </van-tabs>
 </view>

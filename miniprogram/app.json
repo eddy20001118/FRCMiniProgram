@@ -49,6 +49,7 @@
 		]
 	},
 	"usingComponents": {
-		"empty-pages": "/frc-components/empty-pages/index"
+		"empty-pages": "/frc-components/empty-pages/index",
+        "van-transition": "/dist/transition/index"
 	}
 }

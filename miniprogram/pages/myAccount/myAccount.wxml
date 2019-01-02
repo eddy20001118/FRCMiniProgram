@@ -1,13 +1,15 @@
 <view class="container colView">
-    <view class="avatar-block shadow">
-        <view class="user-avatar shadow">
-            <open-data class="user-avatar" type="userAvatarUrl"></open-data>
+    <van-transition duration="450">
+        <view class="avatar-block shadow">
+            <view class="user-avatar shadow">
+                <open-data class="user-avatar" type="userAvatarUrl"></open-data>
+            </view>
+            <open-data class="user-name" type="userNickName"></open-data>
         </view>
-        <open-data class="user-name" type="userNickName"></open-data>
-    </view>
-    <view class="navigator-list shadow">
-        <navigator-list url="/pages/myAccount/favorite/favorite" icon="/res/icons/myAccount/favorfill.png" title="收藏" />
-        <navigator-list url="/pages/myAccount/setting/setting" icon="/res/icons/myAccount/setting.png " title="设置" />
-        <navigator-list url="/pages/myAccount/about/about" icon="/res/icons/myAccount/info.png" title="关于" />
-    </view>
+        <view class="navigator-list shadow">
+            <navigator-list url="/pages/myAccount/favorite/favorite" icon="/res/icons/myAccount/favorfill.png" title="收藏" />
+            <navigator-list url="/pages/myAccount/setting/setting" icon="/res/icons/myAccount/setting.png " title="设置" />
+            <navigator-list url="/pages/myAccount/about/about" icon="/res/icons/myAccount/info.png" title="关于" />
+        </view>
+    </van-transition>
 </view>
