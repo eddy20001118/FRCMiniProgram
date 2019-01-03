@@ -3,5 +3,8 @@
     <view wx:for="{{teamInfo}}" wx:key="{{index}}" id="{{index}}" bindtap='onTeamCardClick'>
         <team-card teamInfo="{{item}}" />
     </view>
-    <empty-pages wx:if="{{(teamInfo == null || teamInfo.length==0) && search != null}}" type="E" msg="No team found" height="{{height}}"/>
+    <view style="margin : 15px;" hidden="{{loadFinish}}">
+        <van-loading size="25px"></van-loading>
+    </view>
+    <empty-pages wx:if="{{(teamInfo == null || teamInfo.length==0) && search != null}}" type="E" msg="No team found" height="{{height}}" />
 </view>

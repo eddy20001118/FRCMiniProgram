@@ -199,6 +199,50 @@ App({
 		}
 	},
 
+	getDbTeam: function (index, onSuccess, onFail) {
+		const db = this.data.dataBase;
+		const teamsInfoCollection = db.collection("teams_info");
+		teamsInfoCollection
+			.skip(index)
+			.limit(10)
+			.get()
+			.then(res => {
+				onSuccess(res)
+			})
+			.catch(err => {
+				onFail(err)
+			})
+	},
+
+	getDbEvent: function (index, eventYear, onSuccess, onFail) {
+		const db = this.data.dataBase;
+		const eventsInfoCollection = db.collection("events_info");
+		eventsInfoCollection
+			.where({
+				year: eventYear
+			}).count().then(res => {
+				var count = res.total;
+				if(index <= count-10){
+					eventsInfoCollection
+					.where({
+						year: eventYear
+					})
+					.skip(index)
+					.limit(10)
+					.get()
+					.then(res => {
+						onSuccess(res)
+					})
+					.catch(err => {
+						onFail(err)
+					})
+				} else {
+					onSuccess(null,true)
+				}
+			})
+
+	},
+
 	onLaunch: function () {
 		wx.cloud.init({
 			env: "frceven-e04c8c"

@@ -1,9 +1,12 @@
 var app = getApp();
 Page({
 	data: {
+		teamInfoCache: new Array(),
 		teamInfo: Array,
 		height: Number,
-		search: String
+		search: String,
+		teamLoadIndex: Number,
+		loadFinish: false
 	},
 
 	onLoad: function (options) {
@@ -15,6 +18,7 @@ Page({
 				})
 			}
 		})
+		this.onLoadTeam(0);
 	},
 
 	onReady: function () {
@@ -38,7 +42,11 @@ Page({
 	},
 
 	onReachBottom: function () {
-
+		this.setData({
+			loadFinish: false
+		})
+		this.onLoadTeam(this.data.teamLoadIndex);
+		console.log("reach bottom");
 	},
 
 	onShareAppMessage: function () {
@@ -46,8 +54,11 @@ Page({
 	},
 
 	onSearch: function (event) {
+		this.setData({
+			loadFinish: false
+		})
 		var that = this;
-		var callback = function (res) {
+		app.search("team", event.detail, (res) => {
 			var teamInfo = new Array(res.data.length);
 			for (var j = 0; j < res.data.length; j++) {
 				var info = res.data[j];
@@ -60,17 +71,22 @@ Page({
 			teamInfo.sort(app.globalMethod.teamArraySort);
 			that.setData({
 				teamInfo: teamInfo,
-				search: event.detail
+				search: event.detail,
+				teamInfoCache: new Array(),
+				teamLoadIndex: 0,
+				loadFinish: true
 			})
-		}
-		app.search("team", event.detail, callback);
+		});
 	},
 
 	onCancel: function () {
 		this.setData({
 			search: null,
-			teamInfo: null
+			teamInfo: null,
+			teamInfoCache: new Array(),
+			teamLoadIndex: 0
 		})
+		this.onLoadTeam(this.data.teamLoadIndex);
 	},
 
 	onTeamCardClick: function (e) {
@@ -80,4 +96,28 @@ Page({
 			url: `/pages/teamDetail/teamDetail?teamInfo=${teamInfo}`
 		})
 	},
+
+	onLoadTeam: function (index) {
+		var that = this;
+		app.getDbTeam(index,
+			(res) => {
+				var teamInfo = that.data.teamInfoCache;
+				for (var j = 0; j < res.data.length; j++) {
+					var info = res.data[j];
+					teamInfo.push({
+						teamNumber: info.team_number,
+						teamName: info.nickname,
+						teamLocation: `${info.city} ${info.state_prov} ${info.country}`
+					})
+				}
+				teamInfo.sort(app.globalMethod.teamArraySort);
+				that.setData({
+					teamInfoCache: teamInfo,
+					teamInfo: teamInfo,
+					teamLoadIndex: index + 10,
+					loadFinish: true
+				})
+			},
+			() => { })
+	}
 })

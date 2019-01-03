@@ -3,5 +3,8 @@
     <view wx:for="{{eventInfo}}" wx:key="{{index}}" id="{{index}}" bindtap='onEventCardClick'>
         <event-card eventInfo="{{item}}" />
     </view>
+    <view style="margin : 15px;" hidden="{{loadFinish}}">
+        <van-loading size="25px"></van-loading>
+    </view>
     <empty-pages wx:if="{{(eventInfo == null || eventInfo.length==0) && search != null}}" type="E" msg="No event found" height="{{height}}"/>
 </view>

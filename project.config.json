@@ -40,7 +40,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 4,
 			"list": [
 				{
 					"id": 0,
@@ -59,6 +59,17 @@
 					"name": "about",
 					"pathName": "pages/myAccount/about/about",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "teamData",
+					"pathName": "pages/teamData/teamData",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "eventData",
+					"pathName": "pages/eventData/eventData"
 				}
 			]
 		}
