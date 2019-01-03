@@ -154,19 +154,15 @@ Page({
         var eventInfo = new Array(res.length);
         for (var j = 0; j < res.length; j++) {
             try {
-                var eventStartDate = res[j].start_date.split("-");
-                var eventEndDate = res[j].end_date.split("-");
-                var startDate = new Date(eventStartDate[0], eventStartDate[1] - 1, eventStartDate[2]);
-                var endDate = new Date(eventEndDate[0], eventEndDate[1] - 1, eventEndDate[2]);
-                var startMonth = startDate.toDateString().split(" ")[1]
-                var endMonth = endDate.toDateString().split(" ")[1]
+                var startDate = new Date(info.start_date);
+                var endDate = new Date(info.start_date);
             } catch (error) { }
 
             eventInfo[j] = {
                 eventTitle: res[j].name,
                 eventLocationShort: `${res[j].city}, ${res[j].state_prov}, ${res[j].country}`,
-                eventStartDate: startMonth + " " + eventStartDate[2],
-                eventEndDate: endMonth + " " + eventEndDate[2],
+                eventStartDate: startDate.toDateString().split(" ")[1] + " " + startDate.getDate(),
+                eventEndDate: endDate.toDateString().split(" ")[1] + " " + endDate.getDate(),
                 eventYear: res[j].year,
                 eventCode: res[j].event_code,
                 startDateObj: startDate,

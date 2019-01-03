@@ -66,19 +66,15 @@ Page({
                 var info = res.data[j];
                 if (info != null) {
                     try {
-                        var eventStartDate = info.start_date.split("-");
-                        var eventEndDate = info.end_date.split("-");
-                        var startDate = new Date(eventStartDate[0], eventStartDate[1] - 1, eventStartDate[2]);
-                        var endDate = new Date(eventEndDate[0], eventEndDate[1] - 1, eventEndDate[2]);
-                        var startMonth = startDate.toDateString().split(" ")[1]
-                        var endMonth = endDate.toDateString().split(" ")[1]
+                        var startDate = new Date(info.start_date);
+                        var endDate = new Date(info.start_date);
                     } catch (error) { }
 
                     eventInfo[j] = {
                         eventTitle: info.name,
                         eventLocationShort: `${info.city} ${info.state_prov} ${info.country}`,
-                        eventStartDate: startMonth + " " + eventStartDate[2],
-                        eventEndDate: endMonth + " " + eventEndDate[2],
+                        eventStartDate: startDate.toDateString().split(" ")[1] + " " + startDate.getDate(),
+                        eventEndDate: endDate.toDateString().split(" ")[1] + " " + endDate.getDate(),
                         eventYear: info.year,
                         eventCode: info.event_code,
                         startDateObj: startDate,
@@ -119,19 +115,15 @@ Page({
                         var info = res.data[j];
                         if (info != null) {
                             try {
-                                var eventStartDate = info.start_date.split("-");
-                                var eventEndDate = info.end_date.split("-");
-                                var startDate = new Date(eventStartDate[0], eventStartDate[1] - 1, eventStartDate[2]);
-                                var endDate = new Date(eventEndDate[0], eventEndDate[1] - 1, eventEndDate[2]);
-                                var startMonth = startDate.toDateString().split(" ")[1]
-                                var endMonth = endDate.toDateString().split(" ")[1]
+                                var startDate = new Date(info.start_date);
+                                var endDate = new Date(info.start_date);
                             } catch (error) { }
 
                             eventInfo.push({
                                 eventTitle: info.name,
                                 eventLocationShort: `${info.city} ${info.state_prov} ${info.country}`,
-                                eventStartDate: startMonth + " " + eventStartDate[2],
-                                eventEndDate: endMonth + " " + eventEndDate[2],
+                                eventStartDate: startDate.toDateString().split(" ")[1] + " " + startDate.getDate(),
+                                eventEndDate: endDate.toDateString().split(" ")[1] + " " + endDate.getDate(),
                                 eventYear: info.year,
                                 eventCode: info.event_code,
                                 startDateObj: startDate,

@@ -151,27 +151,15 @@ Page({
     onSummaryCallBack: function (res) {
         //只有对获取的value进行操作时才需要trycatch来捕获异常，否则如果value不存在，对应属性会被赋值null，不会抛出异常
         try {
-            var eventStartDate = res.start_date.split("-");
-            var eventEndDate = res.end_date.split("-");
-            var startDate = new Date(
-                eventStartDate[0],
-                eventStartDate[1] - 1,
-                eventStartDate[2]
-            );
-            var endDate = new Date(
-                eventEndDate[0],
-                eventEndDate[1] - 1,
-                eventEndDate[2]
-            );
-            var startMonth = startDate.toDateString().split(" ")[1];
-            var endMonth = endDate.toDateString().split(" ")[1];
+            var startDate = new Date(res.start_date);
+            var endDate = new Date(res.start_date);
         } catch (error) { }
 
         var eventIndex = {
             eventTitle: res.name,
             eventLocation: res.address,
-            eventStartDate: startMonth + " " + eventStartDate[2],
-            eventEndDate: endMonth + " " + eventEndDate[2],
+            eventStartDate: startDate.toDateString().split(" ")[1] + " " + startDate.getDate(),
+            eventEndDate: endDate.toDateString().split(" ")[1] + " " + endDate.getDate(),
             eventYear: res.year,
             eventCode: res.event_code,
             eventLocationShort: `${res.city}, ${res.state_prov}, ${res.country}`,
