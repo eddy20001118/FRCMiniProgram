@@ -1,6 +1,8 @@
 <view class="container">
+    <view style="margin-top: 20rpx;"></view>
     <text class="mytext">基本设置</text>
     <view class="navigator-list shadow">
-        <navigator-list type="click" hidden="{{true}}" title="{{title}}" bind:onclick="onFreeCacheClick" />
+    <navigator-list icon="/res/icons/myAccount/Cloud.png" type="click" title="同步收藏 (Beta)" bind:onclick="onCloudSyncClick" />
+        <navigator-list icon="/res/icons/myAccount/warning.png" type="click" title="{{title}}" bind:onclick="onFreeCacheClick" />
     </view>
 </view>

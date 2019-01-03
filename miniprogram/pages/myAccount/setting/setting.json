@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": "设置",
   "usingComponents": {
     "navigator-list": "/frc-components/navigator-list/index"
   }

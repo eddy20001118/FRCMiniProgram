@@ -5,4 +5,5 @@
         <image hidden="{{type == 'click'}}" class="icon-right" src="/res/icons/myAccount/navigatenext.png" />
     </view>
     <text hidden="{{smallText.length == 0}}" class="link-text">{{smallText}}</text>
+    <slot></slot>
 </view>

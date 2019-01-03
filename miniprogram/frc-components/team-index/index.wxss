@@ -18,3 +18,12 @@
     overflow: hidden;
     font-size: 30rpx;
 }
+
+.hover{
+    flex-direction: row;
+    padding: 15px 10px;
+    width: 700rpx;
+    display: flex;
+    align-items: center;
+    background-color: #eeeeee;
+}

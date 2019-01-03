@@ -1,21 +1,25 @@
-<pin-list>
-    <view class='data-list'>
-        <image class='icon' src="/res/icons/team-event/people.png"/>
-        <text class='text'>{{teamIndex.teamName}}</text>
-    </view>
-    <view class='data-list'>
-        <image class='icon' src="/res/icons/team-event/location.png"/>
-        <text class='text'>{{teamIndex.registedLocation}}</text>
-    </view>
-    <view class='data-list'>
-        <image class='icon' src="/res/icons/team-event/info.png"/>
-        <text class='text'>
-        <text style='font-style : italic; font-size : 25rpx; color : #9e9e9e'>aka </text>{{teamIndex.organization}}</text>
-    </view>
-    <view class='data-list'>
-        <image class='icon' src="/res/icons/team-event/calendar.png"/>
-        <picker class='text' bindchange="bindPickerChange" value="{{index}}" range="{{teamYearArray}}">
-            {{yearValue}}<text style='font-size : 30rpx; color : #9e9e9e'> (点击更改年份)</text>
-        </picker>
-    </view>
-</pin-list>
+<view hidden="{{teamIndex==null}}">
+    <pin-list>
+        <view class='data-list'>
+            <image class='icon' src="/res/icons/team-event/people.png"/>
+            <text class='text'>{{teamIndex.teamName}}</text>
+        </view>
+        <view class='data-list'>
+            <image class='icon' src="/res/icons/team-event/location.png"/>
+            <text class='text'>{{teamIndex.registedLocation}}</text>
+        </view>
+        <view class='data-list'>
+            <image class='icon' src="/res/icons/team-event/info.png"/>
+            <text class='text'>
+            <text style='font-style : italic; font-size : 25rpx; color : #9e9e9e'>aka </text>{{teamIndex.organization}}</text>
+        </view>
+        <view class='data-list' hover-class="hover">
+            <image class='icon' src="/res/icons/team-event/calendar.png"/>
+            <van-transition duration="200" name="slide-up">
+                <picker class='text' bindchange="bindPickerChange" value="{{index}}" range="{{teamYearArray}}">
+                    {{yearValue}}<text style='font-size : 30rpx; color : #9e9e9e'> (点击更改年份)</text>
+                </picker>
+            </van-transition>
+        </view>
+    </pin-list>
+</view>

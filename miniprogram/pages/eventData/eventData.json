@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": "赛事搜索",
   "usingComponents": {
     "van-loading": "/dist/loading/index",
     "van-search": "/dist/search/index",

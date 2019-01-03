@@ -1,6 +1,23 @@
-<view class="container">
-    <textarea class="input" placeholder="请简述您的问题"/>
-    <button class="btn" type="primary" loading="{{loading}}" disabled="{{disabled}}" bindtap="onTap">
-        按钮文本
-    </button>
+<view class="container richtext">
+    <view class="content left">用户您好，如果在使用中遇到任何问题，烦请按照以下步骤进行反馈：</view>
+    <view class="title" id="-github">登陆Github</view>
+    <view class="content left">
+        登陆您的github账号，转到 https://github.com/eddy20001118/FRCMiniProgram
+    </view>
+    <image class="img" mode="widthFix" src="/res/img/index.png" />
+    <view class="title" id="-issue">查看与发布Issue</view>
+    <view class="content left">
+        在页面的上方，点击Issues。您可以在这个页面查看已关闭的和还处于开放状态的Issue。如果已有的Issue没能解决您的问题，您还可以点击页面右上方新建一个Issue(New issue)。
+    </view>
+    <image class="img" mode="widthFix" src="/res/img/issuse.png" />
+    <view class="title" id="-pull-request">申请Pull Request</view>
+    <view class="content left">如果您希望协助进行本小程序的开发（新增功能/修改Bug），可以在Pull Request页面提交您的代码，我们会定期检查并进行合并(Merge).</view>
+    <image class="img" mode="widthFix" src="/res/img/pr.png" />
+    <view class="title" id="-">其他联系方式</view>
+    <text decode="{{true}}" class="content left">我们欢迎您的任何建议与意见。
+        <text decode="{{true}}">企业合作邮箱：embedchamber@outlook.com \n</text>
+        <text decode="{{true}}">公众号: Embed Chamber \n</text>
+        <text decode="{{true}}">Bug反馈邮箱：yuhao_li@hotmail.com (开发者邮箱) \n</text>
+    </text>
+    <!-- <rich-text class="richtext" nodes="{{richText}}"/> -->
 </view>

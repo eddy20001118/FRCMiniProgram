@@ -1,5 +1,6 @@
 {
-  "usingComponents": {
-    "navigator-list": "/frc-components/navigator-list/index"
-  }
+	"navigationBarTitleText": "关于",
+	"usingComponents": {
+		"navigator-list": "/frc-components/navigator-list/index"
+	}
 }

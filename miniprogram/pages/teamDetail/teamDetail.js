@@ -184,7 +184,7 @@ Page({
                 data: this.data.teamIndex
             },()=>{
                 wx.showToast({
-                    title: '收藏成功,返回首页下拉刷新即可查看',
+                    title: '收藏成功,返回首页即可查看',
                     icon: 'none',
                     duration: 2000
                 });

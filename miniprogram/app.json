@@ -1,56 +1,56 @@
 {
-	"pages": [
-		"pages/index/index",
-		"pages/eventData/eventData",
-		"pages/teamData/teamData",
-		"pages/myAccount/about/about",
+    "pages": [
+        "pages/index/index",
+        "pages/eventData/eventData",
+        "pages/teamData/teamData",
+        "pages/myAccount/about/about",
         "pages/myAccount/favorite/favorite",
         "pages/myAccount/error/error",
         "pages/myAccount/setting/setting",
         "pages/myAccount/myAccount",
-		"pages/eventDetail/eventDetail",
-		"pages/teamDetail/teamDetail",
-		"pages/teamAtEvent/teamAtEvent"
-	],
-	"window": {
-		"backgroundTextStyle": "light",
-		"navigationBarBackgroundColor": "#3f51b5",
-		"navigationBarTitleText": "FRC赛事小程序",
-		"navigationBarTextStyle": "white"
-	},
-	"tabBar": {
-		"color": "#8a8a8a",
-		"selectedColor": "#3f51b5",
-		"backgroundColor": "#fff",
-		"list": [
-			{
-				"text": "主页",
-				"pagePath": "pages/index/index",
-				"iconPath": "res/icons/tabBar/default/homefill.png",
-				"selectedIconPath": "res/icons/tabBar/selected/homefill.png"
-			},
-			{
-				"text": "赛事",
-				"pagePath": "pages/eventData/eventData",
-				"iconPath": "res/icons/tabBar/default/newshotfill.png",
-				"selectedIconPath": "res/icons/tabBar/selected/news_hot_fill_light.png"
-			},
-			{
-				"text": "队伍",
-				"pagePath": "pages/teamData/teamData",
-				"iconPath": "res/icons/tabBar/default/clothesfill.png",
-				"selectedIconPath": "res/icons/tabBar/selected/clothesfill.png"
-			},
-			{
-				"text": "我的",
-				"pagePath": "pages/myAccount/myAccount",
-				"iconPath": "res/icons/tabBar/default/myfill.png",
-				"selectedIconPath": "res/icons/tabBar/selected/myfill.png"
-			}
-		]
-	},
-	"usingComponents": {
-		"empty-pages": "/frc-components/empty-pages/index",
+        "pages/eventDetail/eventDetail",
+        "pages/teamDetail/teamDetail",
+        "pages/teamAtEvent/teamAtEvent"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#3f51b5",
+        "navigationBarTitleText": "FRC赛事小程序",
+        "navigationBarTextStyle": "white"
+    },
+    "tabBar": {
+        "color": "#8a8a8a",
+        "selectedColor": "#3f51b5",
+        "backgroundColor": "#fff",
+        "list": [
+            {
+                "text": "主页",
+                "pagePath": "pages/index/index",
+                "iconPath": "res/icons/tabBar/default/homefill.png",
+                "selectedIconPath": "res/icons/tabBar/selected/homefill.png"
+            },
+            {
+                "text": "赛事",
+                "pagePath": "pages/eventData/eventData",
+                "iconPath": "res/icons/tabBar/default/newshotfill.png",
+                "selectedIconPath": "res/icons/tabBar/selected/news_hot_fill_light.png"
+            },
+            {
+                "text": "队伍",
+                "pagePath": "pages/teamData/teamData",
+                "iconPath": "res/icons/tabBar/default/clothesfill.png",
+                "selectedIconPath": "res/icons/tabBar/selected/clothesfill.png"
+            },
+            {
+                "text": "我的",
+                "pagePath": "pages/myAccount/myAccount",
+                "iconPath": "res/icons/tabBar/default/myfill.png",
+                "selectedIconPath": "res/icons/tabBar/selected/myfill.png"
+            }
+        ]
+    },
+    "usingComponents": {
+        "empty-pages": "/frc-components/empty-pages/index",
         "van-transition": "/dist/transition/index"
-	}
+    }
 }
