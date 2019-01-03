@@ -1,0 +1,6 @@
+<view class="container">
+    <textarea class="input" placeholder="请简述您的问题"/>
+    <button class="btn" type="primary" loading="{{loading}}" disabled="{{disabled}}" bindtap="onTap">
+        按钮文本
+    </button>
+</view>

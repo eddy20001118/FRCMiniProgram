@@ -5,6 +5,7 @@
 		"pages/teamData/teamData",
 		"pages/myAccount/about/about",
         "pages/myAccount/favorite/favorite",
+        "pages/myAccount/error/error",
         "pages/myAccount/setting/setting",
         "pages/myAccount/myAccount",
 		"pages/eventDetail/eventDetail",

@@ -113,14 +113,6 @@ Page({
             try { var teamName = res.nickname; } catch (error) { }
             try { var teamLocation = `${res.city}, ${res.state_prov}, ${res.country}`; } catch (error) { }
             try { var organization = res.name; } catch (error) { }
-            try {
-                var matchCard = {
-                    matchType: ["Qual", "11"],
-                    redAlliance: [6766, 6666, 6566],
-                    blueAlliance: [6866, 6966, 7066],
-                    score: [312, 300]
-                }
-            } catch (error) { }
 
             var teamIndex = {
                 teamNumber: teamNumber,
@@ -128,8 +120,6 @@ Page({
                 teamLocation: teamLocation,
                 registedLocation: teamLocation,
                 organization: organization,
-                //TODO: 完善matchCard信息请求
-                matchCard: matchCard
             }
             this.setData({
                 teamIndex: teamIndex,

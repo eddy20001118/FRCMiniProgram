@@ -1,0 +1,5 @@
+.input {
+    background-color: #eeeeee;
+    width: 700rpx;
+    height: 200px;
+}
