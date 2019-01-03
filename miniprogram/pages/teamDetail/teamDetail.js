@@ -10,7 +10,7 @@ Page({
         teamIndex: Object,
         teamYearArray: Array,
         dataBase: Boolean,
-        height : Number
+        height: Number
     },
 
     /**
@@ -19,35 +19,37 @@ Page({
     onLoad: function (options) {
         var that = this;
         wx.getSystemInfo({
-            success : res =>{
+            success: res => {
                 that.setData({
-                    height : res.windowHeight-44
+                    height: res.windowHeight - 44
                 })
             }
         })
-        var teamInfo = JSON.parse(decodeURIComponent(options.teamInfo));
-        var teamapi = `team/frc${teamInfo.teamNumber}`;
-        var eventapi = `team/frc${teamInfo.teamNumber}/events`
-        if (teamInfo.teamNumber != null)
-            wx.setNavigationBarTitle({
-                title: "Team " + teamInfo.teamNumber
-            })
+        try {
+            var teamInfo = JSON.parse(decodeURIComponent(options.teamInfo));
+            var teamapi = `team/frc${teamInfo.teamNumber}`;
+            var eventapi = `team/frc${teamInfo.teamNumber}/events`
+            if (teamInfo.teamNumber != null)
+                wx.setNavigationBarTitle({
+                    title: "Team " + teamInfo.teamNumber
+                })
 
-        var that = this;
-        var key = "t" + teamInfo.teamNumber;
-        app.get(key, (value)=>{
-            this.setData({
-                dataBase: true
+            var that = this;
+            var key = "t" + teamInfo.teamNumber;
+            app.get(key, (value) => {
+                this.setData({
+                    dataBase: true
+                })
+                console.log("已有收藏")
+            }, () => {
+                this.setData({
+                    dataBase: false
+                })
+                console.log("无已有收藏")
             })
-            console.log("已有收藏")
-        }, ()=>{
-            this.setData({
-                dataBase: false
-            })
-            console.log("无已有收藏")
-        })
-        app.globalMethod.httpsRequest(teamapi, this.onTeamCallBack);
-        app.globalMethod.httpsRequest(eventapi, this.onEventCallBack);
+            app.globalMethod.httpsRequest(teamapi, this.onTeamCallBack);
+            app.globalMethod.httpsRequest(eventapi, this.onEventCallBack);
+        } catch (e) { }
     },
 
     /**
@@ -182,7 +184,7 @@ Page({
             app.set({
                 key: "t" + this.data.teamIndex.teamNumber,
                 data: this.data.teamIndex
-            },()=>{
+            }, () => {
                 wx.showToast({
                     title: '收藏成功,返回首页即可查看',
                     icon: 'none',
@@ -194,7 +196,7 @@ Page({
             })
         } else {
             var key = "t" + this.data.teamIndex.teamNumber;
-            app.remove(key, ()=>{
+            app.remove(key, () => {
                 wx.showToast({
                     title: '取消收藏',
                     icon: 'none',
@@ -203,7 +205,7 @@ Page({
                 this.setData({
                     dataBase: !this.data.dataBase
                 })
-            }, ()=>{
+            }, () => {
                 wx.showToast({
                     title: '无收藏，无法删除',
                     icon: 'none',

@@ -29,28 +29,31 @@ Page({
                 });
             }
         });
-        var eventInfo = JSON.parse(decodeURIComponent(options.eventInfo));
-        var key = "e" + eventInfo.eventYear + eventInfo.eventCode;
-        app.get(
-            key,
-            value => {
-                this.setData({
-                    dataBase: true,
-                    topTeamList: value.topTeamList,
-                    eventIndex: value.eventIndex
-                });
-                console.log("已有收藏");
-            },
-            () => {
-                this.setData({
-                    dataBase: false
-                });
-                console.log("无已有收藏");
-            }
-        );
+        try {
+            var eventInfo = JSON.parse(decodeURIComponent(options.eventInfo));
+            var summaryApi = `event/${eventInfo.eventYear}${eventInfo.eventCode}`;
+            app.globalMethod.httpsRequest(summaryApi, this.onSummaryCallBack);
+            var key = "e" + eventInfo.eventYear + eventInfo.eventCode;
+            app.get(
+                key,
+                value => {
+                    this.setData({
+                        dataBase: true,
+                        topTeamList: value.topTeamList,
+                        eventIndex: value.eventIndex
+                    });
+                    console.log("已有收藏");
+                },
+                () => {
+                    this.setData({
+                        dataBase: false
+                    });
+                    console.log("无已有收藏");
+                }
+            );
 
-        var summaryApi = `event/${eventInfo.eventYear}${eventInfo.eventCode}`;
-        app.globalMethod.httpsRequest(summaryApi, this.onSummaryCallBack);
+        } catch (e) {
+        }
     },
 
     /**

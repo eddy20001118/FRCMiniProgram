@@ -86,8 +86,9 @@
 				},
 				{
 					"id": -1,
-					"name": "error",
-					"pathName": "pages/myAccount/error/error"
+					"name": "eventDetail",
+					"pathName": "pages/eventDetail/eventDetail",
+					"query": ""
 				}
 			]
 		}
