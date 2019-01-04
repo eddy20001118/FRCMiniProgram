@@ -4,8 +4,9 @@
     	<icon class="wux-selectable__icon" type="{{ inputChecked ? 'success' : 'circle' }}" size="23" color="{{ !disabled ? inputColor : '#666' }}" />
     </block>
     <block wx:elif="{{ type === 'radio' }}">
-    	<radio value="{{ value }}" checked="{{ inputChecked }}" color="{{ inputColor }}" disabled="{{ disabled }}" class="wux-input-class wux-selectable__input" />
-        <icon class="wux-selectable__icon" type="success_no_circle" size="16" color="{{ !disabled ? inputColor : '#666' }}" hidden="{{ !inputChecked }}" />
+    	<radio checked="{{ inputChecked }}" color="{{ inputColor }}" disabled="{{ disabled }}" class="wux-input-class wux-selectable__input" />
+        <text class="mytext">{{ value }}</text>
+        <icon class="wux-selectable__icon" type="success_no_circle" size="16" color="{{ !disabled ? '#3f51b5' : '#666' }}" hidden="{{ !inputChecked }}" />
     </block>
     <block wx:else>
     	<slot name="icon-on" wx:if="{{ inputChecked }}"></slot>

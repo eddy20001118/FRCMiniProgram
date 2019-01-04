@@ -29,8 +29,8 @@
         </block>
     </view>
     <view class="wux-cell__bd">
-        <view wx:if="{{ title }}" class="wux-cell__text">{{ title }}</view>
-        <view wx:if="{{ label }}" class="wux-cell__desc">{{ label }}</view>
+        <!-- <view wx:if="{{ title }}" class="wux-cell__text">{{ title }}</view>
+        <view wx:if="{{ label }}" class="wux-cell__desc">{{ label }}</view> -->
         <slot></slot>
     </view>
     <view class="wux-cell__ft">

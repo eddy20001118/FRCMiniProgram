@@ -208,7 +208,6 @@ Page({
             { label: 'Israel', value: 'Israel' },
             { label: 'Canada', value: 'Canada' },
             { label: 'Australia', value: 'Australia' },
-            { label: 'Austrialia', value: 'Austrialia' },
             { label: 'China', value: 'China' },
             { label: 'Mexico', value: 'Mexico' },
             { label: 'United States', value: 'United States' },
