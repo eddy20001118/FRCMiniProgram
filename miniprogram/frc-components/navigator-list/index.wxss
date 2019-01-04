@@ -9,7 +9,7 @@
 .title {
     margin-left : 25rpx;
     margin-right: 10rpx;
-    font-size: 28rpx;
+    font-size: 10.5pt;
 }
 
 .hover {

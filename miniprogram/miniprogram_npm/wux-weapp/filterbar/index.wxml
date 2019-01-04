@@ -49,7 +49,7 @@
         </wux-animation-group>
         <wux-animation-group wux-class="wux-filterbar__select" in="{{ item.visible }}" class-names="wux-animate--fadeIn" bind:enter="onEnter" bind:exit="onExit" wx:if="{{ item.type === 'radio' }}">
             <scroll-view class="wux-filterbar__scroll-view" scroll-y>
-                <wux-radio-group value="{{ common.getRadioValue(item.children) }}" bind:change="radioChange" data-index="{{ index }}"  data-item="{{ item }}">
+                <wux-radio-group value="{{ common.getRadioValue(item.children) }}" bind:change="radioChange" data-index="{{ index }}" data-item="{{ item }}">
                     <block wx:for="{{ item.children }}" wx:for-item="p" wx:key="{{ item.value }}">
                         <wux-radio title="{{ p.label }}" value="{{ p.value }}" />
                     </block>
@@ -58,7 +58,7 @@
         </wux-animation-group>
         <wux-animation-group wux-class="wux-filterbar__select" in="{{ item.visible }}" class-names="wux-animate--fadeIn" bind:enter="onEnter" bind:exit="onExit" wx:if="{{ item.type === 'checkbox' }}">
             <scroll-view class="wux-filterbar__scroll-view" scroll-y>
-                <wux-checkbox-group name="a" value="{{ common.getCheckboxValue(item.children) }}" bind:change="checkboxChange" data-index="{{ index }}"  data-item="{{ item }}">
+                <wux-checkbox-group name="a" value="{{ common.getCheckboxValue(item.children) }}" bind:change="checkboxChange" data-index="{{ index }}" data-item="{{ item }}">
                     <block wx:for="{{ item.children }}" wx:for-item="p" wx:key="{{ item.value }}">
                         <wux-checkbox title="{{ p.label }}" value="{{ p.value }}" />
                     </block>
@@ -71,14 +71,20 @@
 <wxs module="common">
     module.exports = {
         getRadioValue: function(array) {
-            var result = array.filter(function(n) { return n.checked })[0]
+            var result = array.filter(function(n) {
+                return n.checked
+            })[0]
             if (result) {
                 return result.value
             }
             return ''
         },
         getCheckboxValue: function(array) {
-            return array.filter(function(n) { return n.checked }).map(function(n) { return n.value })
+            return array.filter(function(n) {
+                return n.checked
+            }).map(function(n) {
+                return n.value
+            })
         },
     }
 </wxs>

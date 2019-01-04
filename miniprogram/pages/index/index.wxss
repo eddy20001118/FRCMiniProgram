@@ -1,5 +1,5 @@
 .text {
-    font-size: 27rpx;
+    font-size: 10pt;
     margin-left: 20rpx;
     margin-bottom: 2px;
 }

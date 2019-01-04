@@ -9,7 +9,7 @@
 }
 
 .rankNumber {
-    font-size: 40rpx;
+    font-size: 15pt;
     font-weight: bold;
     display: flex;
     align-items: center;
@@ -22,12 +22,12 @@
 }
 
 .teamName {
-    font-size: 31rpx;
+    font-size: 12pt;
 }
 
 .rankScore {
     color: #424242;
-    font-size: 27rpx;
+    font-size: 10pt;
     font-weight: lighter;
 }
 

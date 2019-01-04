@@ -70,8 +70,8 @@
 }
 
 .wux-filterbar__icon {
-    width: 30rpx;
-    height: 24rpx;
+    width: 12px;
+    height: 12px;
     margin-left: 6rpx;
     display: inline-block;
     background-repeat: no-repeat;
@@ -261,4 +261,8 @@
 
 .wux-filterbar__btns .wux-filterbar__btn--danger:before {
     display: none;
+}
+
+.wux-filterbar__text{
+    font-size: 10pt;
 }

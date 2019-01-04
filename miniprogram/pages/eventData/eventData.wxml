@@ -1,7 +1,7 @@
 <view class='container'>
     <scroll-top-button wx:if="{{currentScrollPosition != 0}}" bind:onclick="onScrolltoTop">button</scroll-top-button>
     <van-search class="searchBar" background="#fff" value="{{ search }}" placeholder="请输入搜索关键词" show-action bind:search="onSearch" bind:cancel="onCancel" />
-    <wux-filterbar style="width: 750rpx; font-size: 12pt; background-color:#eee;" items="{{ filteritems }}" bind:change="onFilterChange"/>
+    <wux-filterbar style="width: 750rpx; background-color:#eee;" items="{{ filteritems }}" bind:change="onFilterChange"/>
     <view wx:for="{{eventInfo}}" wx:key="{{index}}" id="{{index}}" bindtap='onEventCardClick'>
         <event-card eventInfo="{{item}}" />
     </view>

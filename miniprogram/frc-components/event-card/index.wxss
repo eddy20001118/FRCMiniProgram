@@ -22,7 +22,7 @@
 
 .location {
     margin-left: 20rpx;
-    font-size: 25rpx;
+    font-size: 9.375pt;
     width: 300rpx;
     overflow: auto;
     color: #424242;
@@ -30,7 +30,7 @@
 
 .date {
     margin-right: 15rpx;
-    font-size: 25rpx;
+    font-size: 9.375pt;
     color: #424242;
     width: 300rpx;
     overflow: auto;
@@ -40,6 +40,6 @@
 .eventTitle {
     margin-top: 15px;
     margin-left: 20rpx;
-    font-size: 35rpx;
+    font-size: 13pt;
     font-weight: bold;
 }

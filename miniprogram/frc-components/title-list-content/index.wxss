@@ -1,11 +1,11 @@
 .tank{
     flex-direction: row;
-    font-size: 30rpx;
+    font-size: 11pt;
     margin-left: 20rpx;
     margin-bottom: 20rpx;
 }
 
 .team{
     font-weight: bold;
-    font-size: 30rpx;
+    font-size: 11pt;
 }

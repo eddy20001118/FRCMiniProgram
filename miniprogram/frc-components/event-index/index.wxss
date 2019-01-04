@@ -13,6 +13,6 @@
 
 .text{
     margin-left : 50rpx;
-    font-size: 30rpx;
+    font-size: 11pt;
     width: 550rpx;
 }

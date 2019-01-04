@@ -5,12 +5,12 @@
 }
 
 .list-title {
-    font-size: 30rpx;
+    font-size: 11pt;
     font-style: italic;
 }
 
 .list-content {
-    font-size: 30rpx;
+    font-size: 11pt;
     font-weight: bold;
     text-align: right;
 }

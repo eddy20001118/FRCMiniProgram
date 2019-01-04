@@ -2,24 +2,30 @@
     flex-direction: row;
     display: flex;
     width: 700rpx;
-    height: 46rpx;
+    height: 23px;
     padding: 15rpx;
 }
 
 .alliance-title {
     margin-left: 10rpx;
     margin-right: 10rpx;
-    font-size: 31rpx;
+    font-size: 12pt;
     width: 200rpx;
     font-weight: bold;
     text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 
 .alliance-team {
     margin-left: 10rpx;
     margin-right: 10rpx;
-    font-size: 31rpx;
+    font-size: 12pt;
     width: 160rpx;
     text-decoration: underline;
     text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
