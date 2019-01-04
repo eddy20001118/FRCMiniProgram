@@ -8,7 +8,9 @@
             teamInfo="{{item.team}}" 
             noBottomPadding="{{true}}" 
             eventTitle = "{{item.eventIndex.eventTitle}}"
-            eventYear = "{{item.eventIndex.eventYear}}">
+            eventYear = "{{item.eventIndex.eventYear}}"
+            isMatch = "{{item.lastmatch.matchType != 'No match info found'}}">
+            <text hidden="{{item.lastmatch.matchType == 'No match info found'}}" class='text'>Last Match:</text>
             <match-card 
                 wx:if="{{item.lastmatch.matchType != 'No match info found'}}"
                 matchType="{{item.lastmatch.matchType}}"

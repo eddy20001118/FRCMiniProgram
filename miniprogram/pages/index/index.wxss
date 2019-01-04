@@ -6,7 +6,6 @@
 
 .noMatchInfo {
     width: 100%;
-    margin-left: 20rpx;
     justify-content: center;
     align-items: center;
     display: flex;

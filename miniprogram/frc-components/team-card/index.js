@@ -3,7 +3,8 @@ Component({
         teamInfo : null,
         noBottomPadding : Boolean,
         eventTitle: null,
-        eventYear: null
+        eventYear: null,
+        isMatch: Boolean
     },
     data: {},
     methods: {}
