@@ -4,7 +4,7 @@ App({
 	data: {
 		dataBase: null,
 		userFavorCollection: null,
-		userOpenid: null
+		userOpenid: null,
 	},
 	globalMethod: {
 		httpsRequest: function (api, callback) {
@@ -199,10 +199,73 @@ App({
 		}
 	},
 
-	getDbTeam: function (index, onSuccess, onFail) {
+	getDbTeam: function (index, filter, onSuccess, onFail) {
 		const db = this.data.dataBase;
 		const teamsInfoCollection = db.collection("teams_info");
-		teamsInfoCollection
+		var country = filter.country;
+		if (country != "All") {
+			teamsInfoCollection
+				.where({
+					country: filter.country
+				}).count().then(res => {
+					var count = res.total;
+					if (index <= count - 10) {
+						teamsInfoCollection
+							.where({
+								country: filter.country
+							})
+							.skip(index)
+							.limit(10)
+							.get()
+							.then(res => {
+								onSuccess(res)
+							})
+							.catch(err => {
+								onFail(err)
+							})
+					} else {
+						onSuccess(null, true);
+					}
+				})
+		} else {
+			teamsInfoCollection.count().then(res => {
+				var count = res.total;
+				console.log("All:" + count)
+				if (index <= count - 10) {
+					teamsInfoCollection
+						.skip(index)
+						.limit(10)
+						.get()
+						.then(res => {
+							onSuccess(res)
+						})
+						.catch(err => {
+							onFail(err)
+						})
+				} else {
+					onSuccess(null, true);
+				}
+			})
+		}
+	},
+
+	getDbEvent: function (index, filter, onSuccess, onFail) {
+		const db = this.data.dataBase;
+		const eventsInfoCollection = db.collection("events_info");
+		var date = `${filter.eventYear}-${filter.eventMonth}`;
+		var country = filter.country;
+
+		eventsInfoCollection
+			.where({
+				start_date: db.RegExp({
+					regexp: date,
+					options: "i"
+				}),
+				country: db.RegExp({
+					regexp: country,
+					options: "i"
+				})
+			})
 			.skip(index)
 			.limit(10)
 			.get()
@@ -212,34 +275,7 @@ App({
 			.catch(err => {
 				onFail(err)
 			})
-	},
 
-	getDbEvent: function (index, eventYear, onSuccess, onFail) {
-		const db = this.data.dataBase;
-		const eventsInfoCollection = db.collection("events_info");
-		eventsInfoCollection
-			.where({
-				year: eventYear
-			}).count().then(res => {
-				var count = res.total;
-				if(index <= count-10){
-					eventsInfoCollection
-					.where({
-						year: eventYear
-					})
-					.skip(index)
-					.limit(10)
-					.get()
-					.then(res => {
-						onSuccess(res)
-					})
-					.catch(err => {
-						onFail(err)
-					})
-				} else {
-					onSuccess(null,true)
-				}
-			})
 
 	},
 

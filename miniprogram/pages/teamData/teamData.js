@@ -84,7 +84,8 @@ Page({
 			search: null,
 			teamInfo: null,
 			teamInfoCache: new Array(),
-			teamLoadIndex: 0
+			teamLoadIndex: 0,
+			loadFinish: false
 		})
 		this.onLoadTeam(this.data.teamLoadIndex);
 	},
@@ -99,24 +100,33 @@ Page({
 
 	onLoadTeam: function (index) {
 		var that = this;
-		app.getDbTeam(index,
-			(res) => {
-				var teamInfo = that.data.teamInfoCache;
-				for (var j = 0; j < res.data.length; j++) {
-					var info = res.data[j];
-					teamInfo.push({
-						teamNumber: info.team_number,
-						teamName: info.nickname,
-						teamLocation: `${info.city} ${info.state_prov} ${info.country}`
+		app.getDbTeam(index, {
+			country: "All"
+		},
+			(res, isEmpty) => {
+				if (!isEmpty) {
+					var teamInfo = that.data.teamInfoCache;
+					for (var j = 0; j < res.data.length; j++) {
+						var info = res.data[j];
+						teamInfo.push({
+							teamNumber: info.team_number,
+							teamName: info.nickname,
+							teamLocation: `${info.city} ${info.state_prov} ${info.country}`
+						})
+					}
+					teamInfo.sort(app.globalMethod.teamArraySort);
+					that.setData({
+						teamInfoCache: teamInfo,
+						teamInfo: teamInfo,
+						teamLoadIndex: index + 10,
+						loadFinish: true
+					})
+				} else {
+					console.log("is Empty")
+					that.setData({
+						loadFinish: true
 					})
 				}
-				teamInfo.sort(app.globalMethod.teamArraySort);
-				that.setData({
-					teamInfoCache: teamInfo,
-					teamInfo: teamInfo,
-					teamLoadIndex: index + 10,
-					loadFinish: true
-				})
 			},
 			() => { })
 	}
