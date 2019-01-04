@@ -6,11 +6,11 @@
             </view>
             <open-data class="user-name" type="userNickName"></open-data>
         </view>
+    </van-transition>
         <view class="navigator-list shadow">
             <!-- <navigator-list url="/pages/myAccount/favorite/favorite" type="navi" icon="/res/icons/myAccount/favorfill.png" title="收藏" /> -->
             <navigator-list url="/pages/myAccount/setting/setting" type="navi" icon="/res/icons/myAccount/setting.png " title="设置" />
             <navigator-list url="/pages/myAccount/error/error" type="navi" icon="/res/icons/myAccount/questionfill.png" title="报告问题" />
             <navigator-list url="/pages/myAccount/about/about" type="navi" icon="/res/icons/myAccount/info.png" title="关于" />
         </view>
-    </van-transition>
 </view>

@@ -7,5 +7,5 @@
     <view style="margin : 15px;" hidden="{{loadFinish}}">
         <van-loading size="25px"></van-loading>
     </view>
-    <empty-pages wx:if="{{(eventInfo == null || eventInfo.length==0) && search != null}}" type="E" msg="No event found" height="{{height}}"/>
+    <empty-pages hidden="{{(eventInfo != null && eventInfo.length!=0) && (eventInfoCache != null && eventInfoCache.length!=0) || !loadFinish}}" type="E" msg="No event found" height="{{height}}"/>
 </view>

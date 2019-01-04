@@ -62,6 +62,7 @@ Page({
 
     onRequireCloudData: function () {
         //读取保存到云端的数据
+        //TODO: 处理异步方法
         var that = this;
         var eventInfo = new Array();
         var teamInfo = new Array();
@@ -73,25 +74,23 @@ Page({
                     if (keys[j].substring(0, 1) == "e") {
                         var eventkey = keys[j];
                         //event用e打头x
-                        var onGetSuccess = function (res) {
+                        app.getCloud(keys[j], (res) => {
                             console.log("eventkey: " + eventkey);
                             eventInfo.push(res.eventIndex);
                             that.setData({
                                 eventInfo: eventInfo
                             });
-                        };
-                        app.getCloud(keys[j], onGetSuccess, () => { });
+                        }, () => { });
                     } else if (keys[j].substring(0, 1) == "t") {
                         var teamkey = keys[j];
                         //team用t打头
-                        var onGetSuccess = function (res) {
+                        app.getCloud(keys[j], (res) => {
                             console.log("teamkey: " + teamkey);
                             teamInfo.push(res);
                             that.setData({
                                 teamInfo: teamInfo
                             });
-                        };
-                        app.getCloud(keys[j], onGetSuccess, () => { });
+                        }, () => { });
                     }
                 }
             }
@@ -112,19 +111,14 @@ Page({
                 for (var j = 0; j < keys.length; j++) {
                     if (keys[j].substring(0, 1) == "e") {
                         //event用e打头
-                        var onGetSuccess = function (res) {
-                            console.log(res);
+                        app.get(keys[j], (res) => {
                             eventInfo.push(res.eventIndex);
-                        };
-                        var onGetFail = function () { };
-                        app.get(keys[j], onGetSuccess, onGetFail);
+                        }, () => { });
                     } else if (keys[j].substring(0, 1) == "t") {
                         //team用t打头
-                        var onGetSuccess = function (res) {
+                        app.get(keys[j], (res) => {
                             teamInfo.push(res);
-                        };
-                        var onGetFail = function () { };
-                        app.get(keys[j], onGetSuccess, onGetFail);
+                        }, () => { });
                     }
                 }
             }

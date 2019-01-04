@@ -11,7 +11,7 @@ Page({
         chooseMonth: "",
         chooseCountry: "",
         loadFinish: false,
-        filteritems: Array()
+        filteritems: Array
     },
 
     onLoad: function (options) {
@@ -19,7 +19,7 @@ Page({
         wx.getSystemInfo({
             success: res => {
                 that.setData({
-                    height: res.windowHeight - 44
+                    height: res.windowHeight - 84
                 })
             }
         })
@@ -162,6 +162,7 @@ Page({
     onFilterChange: function (e) {
         var that = this;
         var checkedItem = e.detail.checkedItems;
+        console.log(checkedItem);
         checkedItem.forEach((n) => {
             if (n.value == "Country") {
                 n.children.forEach((child) => {
@@ -194,10 +195,18 @@ Page({
     initFilterItems: function () {
         var yearArray = new Array();
         for (var year = 1992; year <= new Date().getFullYear(); year++) {
-            yearArray.push({
-                label: year.toString(),
-                value: year.toString()
-            })
+            if (year == new Date().getFullYear()) {
+                yearArray.push({
+                    label: year.toString(),
+                    value: year.toString(),
+                    checked: true
+                })
+            } else {
+                yearArray.push({
+                    label: year.toString(),
+                    value: year.toString()
+                })
+            }
         }
         yearArray.reverse();
         var filteritems = [{

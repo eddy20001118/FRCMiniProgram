@@ -7,7 +7,7 @@
         </view>
         <text class="version margin">©2019 易室科技服务中心</text>
     </view>
-    <view class="navigator-list shadow">
+    <view class="navigator-list">
         <navigator-list type="click" icon="/res/icons/myAccount/database.png" title="数据来源" smallText="©2014 The Blue Alliance \n https://www.thebluealliance.com/api/v3" />
         <navigator-list type="click" icon="/res/icons/myAccount/github.png " title="Git仓库" smallText="https://github.com/eddy20001118/FRCMiniProgram" />
         <navigator-list type="click" icon="/res/icons/myAccount/info.png" title="开源协议 (MIT)" smallText="在软件和软件的所有副本中都必须包含以上版权声明和MIT许可声明。" />

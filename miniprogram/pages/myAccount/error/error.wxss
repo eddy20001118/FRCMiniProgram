@@ -5,12 +5,17 @@
 }
 
 .richtext{
-    padding: 15px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 55rpx;
+    padding-right: 55rpx;
     width: 750rpx;
 }
 
 .content{
-    margin-top: 2px;
+    overflow: auto;
+    word-break:break-all;
+    margin-top: 3px;
     margin-bottom: 5px;
     font-size: 11pt;
     color: #424242;
@@ -20,7 +25,7 @@
     width: 100%;
     text-align: left;
     margin-top: 5px;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
     font-size: 14pt;
     font-weight: bold;
     color: #424242;

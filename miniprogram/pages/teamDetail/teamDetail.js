@@ -154,8 +154,8 @@ Page({
         var eventInfo = new Array(res.length);
         for (var j = 0; j < res.length; j++) {
             try {
-                var startDate = new Date(info.start_date);
-                var endDate = new Date(info.start_date);
+                var startDate = new Date(res[j].start_date);
+                var endDate = new Date(res[j].start_date);
             } catch (error) { }
 
             eventInfo[j] = {

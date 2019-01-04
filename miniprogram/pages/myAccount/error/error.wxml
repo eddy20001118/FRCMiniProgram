@@ -2,7 +2,7 @@
     <view class="content left">用户您好，如果在使用中遇到任何问题，烦请按照以下步骤进行反馈：</view>
     <view class="title" id="-github">登陆Github</view>
     <view class="content left">
-        登陆您的github账号，转到 https://github.com/eddy20001118/FRCMiniProgram
+        登陆您的github账号，转到https://github.com/eddy20001118/FRCMiniProgram
     </view>
     <image class="img" mode="widthFix" src="/res/img/index.png" />
     <view class="title" id="-issue">查看与发布Issue</view>

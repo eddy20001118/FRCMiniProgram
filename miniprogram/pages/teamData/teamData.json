@@ -3,6 +3,7 @@
   "usingComponents": {
     "van-loading": "/dist/loading/index",
     "van-search": "/dist/search/index",
-    "team-card": "/frc-components/team-card/index"
+    "team-card": "/frc-components/team-card/index",
+    "wux-filterbar": "/miniprogram_npm/wux-weapp/filterbar/index"
   }
 }
