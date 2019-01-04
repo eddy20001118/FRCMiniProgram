@@ -1,0 +1,5 @@
+<van-transition duration="450">
+    <view bind:tap="isClicked" class="circle" hover-class="onClick">
+        <image class="img" src="/res/icons/scroll/jiantou.png"/>
+    </view>
+</van-transition>

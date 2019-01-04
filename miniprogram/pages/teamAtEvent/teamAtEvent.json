@@ -8,6 +8,7 @@
         "awards-card" : "/frc-components/awards-card/index",
         "match-card": "/frc-components/match-card/index",
         "van-collapse": "/dist/collapse/index",
-        "van-collapse-item": "/dist/collapse-item/index"
+        "van-collapse-item": "/dist/collapse-item/index",
+        "pin-button" : "/frc-components/pin-button/index"
     }
 }

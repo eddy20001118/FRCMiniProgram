@@ -5,7 +5,6 @@
     </block>
     <block wx:elif="{{ type === 'radio' }}">
     	<radio checked="{{ inputChecked }}" color="{{ inputColor }}" disabled="{{ disabled }}" class="wux-input-class wux-selectable__input" />
-        <text class="mytext">{{ value }}</text>
         <icon class="wux-selectable__icon" type="success_no_circle" size="16" color="{{ !disabled ? '#3f51b5' : '#666' }}" hidden="{{ !inputChecked }}" />
     </block>
     <block wx:else>

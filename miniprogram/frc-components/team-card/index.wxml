@@ -9,6 +9,9 @@
                 <text class='teamLocation'>{{teamInfo.teamLocation}}</text>
             </view>
         </view>
+        <view hidden="{{eventTitle == null || eventTitle.length == 0}}"  class="team location">
+            <view class="eventTitle">{{eventTitle}} {{eventYear}}</view>
+        </view>
         <slot></slot>
     </view>
 </pin-list>

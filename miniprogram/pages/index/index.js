@@ -3,6 +3,7 @@ Page({
     data: {
         teamInfo: Array,
         eventInfo: Array,
+        teamAtEvent: Array,
         height: Number
     },
 
@@ -30,6 +31,7 @@ Page({
     onUnload: function () { },
 
     onPullDownRefresh: function () {
+        //TODO: 刷新各个卡片的网络请求
         setTimeout(() => {
             this.onRequireData();
             wx.stopPullDownRefresh();
@@ -57,6 +59,19 @@ Page({
         );
         wx.navigateTo({
             url: `/pages/teamDetail/teamDetail?teamInfo=${teamInfo}`
+        });
+    },
+
+    onTeamAtEventCardClick: function (e) {
+        var index = e.currentTarget.id;
+        var eventIndex = encodeURIComponent(
+            JSON.stringify(this.data.teamAtEvent[index].eventIndex)
+        );
+        var team = encodeURIComponent(
+            JSON.stringify(this.data.teamAtEvent[index].team)
+        );
+        wx.navigateTo({
+            url: `/pages/teamAtEvent/teamAtEvent?eventIndex=${eventIndex}&team=${team}`
         });
     },
 
@@ -105,6 +120,7 @@ Page({
         //读取保存到缓存的数据
         var eventInfo = new Array();
         var teamInfo = new Array();
+        var teamAtEvent = new Array();
         var onSuccess = function (res) {
             var keys = res.keys;
             if (keys != null && keys.length != 0) {
@@ -119,6 +135,11 @@ Page({
                         app.get(keys[j], (res) => {
                             teamInfo.push(res);
                         }, () => { });
+                    } else if (keys[j].substring(0, 1) == "q") {
+                        //team at event 用q表示
+                        app.get(keys[j], (res) => {
+                            teamAtEvent.push(res);
+                        })
                     }
                 }
             }
@@ -126,7 +147,8 @@ Page({
         app.getInfo(onSuccess);
         this.setData({
             eventInfo: eventInfo,
-            teamInfo: teamInfo
+            teamInfo: teamInfo,
+            teamAtEvent: teamAtEvent
         });
     }
 });

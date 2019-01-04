@@ -11,7 +11,9 @@ Page({
         chooseMonth: "",
         chooseCountry: "",
         loadFinish: false,
-        filteritems: Array
+        isSearch: Boolean,
+        filteritems: Array,
+        currentScrollPosition: 0
     },
 
     onLoad: function (options) {
@@ -48,10 +50,12 @@ Page({
     },
 
     onReachBottom: function () {
-        this.setData({
-            loadFinish: false
-        })
-        this.onLoadEvent(this.data.eventLoadIndex, "Add");
+        if (!this.data.isSearch) {
+            this.setData({
+                loadFinish: false
+            })
+            this.onLoadEvent(this.data.eventLoadIndex, "Add");
+        }
     },
 
     onShareAppMessage: function () {
@@ -91,6 +95,7 @@ Page({
                 search: event.detail,
                 eventInfoCache: new Array(),
                 eventLoadIndex: 0,
+                isSearch: true,
                 loadFinish: true
             })
         });
@@ -98,8 +103,13 @@ Page({
     onCancel: function () {
         this.setData({
             search: null,
-            eventInfo: null
+            eventInfo: null,
+            eventInfoCache: null,
+            eventLoadIndex: 0,
+            loadFinish: false,
+            isSearch: false
         })
+        this.onLoadEvent(0, "Refresh")
     },
     onEventCardClick: function (e) {
         var index = e.currentTarget.id;
@@ -149,11 +159,13 @@ Page({
                     }
                 }
                 eventInfo.sort(app.globalMethod.eventsAtYearSort);
+                //TODO: 添加列表去重逻辑
                 that.setData({
                     eventInfo: eventInfo,
                     eventInfoCache: eventInfo,
                     eventLoadIndex: index + 10,
-                    loadFinish: true
+                    loadFinish: true,
+                    isSearch: false
                 })
 
             },
@@ -213,16 +225,18 @@ Page({
             type: 'radio',
             label: 'Country',
             value: 'Country',
-            children: [{ label: 'USA', value: 'USA' },
-            { label: 'Israel', value: 'Israel' },
-            { label: 'Canada', value: 'Canada' },
-            { label: 'Australia', value: 'Australia' },
-            { label: 'China', value: 'China' },
-            { label: 'Mexico', value: 'Mexico' },
-            { label: 'United States', value: 'United States' },
-            { label: 'Turkey', value: 'Turkey' },
-            { label: 'Brazil', value: 'Brazil' },
-            { label: 'Northern Israel', value: 'Northern Israel' }],
+            children: [
+                { label: 'No selected', value: '', },
+                { label: 'USA', value: 'USA' },
+                { label: 'Israel', value: 'Israel' },
+                { label: 'Canada', value: 'Canada' },
+                { label: 'Australia', value: 'Australia' },
+                { label: 'China', value: 'China' },
+                { label: 'Mexico', value: 'Mexico' },
+                { label: 'United States', value: 'United States' },
+                { label: 'Turkey', value: 'Turkey' },
+                { label: 'Brazil', value: 'Brazil' },
+                { label: 'Northern Israel', value: 'Northern Israel' }],
             groups: ['001'],
         },
         {
@@ -236,59 +250,78 @@ Page({
             type: 'radio',
             label: 'Month',
             value: 'Month',
-            children: [{
-                label: 'Jan',
-                value: '01',
-            },
-            {
-                label: 'Feb',
-                value: '02',
-            },
-            {
-                label: 'Mar',
-                value: '03',
-            },
-            {
-                label: 'Apr',
-                value: '04',
-            },
-            {
-                label: 'May',
-                value: '05',
-            },
-            {
-                label: 'Jun',
-                value: '06',
-            },
-            {
-                label: 'Jul',
-                value: '07',
-            },
-            {
-                label: 'Aug',
-                value: '08',
-            },
-            {
-                label: 'Sept',
-                value: '09',
-            },
-            {
-                label: 'Oct',
-                value: '10',
-            },
-            {
-                label: 'Nov',
-                value: '11',
-            },
-            {
-                label: 'Dec',
-                value: '12',
-            }
+            children: [
+                {
+                    label: 'No selected',
+                    value: '',
+                },
+                {
+                    label: 'Jan',
+                    value: '01',
+                },
+                {
+                    label: 'Feb',
+                    value: '02',
+                },
+                {
+                    label: 'Mar',
+                    value: '03',
+                },
+                {
+                    label: 'Apr',
+                    value: '04',
+                },
+                {
+                    label: 'May',
+                    value: '05',
+                },
+                {
+                    label: 'Jun',
+                    value: '06',
+                },
+                {
+                    label: 'Jul',
+                    value: '07',
+                },
+                {
+                    label: 'Aug',
+                    value: '08',
+                },
+                {
+                    label: 'Sept',
+                    value: '09',
+                },
+                {
+                    label: 'Oct',
+                    value: '10',
+                },
+                {
+                    label: 'Nov',
+                    value: '11',
+                },
+                {
+                    label: 'Dec',
+                    value: '12',
+                }
             ],
             groups: ['001'],
         }]
         this.setData({
             filteritems: filteritems
         })
-    }
+    },
+    onScrolltoTop: function () {
+		wx.pageScrollTo({
+			scrollTop: 0,
+			duration: 0
+		});
+		this.setData({
+			currentScrollPosition: 0
+		});
+	},
+	onPageScroll: function (e) { // 获取滚动条当前位置
+		this.setData({
+			currentScrollPosition: e.scrollTop
+		})
+	}
 })

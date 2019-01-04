@@ -3,6 +3,23 @@
     <view bindtap='onEventCardClick' wx:for="{{eventInfo}}" wx:key="{{index}}" id="{{index}}">
         <pin-event-card eventInfo="{{item}}" steps="{{item.steps}}" active="{{item.active}}" />
     </view>
+    <view bindtap='onTeamAtEventCardClick' wx:for="{{teamAtEvent}}" wx:key="{{index}}" id="{{index}}">
+        <team-card 
+            teamInfo="{{item.team}}" 
+            noBottomPadding="{{true}}" 
+            eventTitle = "{{item.eventIndex.eventTitle}}"
+            eventYear = "{{item.eventIndex.eventYear}}">
+            <match-card 
+                wx:if="{{item.lastmatch.matchType != 'No match info found'}}"
+                matchType="{{item.lastmatch.matchType}}"
+                redAlliance="{{item.lastmatch.redAlliance}}"
+                blueAlliance="{{item.lastmatch.blueAlliance}}"
+                score="{{item.lastmatch.score}}"
+                currentTeamNumber="{{item.team.teamNumber}}"
+            />
+            <view wx:if="{{item.lastmatch.matchType == 'No match info found'}}" class="noMatchInfo">{{item.lastmatch.matchType}}</view>
+        </team-card>
+    </view>
     <view bindtap='onTeamCardClick' wx:for="{{teamInfo}}" wx:key="{{index}}" id="{{index}}">
         <team-card teamInfo="{{item}}"/>
     </view>

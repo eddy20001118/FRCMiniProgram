@@ -7,8 +7,10 @@ Page({
 		search: String,
 		teamLoadIndex: Number,
 		loadFinish: false,
+		isSearch: Boolean,
 		chooseCountry: "China", //默认勾选中国队伍
-		filteritems: Array
+		filteritems: Array,
+		currentScrollPosition: 0
 	},
 
 	onLoad: function (options) {
@@ -21,7 +23,7 @@ Page({
 			}
 		})
 		this.initFilterItems();
-		this.onLoadTeam(0,"Add");
+		this.onLoadTeam(0, "Add");
 	},
 
 	onReady: function () {
@@ -45,10 +47,12 @@ Page({
 	},
 
 	onReachBottom: function () {
-		this.setData({
-			loadFinish: false
-		})
-		this.onLoadTeam(this.data.teamLoadIndex,"Add");
+		if (!this.data.isSearch) {
+			this.setData({
+				loadFinish: false
+			})
+			this.onLoadTeam(this.data.teamLoadIndex, "Add");
+		}
 	},
 
 	onShareAppMessage: function () {
@@ -76,6 +80,7 @@ Page({
 				search: event.detail,
 				teamInfoCache: new Array(),
 				teamLoadIndex: 0,
+				isSearch: true,
 				loadFinish: true
 			})
 		});
@@ -85,11 +90,12 @@ Page({
 		this.setData({
 			search: null,
 			teamInfo: null,
-			teamInfoCache: new Array(),
+			teamInfoCache: null,
 			teamLoadIndex: 0,
+			isSearch: false,
 			loadFinish: false
 		})
-		this.onLoadTeam(this.data.teamLoadIndex);
+		this.onLoadTeam(0, "Refresh");
 	},
 
 	onTeamCardClick: function (e) {
@@ -126,11 +132,13 @@ Page({
 					})
 				}
 				teamInfo.sort(app.globalMethod.teamArraySort);
+				//TODO: 添加列表去重逻辑
 				that.setData({
 					teamInfoCache: teamInfo,
 					teamInfo: teamInfo,
 					teamLoadIndex: index + 10,
-					loadFinish: true
+					loadFinish: true,
+					isSearch: false
 				})
 			},
 			() => { })
@@ -173,10 +181,10 @@ Page({
 			type: 'radio',
 			label: 'Country',
 			value: 'Country',
-			children: [ { label: 'USA', value: 'USA' },
+			children: [{ label: 'USA', value: 'USA' },
 			{ label: 'Canada', value: 'Canada' },
 			{ label: 'Brazil', value: 'Brazil' },
-			{ label: 'China', value: 'China' , checked:true}, //默认勾选中国队伍
+			{ label: 'China', value: 'China', checked: true }, //默认勾选中国队伍
 			{ label: 'Greece', value: 'Greece' },
 			{ label: 'South Africa', value: 'South Africa' },
 			{ label: 'Chinese Taipei', value: 'Chinese Taipei' },
@@ -188,8 +196,10 @@ Page({
 			{ label: 'Israel', value: 'Israel' },
 			{ label: 'Australia', value: 'Australia' },
 			{ label: 'Poland', value: 'Poland' },
-			{ label: 'Saint Kitts and Nevis',
-			  value: 'Saint Kitts and Nevis' },
+			{
+				label: 'Saint Kitts and Nevis',
+				value: 'Saint Kitts and Nevis'
+			},
 			{ label: 'New Zealand', value: 'New Zealand' },
 			{ label: 'Switzerland', value: 'Switzerland' },
 			{ label: 'Japan', value: 'Japan' },
@@ -223,11 +233,25 @@ Page({
 			{ label: 'Bosnia-Herzegovina', value: 'Bosnia-Herzegovina' },
 			{ label: 'Czech Republic', value: 'Czech Republic' },
 			{ label: 'Pakistan', value: 'Pakistan' },
-			{ label: 'Kazakhstan', value: 'Kazakhstan' } ],
+			{ label: 'Kazakhstan', value: 'Kazakhstan' }],
 			groups: ['001'],
 		}]
 		this.setData({
 			filteritems: filteritems
+		})
+	},
+	onScrolltoTop: function () {
+		wx.pageScrollTo({
+			scrollTop: 0,
+			duration: 0
+		});
+		this.setData({
+			currentScrollPosition: 0
+		});
+	},
+	onPageScroll: function (e) { // 获取滚动条当前位置
+		this.setData({
+			currentScrollPosition: e.scrollTop
 		})
 	}
 })

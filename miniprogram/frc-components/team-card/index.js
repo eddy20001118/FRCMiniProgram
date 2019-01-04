@@ -1,7 +1,9 @@
 Component({
     properties: {
         teamInfo : null,
-        noBottomPadding : Boolean
+        noBottomPadding : Boolean,
+        eventTitle: null,
+        eventYear: null
     },
     data: {},
     methods: {}

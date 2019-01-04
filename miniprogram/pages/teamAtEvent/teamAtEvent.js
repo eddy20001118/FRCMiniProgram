@@ -14,7 +14,8 @@ Page({
         match: Object,
         activeNames: [], //折叠面板激活
         activeTab: Number,
-        height : Number
+        height: Number,
+        dataBase: Boolean
     },
 
     /**
@@ -22,39 +23,54 @@ Page({
      */
     onLoad: function (options) {
         var that = this;
-		wx.getSystemInfo({
-            success : res =>{
+        wx.getSystemInfo({
+            success: res => {
                 that.setData({
-                    height : res.windowHeight-44
+                    height: res.windowHeight - 44
                 })
             }
         })
-        var eventIndex = JSON.parse(decodeURIComponent(options.eventIndex));
-        var team = JSON.parse(decodeURIComponent(options.team));
-        var summaryApi = `team/frc${team.teamNumber}/event/${eventIndex.eventYear}${eventIndex.eventCode}/status`;
-        var awardsApi = `team/frc${team.teamNumber}/event/${eventIndex.eventYear}${eventIndex.eventCode}/awards`
-        var statusApi = `event/${eventIndex.eventYear}${eventIndex.eventCode}/oprs`;
-        var matchesApi = `team/frc${team.teamNumber}/event/${eventIndex.eventYear}${eventIndex.eventCode}/matches/simple`;
-        if (eventIndex != null) {
-            this.setData({
-                eventIndex: eventIndex
+        try {
+            var eventIndex = JSON.parse(decodeURIComponent(options.eventIndex));
+            var team = JSON.parse(decodeURIComponent(options.team));
+            var summaryApi = `team/frc${team.teamNumber}/event/${eventIndex.eventYear}${eventIndex.eventCode}/status`;
+            var awardsApi = `team/frc${team.teamNumber}/event/${eventIndex.eventYear}${eventIndex.eventCode}/awards`
+            var statusApi = `event/${eventIndex.eventYear}${eventIndex.eventCode}/oprs`;
+            var matchesApi = `team/frc${team.teamNumber}/event/${eventIndex.eventYear}${eventIndex.eventCode}/matches/simple`;
+            if (eventIndex != null) {
+                this.setData({
+                    eventIndex: eventIndex
+                })
+            }
+
+            if (team != null) {
+                this.setData({
+                    team: team
+                })
+            }
+
+            wx.setNavigationBarTitle({
+                title: this.data.eventIndex.eventTitle + " " + this.data.team.teamNumber
+            });
+
+            var key = `q${team.teamNumber}${eventIndex.eventYear}${eventIndex.eventCode}`
+            app.get(key, (value) => {
+                this.setData({
+                    dataBase: true
+                })
+                console.log("已有收藏")
+            }, () => {
+                this.setData({
+                    dataBase: false
+                })
+                console.log("无已有收藏")
             })
-        }
 
-        if (team != null) {
-            this.setData({
-                team: team
-            })
-        }
-
-        wx.setNavigationBarTitle({
-            title: this.data.eventIndex.eventTitle + " " + this.data.team.teamNumber
-        });
-
-        app.globalMethod.httpsRequest(awardsApi, this.onAwardsCallback);
-        app.globalMethod.httpsRequest(summaryApi, this.onSummaryCallback);
-        app.globalMethod.httpsRequest(matchesApi, this.onMatchesCallback);
-        app.globalMethod.httpsRequest(statusApi, this.onStatusCallback);
+            app.globalMethod.httpsRequest(awardsApi, this.onAwardsCallback);
+            app.globalMethod.httpsRequest(summaryApi, this.onSummaryCallback);
+            app.globalMethod.httpsRequest(matchesApi, this.onMatchesCallback);
+            app.globalMethod.httpsRequest(statusApi, this.onStatusCallback);
+        } catch (e) { console.log(e) }
     },
 
     /**
@@ -249,6 +265,61 @@ Page({
                 awardCard: awardCard,
                 summaryInfo: this.data.summaryInfo
             })
+        }
+    },
+    onPinButtonClick: function () {
+        this.onSaveStatus();
+    },
+    onSaveStatus: function () {
+        if (!this.data.dataBase) {
+            var lastmatch = {
+                matchType : "No match info found"
+            }
+            if(this.data.match != null){
+                for(var key in this.data.match){
+                    if(this.data.match[key].length != 0){
+                        var res = this.data.match[key];
+                        res.forEach(element => {
+                            lastmatch = element;
+                        });
+                    }
+                }
+            }
+            app.set({
+                key: `q${this.data.team.teamNumber}${this.data.eventIndex.eventYear}${this.data.eventIndex.eventCode}`,
+                data: {
+                    team : this.data.team,
+                    eventIndex: this.data.eventIndex,
+                    lastmatch: lastmatch
+                }
+            }, () => {
+                wx.showToast({
+                    title: '收藏成功,返回首页即可查看',
+                    icon: 'none',
+                    duration: 2000
+                });
+                this.setData({
+                    dataBase: !this.data.dataBase
+                })
+            })
+        } else {
+            var key = `q${this.data.team.teamNumber}${this.data.eventIndex.eventYear}${this.data.eventIndex.eventCode}`;
+            app.remove(key, () => {
+                wx.showToast({
+                    title: '取消收藏',
+                    icon: 'none',
+                    duration: 2000
+                });
+                this.setData({
+                    dataBase: !this.data.dataBase
+                })
+            }, () => {
+                wx.showToast({
+                    title: '无收藏，无法删除',
+                    icon: 'none',
+                    duration: 2000
+                });
+            });
         }
     },
 })

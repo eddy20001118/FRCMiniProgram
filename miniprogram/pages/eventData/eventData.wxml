@@ -1,4 +1,5 @@
 <view class='container'>
+    <scroll-top-button wx:if="{{currentScrollPosition != 0}}" bind:onclick="onScrolltoTop">button</scroll-top-button>
     <van-search class="searchBar" background="#fff" value="{{ search }}" placeholder="请输入搜索关键词" show-action bind:search="onSearch" bind:cancel="onCancel" />
     <wux-filterbar style="width: 750rpx; font-size: 12pt; background-color:#eee;" items="{{ filteritems }}" bind:change="onFilterChange"/>
     <view wx:for="{{eventInfo}}" wx:key="{{index}}" id="{{index}}" bindtap='onEventCardClick'>
@@ -7,5 +8,5 @@
     <view style="margin : 15px;" hidden="{{loadFinish}}">
         <van-loading size="25px"></van-loading>
     </view>
-    <empty-pages hidden="{{(eventInfo != null && eventInfo.length!=0) && (eventInfoCache != null && eventInfoCache.length!=0) || !loadFinish}}" type="E" msg="No event found" height="{{height}}"/>
+    <empty-pages hidden="{{(eventInfo != null && eventInfo.length!=0) || (eventInfoCache != null && eventInfoCache.length!=0) || !loadFinish}}" type="E" msg="No event found" height="{{height}}"/>
 </view>

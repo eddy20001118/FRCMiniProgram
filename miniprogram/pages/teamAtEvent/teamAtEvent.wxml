@@ -2,9 +2,10 @@
     <van-tabs style="width:750rpx;" color="#3f51b5" swipeable active="{{ active }}" bind:change="onTabChange">
         <van-tab title="Summary">
             <van-transition duration="450">
-                <view class="container fullheight">
+                <view class="container">
                     <teamatevent-summary summaryInfo="{{summaryInfo}}" />
                 </view>
+                <pin-button status="{{dataBase}}" bind:onclick="onPinButtonClick" />
                 <empty-pages hidden="{{summaryInfo != null}}" type="E" msg="No summary found" height="{{height}}" />
             </van-transition>
         </van-tab>

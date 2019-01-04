@@ -34,7 +34,6 @@ Page({
                     title: "Team " + teamInfo.teamNumber
                 })
 
-            var that = this;
             var key = "t" + teamInfo.teamNumber;
             app.get(key, (value) => {
                 this.setData({
@@ -49,7 +48,7 @@ Page({
             })
             app.globalMethod.httpsRequest(teamapi, this.onTeamCallBack);
             app.globalMethod.httpsRequest(eventapi, this.onEventCallBack);
-        } catch (e) { }
+        } catch (e) { console.log(e) }
     },
 
     /**
@@ -144,6 +143,8 @@ Page({
                 }
             }
             teamYearArray.reverse();
+        } else {
+            teamYearArray.push("No event info found");
         }
         this.setData({
             teamYearArray: teamYearArray
@@ -217,7 +218,9 @@ Page({
 
     getTeamYear: function (e) {
         var index = e.detail;
-        var eventAtYearApi = `team/frc${this.data.teamIndex.teamNumber}/events/${this.data.teamYearArray[index]}`;
-        app.globalMethod.httpsRequest(eventAtYearApi, this.onEventatYearCallback);
+        if (this.data.teamYearArray[index] != "No event info found") {
+            var eventAtYearApi = `team/frc${this.data.teamIndex.teamNumber}/events/${this.data.teamYearArray[index]}`;
+            app.globalMethod.httpsRequest(eventAtYearApi, this.onEventatYearCallback);
+        }
     }
 })

@@ -47,3 +47,26 @@
 .hover{
     background-color: #eee;
 }
+
+.eventTitle {
+    width: auto;
+    display: flex;
+    font-size: 11pt;
+    font-weight: bold;
+    color: #424242;
+}
+
+/* .icon{
+    margin-left: 14rpx;
+    margin-right: 14rpx;
+    height: 11pt;
+    width: 11pt;    
+} */
+
+.location{
+    padding-top: 6px;
+    padding-bottom: 6px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
