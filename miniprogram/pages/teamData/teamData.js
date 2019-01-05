@@ -73,7 +73,7 @@ Page({
 					teamName: info.nickname,
 					teamLocation: `${info.city} ${info.state_prov} ${info.country}`
 				}
-			}
+			}   
 			teamInfo.sort(app.globalMethod.teamArraySort);
 			that.setData({
 				teamInfo: teamInfo,

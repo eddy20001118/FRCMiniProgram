@@ -148,7 +148,7 @@ Page({
         //只有对获取的value进行操作时才需要trycatch来捕获异常，否则如果value不存在，对应属性会被赋值null，不会抛出异常
         try {
             var startDate = new Date(res.start_date);
-            var endDate = new Date(res.start_date);
+            var endDate = new Date(res.end_date);
         } catch (error) { }
 
         var eventIndex = {

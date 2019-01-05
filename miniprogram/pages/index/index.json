@@ -7,6 +7,7 @@
       "pin-event-card": "/frc-components/pin-event-card/index",
       "pin-list": "/frc-components/pin-list/index",
       "match-card": "/frc-components/match-card/index",
-      "wux-fab-button": "/miniprogram_npm/wux-weapp/fab-button/index"
+      "wux-fab-button": "/miniprogram_npm/wux-weapp/fab-button/index",
+      "van-action-sheet": "/dist/action-sheet/index"
   }
 }

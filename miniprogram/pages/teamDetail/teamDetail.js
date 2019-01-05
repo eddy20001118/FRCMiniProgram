@@ -156,7 +156,7 @@ Page({
         for (var j = 0; j < res.length; j++) {
             try {
                 var startDate = new Date(res[j].start_date);
-                var endDate = new Date(res[j].start_date);
+                var endDate = new Date(res[j].end_date);
             } catch (error) { }
 
             eventInfo[j] = {

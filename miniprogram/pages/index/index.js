@@ -4,6 +4,9 @@ Page({
         teamInfo: Array,
         eventInfo: Array,
         teamAtEvent: Array,
+        delete: [{ name: '删除' }],
+        DeleteKey: String,
+        onLongPressedClick: false,
         height: Number
     },
 
@@ -160,14 +163,14 @@ Page({
                 })
             } catch (e) { console.log(e) }
         });
-        teamAtEvent.forEach((element,index) => {
+        teamAtEvent.forEach((element, index) => {
             try {
                 var teamMatchesApi = `team/frc${element.team.teamNumber}/event/${element.eventIndex.eventYear}${element.eventIndex.eventCode}/matches/simple`
-                app.globalMethod.httpsRequest(teamMatchesApi,(res) => {
-                    this.onTeamMatchesCallback(res,index);
+                app.globalMethod.httpsRequest(teamMatchesApi, (res) => {
+                    this.onTeamMatchesCallback(res, index);
                 })
             } catch (error) { console.log(error) }
-        }) 
+        })
     },
 
     onMatchesCallback: function (res, index) {
@@ -208,8 +211,8 @@ Page({
         })
         var localtemp = this.data.eventInfo[index];
         app.set({
-            key : `e${localtemp.eventIndex.eventYear}${localtemp.eventIndex.eventCode}`,
-            data : localtemp
+            key: `e${localtemp.eventIndex.eventYear}${localtemp.eventIndex.eventCode}`,
+            data: localtemp
         })
     },
 
@@ -274,12 +277,41 @@ Page({
         var lastmatch = app.globalMethod.getLastMatch(match);
         this.data.teamAtEvent[index].lastmatch = lastmatch;
         this.setData({
-            teamAtEvent : this.data.teamAtEvent
+            teamAtEvent: this.data.teamAtEvent
         })
         var localtemp = this.data.teamAtEvent[index];
         app.set({
-            key : `q${localtemp.team.teamNumber}${localtemp.eventIndex.eventYear}${localtemp.eventIndex.eventCode}`,
-            data : localtemp
+            key: `q${localtemp.team.teamNumber}${localtemp.eventIndex.eventYear}${localtemp.eventIndex.eventCode}`,
+            data: localtemp
         })
     },
+
+    onLongPressed: function (e) {
+        this.setData({
+            onLongPressedClick: true,
+            DeleteKey: e.currentTarget.dataset.key
+        })
+    },
+
+    onDelete: function (e) {
+        app.remove(this.data.DeleteKey, () => {
+            wx.showToast({
+                title: '删除成功',
+                icon: 'none',
+                duration: 2000
+            });
+            this.setData({
+                DeleteKey: null,
+                onLongPressedClick: false
+            })
+        }, () => { })
+        this.onRequireData();
+    },
+
+    onDeleteCancel: function () {
+        this.setData({
+            DeleteKey: null,
+            onLongPressedClick: false
+        })
+    }
 });

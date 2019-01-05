@@ -1,9 +1,20 @@
 <!-- index.wxml -->
 <view class="container">
-    <view bindtap='onEventCardClick' wx:for="{{eventInfo}}" wx:key="{{index}}" id="{{index}}">
+    <view bindlongpress="onLongPressed" 
+        bindtap='onEventCardClick' 
+        wx:for="{{eventInfo}}" 
+        wx:key="{{index}}" 
+        id="{{index}}" 
+        data-key="{{'e'+item.eventYear+item.eventCode}}">
         <pin-event-card eventInfo="{{item}}" steps="{{item.steps}}" active="{{item.active}}" />
     </view>
-    <view bindtap='onTeamAtEventCardClick' wx:for="{{teamAtEvent}}" wx:key="{{index}}" id="{{index}}">
+    <view 
+        bindlongpress="onLongPressed" 
+        bindtap='onTeamAtEventCardClick' 
+        wx:for="{{teamAtEvent}}" 
+        wx:key="{{index}}" 
+        id="{{index}}" 
+        data-key="{{'q'+item.team.teamNumber+item.eventIndex.eventYear+item.eventIndex.eventCode}}">
         <team-card 
             teamInfo="{{item.team}}" 
             noBottomPadding="{{true}}" 
@@ -22,7 +33,13 @@
             <view wx:if="{{item.lastmatch.matchType == 'No match info found'}}" class="noMatchInfo">{{item.lastmatch.matchType}}</view>
         </team-card>
     </view>
-    <view bindtap='onTeamCardClick' wx:for="{{teamInfo}}" wx:key="{{index}}" id="{{index}}">
+    <view 
+        bindlongpress="onLongPressed" 
+        bindtap='onTeamCardClick' 
+        wx:for="{{teamInfo}}" 
+        wx:key="{{index}}" 
+        id="{{index}}" 
+        data-key="{{'t'+item.teamNumber}}">
         <team-card teamInfo="{{item}}"/>
     </view>
     <empty-pages 
@@ -31,4 +48,11 @@
         height="{{height}}"
         msg="开始搜索吧！"
          />
+    <van-action-sheet
+        show="{{ DeleteKey != null && DeleteKet.length != 0 && onLongPressedClick}}"
+        actions="{{ delete }}"
+        bind:select="onDelete"
+        bind:cancel="onDeleteCancel"
+        cancel-text="取消"
+    />
 </view>

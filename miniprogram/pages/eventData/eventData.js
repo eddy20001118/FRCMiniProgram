@@ -74,7 +74,7 @@ Page({
                 if (info != null) {
                     try {
                         var startDate = new Date(info.start_date);
-                        var endDate = new Date(info.start_date);
+                        var endDate = new Date(info.end_date);
                     } catch (error) { }
 
                     eventInfo[j] = {
@@ -143,7 +143,7 @@ Page({
                     if (info != null) {
                         try {
                             var startDate = new Date(info.start_date);
-                            var endDate = new Date(info.start_date);
+                            var endDate = new Date(info.end_date);
                         } catch (error) { }
 
                         eventInfo.push({
