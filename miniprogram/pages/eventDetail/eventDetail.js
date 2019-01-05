@@ -96,12 +96,8 @@ Page({
             eventInfo.eventCode
             }/alliances`; //object
         var awardsApi = `event/${eventInfo.eventYear}${eventInfo.eventCode}/awards`; //list
-        var matchesApi = `event/${eventInfo.eventYear}${
-            eventInfo.eventCode
-            }/matches/simple`; //list
-        var teamListApi = `event/${eventInfo.eventYear}${
-            eventInfo.eventCode
-            }/teams`; //list
+        var matchesApi = `event/${eventInfo.eventYear}${eventInfo.eventCode}/matches/simple`; //list
+        var teamListApi = `event/${eventInfo.eventYear}${eventInfo.eventCode}/teams`; //list
         app.globalMethod.httpsRequest(teamListApi, this.onTeamsCallBack);
         app.globalMethod.httpsRequest(alliancesApi, this.onAlliancesCallBack);
         app.globalMethod.httpsRequest(awardsApi, this.onAwardsCallBack);
@@ -212,8 +208,10 @@ Page({
     },
 
     onMatchesCallBack: function (res) {
+        var match = {};
+        var active = -1;
         if (res != null && res.length != 0) {
-            var match = {
+            match = {
                 qual: new Array(),
                 quarter: new Array(),
                 semi: new Array(),
@@ -286,7 +284,6 @@ Page({
                     } catch (e) { console.log(e) }
                 }
             }
-            var active;
             Object.keys(match).forEach(function (key) {
                 if (key == "qual") {
                     active = 0;
@@ -298,12 +295,12 @@ Page({
                     active = 3;
                 }
             });
-            this.data.eventIndex.active = active;
-            this.setData({
-                match: match,
-                eventIndex: this.data.eventIndex
-            })
         }
+        this.data.eventIndex.active = active;
+        this.setData({
+            match: match,
+            eventIndex: this.data.eventIndex
+        })
     },
 
     onRankingCallBack: function (res) {

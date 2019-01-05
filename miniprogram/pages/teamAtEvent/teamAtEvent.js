@@ -272,19 +272,7 @@ Page({
     },
     onSaveStatus: function () {
         if (!this.data.dataBase) {
-            var lastmatch = {
-                matchType : "No match info found"
-            }
-            if(this.data.match != null){
-                for(var key in this.data.match){
-                    if(this.data.match[key].length != 0){
-                        var res = this.data.match[key];
-                        res.forEach(element => {
-                            lastmatch = element;
-                        });
-                    }
-                }
-            }
+            var lastmatch = app.globalMethod.getLastMatch(this.data.match);
             app.set({
                 key: `q${this.data.team.teamNumber}${this.data.eventIndex.eventYear}${this.data.eventIndex.eventCode}`,
                 data: {

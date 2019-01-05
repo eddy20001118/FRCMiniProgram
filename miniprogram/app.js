@@ -32,6 +32,33 @@ App({
 		//         fail: console.error
 		//     })
 		// },
+		uniqueArray: function (arr) {
+			// 存放结果
+			var res = [];
+			for (var i in arr) {// 遍历数组元素
+				if (res.indexOf(arr[i]) == -1 && arr[i] != null) {// 如果结果数组不存在该元素则保存
+					res.push(arr[i]);
+				}
+			}
+			// 返回去重后的数组
+			return res;
+		},
+		getLastMatch: function (match) {
+			var temp = ["final","semi","quarter","qual"];
+			for(var item in temp){
+				var key = temp[item]
+				var res = match[key]
+				if(res != null && res.length != 0) return res[res.length-1]
+			}
+			return {matchType : "No match info found"}
+		},
+		matchesArrayStringSort: function (x, y) {
+			if (x == "f") return false;
+			else if (x == "sf" && y != "f") return false;
+			else if (x == "qf" && y != "f" && y != "sf") return false;
+			else if (x == "qm" && y != "f" && y != "sf" && y != "qf") return false;
+			else return true;
+		},
 		matchesArraySort: function (x, y) {
 			return x.matchType[1] - y.matchType[1];
 		},
@@ -61,7 +88,6 @@ App({
 
 	set: function (data, onSuccess) {
 		try {
-			console.log(data);
 			wx.setStorageSync(data.key, data.data);
 			onSuccess();
 		} catch (error) { }
@@ -204,21 +230,21 @@ App({
 		const teamsInfoCollection = db.collection("teams_info");
 		var country = filter.country;
 		teamsInfoCollection
-		.where({
-			country : db.RegExp({
-				regexp: country,
-				options: "i"
+			.where({
+				country: db.RegExp({
+					regexp: country,
+					options: "i"
+				})
 			})
-		})
-		.skip(index)
-		.limit(10)
-		.get()
-		.then(res => {
-			onSuccess(res)
-		})
-		.catch(err => {
-			onFail(err)
-		})
+			.skip(index)
+			.limit(10)
+			.get()
+			.then(res => {
+				onSuccess(res)
+			})
+			.catch(err => {
+				onFail(err)
+			})
 	},
 
 	getDbEvent: function (index, filter, onSuccess, onFail) {

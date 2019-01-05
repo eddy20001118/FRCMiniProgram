@@ -26,7 +26,7 @@
         <team-card teamInfo="{{item}}"/>
     </view>
     <empty-pages 
-        hidden="{{(teamInfo != null && teamInfo.length != 0)|| (eventInfo != null && eventInfo.length != 0)}}" 
+        hidden="{{(teamInfo != null && teamInfo.length != 0)|| (eventInfo != null && eventInfo.length != 0) || (teamAtEvent != null && teamAtEvent.length != 0)}}" 
         type="I" 
         height="{{height}}"
         msg="开始搜索吧！"

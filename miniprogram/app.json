@@ -33,7 +33,7 @@
                 "text": "赛事",
                 "pagePath": "pages/eventData/eventData",
                 "iconPath": "res/icons/tabBar/default/newshotfill.png",
-                "selectedIconPath": "res/icons/tabBar/selected/news_hot_fill_light.png"
+                "selectedIconPath": "res/icons/tabBar/selected/newshotfill.png"
             },
             {
                 "text": "队伍",
