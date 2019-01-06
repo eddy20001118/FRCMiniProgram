@@ -1,6 +1,7 @@
 Component({
 	externalClasses: ['wux-class'],
 	properties: {
+        hidden : Boolean,
         position: {
             type: String,
             value: 'center',

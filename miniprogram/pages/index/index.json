@@ -1,13 +1,14 @@
 {
-  "backgroundTextStyle": "dark",
-  "enablePullDownRefresh": true,
-  "usingComponents": {
-      "team-card": "/frc-components/team-card/index",
-      "event-card": "/frc-components/event-card/index",
-      "pin-event-card": "/frc-components/pin-event-card/index",
-      "pin-list": "/frc-components/pin-list/index",
-      "match-card": "/frc-components/match-card/index",
-      "wux-fab-button": "/miniprogram_npm/wux-weapp/fab-button/index",
-      "van-action-sheet": "/dist/action-sheet/index"
-  }
+    "backgroundTextStyle": "dark",
+    "enablePullDownRefresh": true,
+    "usingComponents": {
+        "team-card": "/frc-components/team-card/index",
+        "event-card": "/frc-components/event-card/index",
+        "pin-event-card": "/frc-components/pin-event-card/index",
+        "pin-list": "/frc-components/pin-list/index",
+        "match-card": "/frc-components/match-card/index",
+        "van-action-sheet": "/dist/action-sheet/index",
+        "van-tab": "/dist/tab/index",
+        "van-tabs": "/dist/tabs/index"
+    }
 }
