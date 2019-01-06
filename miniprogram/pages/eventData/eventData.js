@@ -50,7 +50,8 @@ Page({
     },
 
     onReachBottom: function () {
-        if (!this.data.isSearch) {
+        //不是搜索状态且上一次加载完成了才进行下一次加载
+		if (!this.data.isSearch && this.data.loadFinish) {
             this.setData({
                 loadFinish: false
             })
@@ -159,7 +160,6 @@ Page({
                     }
                 }
                 eventInfo.sort(app.globalMethod.eventsAtYearSort);
-                //TODO: 添加列表去重逻辑
                 that.setData({
                     eventInfo: eventInfo,
                     eventInfoCache: eventInfo,
