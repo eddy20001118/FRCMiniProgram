@@ -313,5 +313,18 @@ Page({
             DeleteKey: null,
             onLongPressedClick: false
         })
+    },
+
+    onSwitchTaps: function (e) {
+        var tag = e.currentTarget.id;
+        if(tag == "e"){
+            wx.switchTab({
+                url : "/pages/eventData/eventData"
+            });
+        } else if(tag == "t" || tag == "q"){
+            wx.switchTab({
+                url : "/pages/teamData/teamData"
+            });
+        }
     }
 });

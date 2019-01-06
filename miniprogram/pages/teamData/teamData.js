@@ -136,7 +136,7 @@ Page({
 				that.setData({
 					teamInfoCache: teamInfo,
 					teamInfo: teamInfo,
-					teamLoadIndex: index + 10,
+					teamLoadIndex: index + 20,
 					loadFinish: true,
 					isSearch: false
 				})

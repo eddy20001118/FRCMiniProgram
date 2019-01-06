@@ -19,5 +19,4 @@
         <text decode="{{true}}">公众号: Embed Chamber \n</text>
         <text decode="{{true}}">Bug反馈邮箱：yuhao_li@hotmail.com (开发者邮箱) \n</text>
     </text>
-    <!-- <rich-text class="richtext" nodes="{{richText}}"/> -->
 </view>

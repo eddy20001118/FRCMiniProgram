@@ -237,7 +237,7 @@ App({
 				})
 			})
 			.skip(index)
-			.limit(10)
+			.limit(20)
 			.get()
 			.then(res => {
 				onSuccess(res)
@@ -265,7 +265,7 @@ App({
 				})
 			})
 			.skip(index)
-			.limit(10)
+			.limit(20)
 			.get()
 			.then(res => {
 				onSuccess(res)

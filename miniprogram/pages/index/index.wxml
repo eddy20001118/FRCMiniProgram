@@ -5,7 +5,9 @@
                 <view class="container" bindlongpress="onLongPressed" bindtap='onEventCardClick' wx:for="{{eventInfo}}" wx:key="{{index}}" id="{{index}}" data-key="{{'e'+item.eventYear+item.eventCode}}">
                     <pin-event-card eventInfo="{{item}}" steps="{{item.steps}}" active="{{item.active}}" />
                 </view>
-                <empty-pages hidden="{{eventInfo != null && eventInfo.length != 0}}" type="E" height="{{height}}" msg="No team Info found" />
+                <view bind:tap="onSwitchTaps" id="e">
+                    <empty-pages hidden="{{eventInfo != null && eventInfo.length != 0}}" type="I" height="{{height}}" msg="Start search today!" />
+                </view>
             </van-transition>
         </van-tab>
 
@@ -14,7 +16,9 @@
                 <view class="container" bindlongpress="onLongPressed" bindtap='onTeamCardClick' wx:for="{{teamInfo}}" wx:key="{{index}}" id="{{index}}" data-key="{{'t'+item.teamNumber}}">
                     <team-card teamInfo="{{item}}" />
                 </view>
-                <empty-pages hidden="{{teamInfo != null && teamInfo.length != 0}}" type="E" height="{{height}}" msg="No team Info found" />
+                <view bind:tap="onSwitchTaps" id="t">
+                    <empty-pages hidden="{{teamInfo != null && teamInfo.length != 0}}" type="I" height="{{height}}" msg="Start search today!" />
+                </view>
             </van-transition>
         </van-tab>
         
@@ -29,7 +33,9 @@
                         </view>
                     </team-card>
                 </view>
-                <empty-pages hidden="{{teamAtEvent != null && teamAtEvent.length != 0}}" type="E" height="{{height}}" msg="No team Info found" />
+                <view bind:tap="onSwitchTaps" id="q">
+                    <empty-pages hidden="{{teamAtEvent != null && teamAtEvent.length != 0}}" type="I" height="{{height}}" msg="Start search today!" />
+                </view>
             </van-transition>
         </van-tab>
     </van-tabs>

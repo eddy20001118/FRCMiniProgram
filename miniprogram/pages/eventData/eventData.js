@@ -163,7 +163,7 @@ Page({
                 that.setData({
                     eventInfo: eventInfo,
                     eventInfoCache: eventInfo,
-                    eventLoadIndex: index + 10,
+                    eventLoadIndex: index + 20,
                     loadFinish: true,
                     isSearch: false
                 })

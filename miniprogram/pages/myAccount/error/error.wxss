@@ -9,7 +9,8 @@
     padding-bottom: 20px;
     padding-left: 55rpx;
     padding-right: 55rpx;
-    width: 750rpx;
+    justify-content: center;
+    display: flex;
 }
 
 .content{
