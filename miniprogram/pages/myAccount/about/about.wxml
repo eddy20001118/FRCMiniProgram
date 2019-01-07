@@ -1,9 +1,9 @@
 <view class="container">
     <view class="index shadow">
-        <image class="logo" src="/res/icons/emptyPages/warning.png" />
+        <image class="logo" src="/res/logo/icon.png" />
         <view class="row">
-            <text class="title margin" decode="{{true}}">SOFA &nbsp;</text>
-            <text class="version">(v0.1.2)</text>
+            <text class="title margin" decode="{{true}}">Towero &nbsp;</text>
+            <text class="version">(v0.2.0)</text>
         </view>
         <text class="version margin">©2019 易室科技服务中心</text>
     </view>

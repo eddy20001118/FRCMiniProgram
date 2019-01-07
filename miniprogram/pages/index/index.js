@@ -7,7 +7,8 @@ Page({
         delete: [{ name: '删除' }],
         DeleteKey: String,
         onLongPressedClick: false,
-        height: Number
+        height: Number,
+        tabsIndex: 0
     },
 
     onLoad: function (options) {
@@ -34,8 +35,19 @@ Page({
     onUnload: function () { },
 
     onPullDownRefresh: function () {
-        this.onRequireData();
-        this.onRequireCurrent();
+        if ((this.data.eventInfo == null || this.data.eventInfo.length == 0) && this.data.tabsIndex == 0) {
+            wx.stopPullDownRefresh();
+        }
+        else if ((this.data.teamInfo == null || this.data.teamInfo.length == 0) && this.data.tabsIndex == 1) {
+            wx.stopPullDownRefresh();
+        }
+        else if ((this.data.teamAtEvent == null || this.data.teamAtEvent.length == 0) && this.data.tabsIndex == 2) {
+            wx.stopPullDownRefresh();
+        } else {
+            setTimeout(() => {
+                this.onRequireCurrent(this.data.tabsIndex);
+            }, 3000);
+        }
     },
 
     onReachBottom: function () { },
@@ -121,6 +133,7 @@ Page({
         var eventInfo = new Array();
         var teamInfo = new Array();
         var teamAtEvent = new Array();
+        var that = this;
         var onSuccess = function (res) {
             var keys = res.keys;
             if (keys != null && keys.length != 0) {
@@ -143,34 +156,38 @@ Page({
                     }
                 }
             }
+            that.setData({
+                eventInfo: eventInfo,
+                teamInfo: teamInfo,
+                teamAtEvent: teamAtEvent
+            });
         };
         app.getInfo(onSuccess);
-        this.setData({
-            eventInfo: eventInfo,
-            teamInfo: teamInfo,
-            teamAtEvent: teamAtEvent
-        });
     },
 
-    onRequireCurrent: function () { //刷新数据(teamAtEvent的赛事和eventInfo的进度条)
+    onRequireCurrent: function (type) { //刷新数据(teamAtEvent的赛事和eventInfo的进度条)
         var eventInfo = this.data.eventInfo;
         var teamAtEvent = this.data.teamAtEvent;
-        eventInfo.forEach((element, index) => {
-            try {
-                var matchesApi = `event/${element.eventYear}${element.eventCode}/matches/simple`;
-                app.globalMethod.httpsRequest(matchesApi, (res) => {
-                    this.onMatchesCallback(res, index);
-                })
-            } catch (e) { console.log(e) }
-        });
-        teamAtEvent.forEach((element, index) => {
-            try {
-                var teamMatchesApi = `team/frc${element.team.teamNumber}/event/${element.eventIndex.eventYear}${element.eventIndex.eventCode}/matches/simple`
-                app.globalMethod.httpsRequest(teamMatchesApi, (res) => {
-                    this.onTeamMatchesCallback(res, index);
-                })
-            } catch (error) { console.log(error) }
-        })
+        if (type == 0) {
+            eventInfo.forEach((element, index) => {
+                try {
+                    var matchesApi = `event/${element.eventYear}${element.eventCode}/matches/simple`;
+                    app.globalMethod.httpsRequest(matchesApi, (res) => {
+                        this.onMatchesCallback(res, index);
+                    })
+                } catch (e) { console.log(e) }
+            });
+        }
+        else if (type == 2) {
+            teamAtEvent.forEach((element, index) => {
+                try {
+                    var teamMatchesApi = `team/frc${element.team.teamNumber}/event/${element.eventIndex.eventYear}${element.eventIndex.eventCode}/matches/simple`
+                    app.globalMethod.httpsRequest(teamMatchesApi, (res) => {
+                        this.onTeamMatchesCallback(res, index);
+                    })
+                } catch (error) { console.log(error) }
+            })
+        }
     },
 
     onMatchesCallback: function (res, index) {
@@ -209,11 +226,14 @@ Page({
         this.setData({
             eventInfo: this.data.eventInfo
         })
-        var localtemp = this.data.eventInfo[index];
+        var localtemp = new Object();
+        localtemp.eventIndex = this.data.eventInfo[index]
         app.set({
             key: `e${localtemp.eventIndex.eventYear}${localtemp.eventIndex.eventCode}`,
             data: localtemp
         })
+        wx.stopPullDownRefresh();
+        console.log("stop event refresh")
     },
 
     onTeamMatchesCallback: function (res, index) {
@@ -284,6 +304,8 @@ Page({
             key: `q${localtemp.team.teamNumber}${localtemp.eventIndex.eventYear}${localtemp.eventIndex.eventCode}`,
             data: localtemp
         })
+        wx.stopPullDownRefresh();
+        console.log("stop teamatevent refresh")
     },
 
     onLongPressed: function (e) {
@@ -317,14 +339,20 @@ Page({
 
     onSwitchTaps: function (e) {
         var tag = e.currentTarget.id;
-        if(tag == "e"){
+        if (tag == "e") {
             wx.switchTab({
-                url : "/pages/eventData/eventData"
+                url: "/pages/eventData/eventData"
             });
-        } else if(tag == "t" || tag == "q"){
+        } else if (tag == "t" || tag == "q") {
             wx.switchTab({
-                url : "/pages/teamData/teamData"
+                url: "/pages/teamData/teamData"
             });
         }
+    },
+
+    onTabsChanged: function (e) {
+        this.setData({
+            tabsIndex: e.detail.index
+        })
     }
 });

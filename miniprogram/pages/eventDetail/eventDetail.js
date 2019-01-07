@@ -39,7 +39,7 @@ Page({
                 value => {
                     this.setData({
                         dataBase: true,
-                        topTeamList: value.topTeamList,
+                        topTeamList: (value.topTeamList != null) ? value.topTeamList : new Array(),
                         eventIndex: value.eventIndex
                     });
                     console.log("已有收藏");

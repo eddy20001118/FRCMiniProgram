@@ -1,12 +1,12 @@
 <view class="container">
-    <van-tabs style="width:750rpx;" color="#3f51b5" swipeable active="{{ active }}">
+    <van-tabs style="width:750rpx;" color="#3f51b5" swipeable active="{{ active }}" bind:change="onTabsChanged">
         <van-tab title="Events">
             <van-transition duration="450">
                 <view class="container" bindlongpress="onLongPressed" bindtap='onEventCardClick' wx:for="{{eventInfo}}" wx:key="{{index}}" id="{{index}}" data-key="{{'e'+item.eventYear+item.eventCode}}">
                     <pin-event-card eventInfo="{{item}}" steps="{{item.steps}}" active="{{item.active}}" />
                 </view>
                 <view bind:tap="onSwitchTaps" id="e">
-                    <empty-pages hidden="{{eventInfo != null && eventInfo.length != 0}}" type="I" height="{{height}}" msg="Start search today!" />
+                    <empty-pages hidden="{{eventInfo != null && eventInfo.length != 0}}" type="I" height="{{height}}" msg="Search events today!" />
                 </view>
             </van-transition>
         </van-tab>
@@ -17,7 +17,7 @@
                     <team-card teamInfo="{{item}}" />
                 </view>
                 <view bind:tap="onSwitchTaps" id="t">
-                    <empty-pages hidden="{{teamInfo != null && teamInfo.length != 0}}" type="I" height="{{height}}" msg="Start search today!" />
+                    <empty-pages hidden="{{teamInfo != null && teamInfo.length != 0}}" type="I" height="{{height}}" msg="Search teams today!" />
                 </view>
             </van-transition>
         </van-tab>
