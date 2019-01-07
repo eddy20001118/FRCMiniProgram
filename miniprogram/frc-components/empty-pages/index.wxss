@@ -6,11 +6,21 @@
 }
 
 .mytext{
+    width: 60%;
     color: #424242;
     font-size: 11pt;
     margin-top: 15px;
     margin-bottom: 15px;
     text-align: center;
+}
+
+.longtext{
+    width: 60%;
+    color: #424242;
+    font-size: 11pt;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: left;
 }
 
 .search-icon{

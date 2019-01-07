@@ -34,7 +34,7 @@
                     </team-card>
                 </view>
                 <view bind:tap="onSwitchTaps" id="q">
-                    <empty-pages hidden="{{teamAtEvent != null && teamAtEvent.length != 0}}" type="I" height="{{height}}" msg="Start search today!" />
+                    <empty-pages hidden="{{teamAtEvent != null && teamAtEvent.length != 0}}" type="M" height="{{height}}" msg="请从赛事中查找队伍，或者从队伍中查找赛事，然后固定到这里。" />
                 </view>
             </van-transition>
         </van-tab>

@@ -3,7 +3,7 @@
         <image class="logo" src="/res/icons/emptyPages/warning.png" />
         <view class="row">
             <text class="title margin" decode="{{true}}">SOFA &nbsp;</text>
-            <text class="version">(v0.1.0)</text>
+            <text class="version">(v0.1.2)</text>
         </view>
         <text class="version margin">©2019 易室科技服务中心</text>
     </view>
