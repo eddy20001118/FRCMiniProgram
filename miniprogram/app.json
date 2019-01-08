@@ -15,7 +15,7 @@
     "window": {
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#3f51b5",
-        "navigationBarTitleText": "FRC赛事小程序",
+        "navigationBarTitleText": "TOWERO",
         "navigationBarTextStyle": "white"
     },
     "tabBar": {

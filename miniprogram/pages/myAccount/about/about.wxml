@@ -3,9 +3,9 @@
         <image class="logo" src="/res/logo/icon.png" />
         <view class="row">
             <text class="title margin" decode="{{true}}">Towero &nbsp;</text>
-            <text class="version">(v0.2.0)</text>
+            <text class="version">(v0.2.3)</text>
         </view>
-        <text class="version margin">©2019 易室科技服务中心</text>
+        <text class="version margin">©2019 易世科技服务中心</text>
     </view>
     <view class="navigator-list">
         <navigator-list type="click" icon="/res/icons/myAccount/database.png" title="数据来源" smallText="©2014 The Blue Alliance \n https://www.thebluealliance.com/api/v3" />

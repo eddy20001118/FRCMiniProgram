@@ -5,7 +5,8 @@ Component({
      */
     properties: {
         teamIndex: null,
-        teamYearArray: Array
+        teamYearArray: Array,
+        lastYear: Number
     },
 
     /**

@@ -3,7 +3,7 @@
         <van-tab title="Info">
             <van-transition duration="450">
                 <view class='container'>
-                    <team-index teamIndex="{{teamIndex}}" teamYearArray="{{teamYearArray}}" bind:event="getTeamYear" />
+                    <team-index teamIndex="{{teamIndex}}" teamYearArray="{{teamYearArray}}" lastYear="{{teamYearArray[0]}}" bind:event="getTeamYear" />
                     <pin-button status="{{dataBase}}" bind:onclick="onPinButtonClick" />
                 </view>
                 <empty-pages hidden="{{teamIndex != null}}" type="E" msg="No team Info found" height="{{height}}" />

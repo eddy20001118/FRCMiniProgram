@@ -38,7 +38,7 @@ Page({
         if ((this.data.eventInfo == null || this.data.eventInfo.length == 0) && this.data.tabsIndex == 0) {
             wx.stopPullDownRefresh();
         }
-        else if ((this.data.teamInfo == null || this.data.teamInfo.length == 0) && this.data.tabsIndex == 1) {
+        else if (this.data.tabsIndex == 1) {
             wx.stopPullDownRefresh();
         }
         else if ((this.data.teamAtEvent == null || this.data.teamAtEvent.length == 0) && this.data.tabsIndex == 2) {

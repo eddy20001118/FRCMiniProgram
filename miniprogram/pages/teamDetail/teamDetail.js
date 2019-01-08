@@ -28,7 +28,7 @@ Page({
         try {
             var teamInfo = JSON.parse(decodeURIComponent(options.teamInfo));
             var teamapi = `team/frc${teamInfo.teamNumber}`;
-            var eventapi = `team/frc${teamInfo.teamNumber}/events`
+            
             if (teamInfo.teamNumber != null)
                 wx.setNavigationBarTitle({
                     title: "Team " + teamInfo.teamNumber
@@ -47,7 +47,6 @@ Page({
                 console.log("无已有收藏")
             })
             app.globalMethod.httpsRequest(teamapi, this.onTeamCallBack);
-            app.globalMethod.httpsRequest(eventapi, this.onEventCallBack);
         } catch (e) { console.log(e) }
     },
 
@@ -125,6 +124,12 @@ Page({
             this.setData({
                 teamIndex: teamIndex,
             })
+            try {
+                var eventapi = `team/frc${this.data.teamIndex.teamNumber}/events`
+                app.globalMethod.httpsRequest(eventapi, this.onEventCallBack);
+            } catch (error) {
+                
+            }
         }
     },
 
@@ -148,6 +153,9 @@ Page({
         }
         this.setData({
             teamYearArray: teamYearArray
+        })
+        this.getTeamYear({
+            detail : 0
         })
     },
 

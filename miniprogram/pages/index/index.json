@@ -1,4 +1,5 @@
 {
+    "navigationBarTitleText": "主页",
     "backgroundTextStyle": "dark",
     "enablePullDownRefresh": true,
     "usingComponents": {
