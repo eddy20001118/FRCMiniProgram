@@ -28,7 +28,7 @@ Page({
         try {
             var teamInfo = JSON.parse(decodeURIComponent(options.teamInfo));
             var teamapi = `team/frc${teamInfo.teamNumber}`;
-            
+
             if (teamInfo.teamNumber != null)
                 wx.setNavigationBarTitle({
                     title: "Team " + teamInfo.teamNumber
@@ -94,8 +94,25 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
-
+    onShareAppMessage: function (e) {
+        if (this.data.teamIndex != null) {
+            try {
+                var teamIndex = this.data.teamIndex;
+                var encodedTeamIndex = encodeURIComponent(JSON.stringify(teamIndex));
+                return {
+                    title: `点击查看 Team${teamIndex.teamNumber} 的详细信息`,
+                    path: `/pages/teamDetail/teamDetail?teamInfo=${encodedTeamIndex}`
+                }
+            } catch (e) {
+                console.log(e)
+            }
+        } else {
+            wx.showToast({
+                title: '请稍候',
+                icon: 'none',
+                duration: 2000
+            })
+        }
     },
 
     onEventCardClick: function (e) {
@@ -128,7 +145,7 @@ Page({
                 var eventapi = `team/frc${this.data.teamIndex.teamNumber}/events`
                 app.globalMethod.httpsRequest(eventapi, this.onEventCallBack);
             } catch (error) {
-                
+
             }
         }
     },
@@ -155,7 +172,7 @@ Page({
             teamYearArray: teamYearArray
         })
         this.getTeamYear({
-            detail : 0
+            detail: 0
         })
     },
 

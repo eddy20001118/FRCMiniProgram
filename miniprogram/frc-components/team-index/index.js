@@ -6,7 +6,7 @@ Component({
     properties: {
         teamIndex: null,
         teamYearArray: Array,
-        lastYear: Number
+        lastYear: String
     },
 
     /**

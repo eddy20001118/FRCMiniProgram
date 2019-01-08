@@ -89,7 +89,26 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () { },
+    onShareAppMessage: function (e) {
+        if (this.data.eventIndex != null) {
+            try {
+                var eventIndex = this.data.eventIndex;
+                var encodedeventIndex = encodeURIComponent(JSON.stringify(eventIndex));
+                return {
+                    title: `点击查看 ${eventIndex.eventTitle} ${eventIndex.eventYear} 的详细信息`,
+                    path: `/pages/eventDetail/eventDetail?eventInfo=${encodedeventIndex}`
+                }
+            } catch (e) {
+                console.log(e)
+            }
+        } else {
+            wx.showToast({
+                title: '请稍候',
+                icon: 'none',
+                duration: 2000
+            })
+        }
+     },
 
     onLoadOtherRequests: function (eventInfo) {
         var alliancesApi = `event/${eventInfo.eventYear}${

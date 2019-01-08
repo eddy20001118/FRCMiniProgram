@@ -81,21 +81,21 @@ Page({
                     var shareTeamAtEvent = this.data.teamAtEvent[shareItem.index];
                     var encodedTeamAtEvent = encodeURIComponent(JSON.stringify(shareTeamAtEvent));
                     return {
-                        title: `点击查看Team${shareTeamAtEvent.team.teamNumber}在${shareTeamAtEvent.eventIndex.eventTitle} ${shareTeamAtEvent.eventIndex.eventYear}的赛事`,
+                        title: `点击收藏 Team${shareTeamAtEvent.team.teamNumber} 在 ${shareTeamAtEvent.eventIndex.eventTitle} ${shareTeamAtEvent.eventIndex.eventYear} 的赛事`,
                         path: `/pages/index/index?id=q&msg=${encodedTeamAtEvent}`
                     }
                 } else if (shareItem.type == "e") {
                     var shareEvent = this.data.eventInfo[shareItem.index];
                     var encodedEvent = encodeURIComponent(JSON.stringify(shareEvent));
                     return {
-                        title: `点击查看${shareEvent.eventTitle} ${shareEvent.eventYear}的赛事`,
+                        title: `点击收藏 ${shareEvent.eventTitle} ${shareEvent.eventYear} 赛事`,
                         path: `/pages/index/index?id=e&msg=${encodedEvent}`
                     }
                 } else if (shareItem.type == "t") {
                     var shareTeam = this.data.teamInfo[shareItem.index];
                     var encodedTeam = encodeURIComponent(JSON.stringify(shareTeam));
                     return {
-                        title: `点击查看Team${shareTeam.teamNumber}的信息`,
+                        title: `点击收藏 Team${shareTeam.teamNumber}`,
                         path: `/pages/index/index?id=t&msg=${encodedTeam}`
                     }
                 }

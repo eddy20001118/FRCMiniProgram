@@ -118,8 +118,27 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
-
+    onShareAppMessage: function (e) {
+        if (this.data.eventIndex != null && this.data.team != null) {
+            try {
+                var eventIndex = this.data.eventIndex;
+                var team = this.data.team;
+                var encodedeventIndex = encodeURIComponent(JSON.stringify(eventIndex));
+                var encodedteam = encodeURIComponent(JSON.stringify(team));
+                return {
+                    title: `点击查看Team${team.teamNumber} 在 ${eventIndex.eventTitle} ${eventIndex.eventYear} 的详细信息`,
+                    path: `/pages/teamAtEvent/teamAtEvent?eventIndex=${encodedeventIndex}&team=${encodedteam}`
+                }
+            } catch (e) {
+                console.log(e)
+            }
+        } else {
+            wx.showToast({
+                title: '请稍候',
+                icon: 'none',
+                duration: 2000
+            })
+        }
     },
 
     onCollapseChange: function (event) {
