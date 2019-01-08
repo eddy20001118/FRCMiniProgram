@@ -1,8 +1,17 @@
 <view class="container">
-    <van-tabs style="width:750rpx;" color="#3f51b5" swipeable active="{{ active }}" bind:change="onTabsChanged">
+    <van-tabs style="width:750rpx;" color="#3f51b5" swipeable active="{{ activeTab }}" bind:change="onTabsChanged">
         <van-tab title="Events">
             <van-transition duration="450">
-                <view class="container" bindlongpress="onLongPressed" bindtap='onEventCardClick' wx:for="{{eventInfo}}" wx:key="{{index}}" id="{{index}}" data-key="{{'e'+item.eventYear+item.eventCode}}">
+                <view 
+                    class="container" 
+                    bindlongpress="onLongPressed" 
+                    bindtap='onEventCardClick' 
+                    wx:for="{{eventInfo}}" 
+                    wx:key="{{index}}" 
+                    id="{{index}}" 
+                    data-key="{{'e'+item.eventYear+item.eventCode}}"
+                    data-type="e"
+                >
                     <pin-event-card eventInfo="{{item}}" steps="{{item.steps}}" active="{{item.active}}" />
                 </view>
                 <view bind:tap="onSwitchTaps" id="e">
@@ -13,7 +22,16 @@
 
         <van-tab title="Teams">
             <van-transition duration="450">
-                <view class="container" bindlongpress="onLongPressed" bindtap='onTeamCardClick' wx:for="{{teamInfo}}" wx:key="{{index}}" id="{{index}}" data-key="{{'t'+item.teamNumber}}">
+                <view 
+                    class="container" 
+                    bindlongpress="onLongPressed" 
+                    bindtap='onTeamCardClick' 
+                    wx:for="{{teamInfo}}" 
+                    wx:key="{{index}}" 
+                    id="{{index}}" 
+                    data-key="{{'t'+item.teamNumber}}"
+                    data-type="t"
+                >
                     <team-card teamInfo="{{item}}" />
                 </view>
                 <view bind:tap="onSwitchTaps" id="t">
@@ -24,7 +42,15 @@
         
         <van-tab title="Team's event">
             <van-transition duration="450">
-                <view class="container" bindlongpress="onLongPressed" bindtap='onTeamAtEventCardClick' wx:for="{{teamAtEvent}}" wx:key="{{index}}" id="{{index}}" data-key="{{'q'+item.team.teamNumber+item.eventIndex.eventYear+item.eventIndex.eventCode}}">
+                <view 
+                    class="container" 
+                    bindlongpress="onLongPressed" 
+                    bindtap='onTeamAtEventCardClick' 
+                    wx:for="{{teamAtEvent}}" 
+                    wx:key="{{index}}" id="{{index}}" 
+                    data-key="{{'q'+item.team.teamNumber+item.eventIndex.eventYear+item.eventIndex.eventCode}}"
+                    data-type="q"
+                >
                     <team-card teamInfo="{{item.team}}" noBottomPadding="{{true}}" eventTitle="{{item.eventIndex.eventTitle}}" eventYear="{{item.eventIndex.eventYear}}" isMatch="{{item.lastmatch.matchType != 'No match info found'}}">
                         <text hidden="{{item.lastmatch.matchType == 'No match info found'}}" class='text'>Last Match:</text>
                         <match-card wx:if="{{item.lastmatch.matchType != 'No match info found'}}" matchType="{{item.lastmatch.matchType}}" redAlliance="{{item.lastmatch.redAlliance}}" blueAlliance="{{item.lastmatch.blueAlliance}}" score="{{item.lastmatch.score}}" currentTeamNumber="{{item.team.teamNumber}}" />
@@ -39,5 +65,5 @@
             </van-transition>
         </van-tab>
     </van-tabs>
-    <van-action-sheet show="{{ DeleteKey != null && DeleteKet.length != 0 && onLongPressedClick}}" actions="{{ delete }}" bind:select="onDelete" bind:cancel="onDeleteCancel" cancel-text="取消" />
+    <van-action-sheet show="{{onLongPressedClick}}" actions="{{ popselect }}" bind:select="onPopSelect" bind:cancel="onPopCancel" cancel-text="取消" />
 </view>

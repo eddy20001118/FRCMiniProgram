@@ -4,14 +4,35 @@ Page({
         teamInfo: Array,
         eventInfo: Array,
         teamAtEvent: Array,
-        delete: [{ name: '删除' }],
+        popselect: [
+            {
+                name: '分享',
+                openType: 'share'
+            },
+            {
+                name: '删除'
+            }],
+        shareItem: {
+            type: String, //e,t,q
+            index: Number
+        },
         DeleteKey: String,
         onLongPressedClick: false,
         height: Number,
-        tabsIndex: 0
+        tabsIndex: 0,
+        activeTab: 0
     },
 
     onLoad: function (options) {
+        if (options.id != null && options.msg != null) {
+            try {
+                var type = options.id;
+                var msg = JSON.parse(decodeURIComponent(options.msg));
+                this.onSetShareItem(type, msg);
+            } catch (e) {
+                console.log(e)
+            }
+        }
         var that = this;
         wx.getSystemInfo({
             success: res => {
@@ -52,7 +73,43 @@ Page({
 
     onReachBottom: function () { },
 
-    onShareAppMessage: function () { },
+    onShareAppMessage: function (e) {
+        if (e.from == "button") {
+            try {
+                var shareItem = this.data.shareItem;
+                if (shareItem.type == "q") {
+                    var shareTeamAtEvent = this.data.teamAtEvent[shareItem.index];
+                    var encodedTeamAtEvent = encodeURIComponent(JSON.stringify(shareTeamAtEvent));
+                    return {
+                        title: `点击查看Team${shareTeamAtEvent.team.teamNumber}在${shareTeamAtEvent.eventIndex.eventTitle} ${shareTeamAtEvent.eventIndex.eventYear}的赛事`,
+                        path: `/pages/index/index?id=q&msg=${encodedTeamAtEvent}`
+                    }
+                } else if (shareItem.type == "e") {
+                    var shareEvent = this.data.eventInfo[shareItem.index];
+                    var encodedEvent = encodeURIComponent(JSON.stringify(shareEvent));
+                    return {
+                        title: `点击查看${shareEvent.eventTitle} ${shareEvent.eventYear}的赛事`,
+                        path: `/pages/index/index?id=e&msg=${encodedEvent}`
+                    }
+                } else if (shareItem.type == "t") {
+                    var shareTeam = this.data.teamInfo[shareItem.index];
+                    var encodedTeam = encodeURIComponent(JSON.stringify(shareTeam));
+                    return {
+                        title: `点击查看Team${shareTeam.teamNumber}的信息`,
+                        path: `/pages/index/index?id=t&msg=${encodedTeam}`
+                    }
+                }
+            } catch (e) {
+                console.log(e)
+            }
+        } else {
+            wx.showToast({
+                title: '请长按想要分享的卡片进行分享',
+                icon: 'none',
+                duration: 2000
+            })
+        }
+    },
 
     onEventCardClick: function (e) {
         var index = e.currentTarget.id;
@@ -309,31 +366,49 @@ Page({
     },
 
     onLongPressed: function (e) {
-        this.setData({
-            onLongPressedClick: true,
-            DeleteKey: e.currentTarget.dataset.key
-        })
-    },
-
-    onDelete: function (e) {
-        app.remove(this.data.DeleteKey, () => {
-            wx.showToast({
-                title: '删除成功',
-                icon: 'none',
-                duration: 2000
-            });
+        try {
             this.setData({
-                DeleteKey: null,
-                onLongPressedClick: false
+                onLongPressedClick: true,
+                DeleteKey: e.currentTarget.dataset.key,
+                shareItem: {
+                    type: e.currentTarget.dataset.type,
+                    index: e.currentTarget.id
+                }
             })
-        }, () => { })
-        this.onRequireData();
+        } catch (e) {
+            console.log(e)
+        }
     },
 
-    onDeleteCancel: function () {
+    onPopSelect: function (e) {
+        var type = e.detail.name;
+        if (type == "分享") {
+            //这里什么都不用做，因为当选中“分享”标签时会自动触发onShareAppMessage方法
+            //留在这里是为了占位，便于理解，程序实际不会执行到这里
+        } else if (type == "删除") {
+            app.remove(this.data.DeleteKey, () => {
+                wx.showToast({
+                    title: '删除成功',
+                    icon: 'none',
+                    duration: 2000
+                });
+                this.setData({
+                    DeleteKey: null,
+                    onLongPressedClick: false
+                })
+            }, () => { })
+            this.onRequireData();
+        }
+    },
+
+    onPopCancel: function () {
         this.setData({
             DeleteKey: null,
-            onLongPressedClick: false
+            onLongPressedClick: false,
+            shareItem: {
+                type: null,
+                index: null
+            }
         })
     },
 
@@ -354,5 +429,41 @@ Page({
         this.setData({
             tabsIndex: e.detail.index
         })
+    },
+
+    onSetShareItem: function (type, msg) {
+        try {
+            //本地缓存是覆盖写入，所以不必判断会不会重复写入
+            //本函数执行完成后会回到onLoad执行onRequireData把数据从本地缓存刷新到视图
+            if (type == "e") {
+                var localtemp = new Object();
+                localtemp.eventIndex = msg;
+                app.set({
+                    key: `e${localtemp.eventIndex.eventYear}${localtemp.eventIndex.eventCode}`,
+                    data: localtemp
+                })
+                this.setData({
+                    activeTab: 0
+                })
+            } else if (type == "q") {
+                app.set({
+                    key: `q${msg.team.teamNumber}${msg.eventIndex.eventYear}${msg.eventIndex.eventCode}`,
+                    data: msg
+                })
+                this.setData({
+                    activeTab: 2
+                })
+            } else if (type == "t") {
+                app.set({
+                    key: `t${msg.teamNumber}`,
+                    data: msg
+                })
+                this.setData({
+                    activeTab: 1
+                })
+            }
+        } catch (e) {
+            console.log(e);
+        }
     }
 });
