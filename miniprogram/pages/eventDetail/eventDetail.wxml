@@ -7,7 +7,6 @@
                     <title-list title="Top Team" wx:if="{{topTeamList != null && topTeamList.length != 0}}">
                         <title-list-content wx:for="{{topTeamList}}" wx:key="{{index}}" index="{{index+1}}" teamNumber="{{item.team[1]}}" />
                     </title-list>
-                    <pin-button status="{{dataBase}}" bind:onclick="onPinButtonClick" />
                 </view>
                 <empty-pages hidden="{{eventIndex != null}}" type="E" msg="No summary found" height="{{height}}" />
             </van-transition>
@@ -78,4 +77,11 @@
             </van-transition>
         </van-tab>
     </van-tabs>
+    <wux-fab-button 
+        position="bottomRight" 
+        theme="energized" 
+        direction="vertical" 
+        buttons="{{ fabSubButtons }}" 
+        bind:click="onfabClick"
+        bind:change="onfabRefresh"  />
 </view>

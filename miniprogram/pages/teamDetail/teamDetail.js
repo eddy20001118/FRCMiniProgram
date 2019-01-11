@@ -10,7 +10,19 @@ Page({
         teamIndex: Object,
         teamYearArray: Array,
         dataBase: Boolean,
-        height: Number
+        height: Number,
+        fabSubButtons:
+            [{
+                className: 'share',
+                label: 'Share',
+                icon: '/res/icons/pin/share.png',
+                openType: 'share'
+            },
+            {
+                className: 'pinHome',
+                label: 'Pin to home',
+                icon: '/res/icons/pin/pin.png'
+            }]
     },
 
     /**
@@ -36,12 +48,16 @@ Page({
 
             var key = "t" + teamInfo.teamNumber;
             app.get(key, (value) => {
+                this.data.fabSubButtons[1].icon = "/res/icons/pin/gou.png"
                 this.setData({
+                    fabSubButtons: this.data.fabSubButtons,
                     dataBase: true
                 })
                 console.log("已有收藏")
             }, () => {
+                this.data.fabSubButtons[1].icon = "/res/icons/pin/pin.png"
                 this.setData({
+                    fabSubButtons: this.data.fabSubButtons,
                     dataBase: false
                 })
                 console.log("无已有收藏")
@@ -120,7 +136,7 @@ Page({
         var eventInfo = encodeURIComponent(JSON.stringify(this.data.eventInfo[index]));
         var teamIndex = encodeURIComponent(JSON.stringify(this.data.teamIndex));
         wx.navigateTo({
-            url: `/pages/teamAtEvent/teamAtEvent?eventIndex=${eventInfo}&team=${teamIndex}`
+            url: `/pages/teamAtEvent/teamAtEvent?eventIndex=${eventInfo}&team=${teamIndex}&id=team`
         })
     },
 
@@ -203,6 +219,7 @@ Page({
 
     onSaveStatus: function () {
         if (!this.data.dataBase) {
+            //如果没有收藏
             app.set({
                 key: "t" + this.data.teamIndex.teamNumber,
                 data: this.data.teamIndex
@@ -212,9 +229,14 @@ Page({
                     icon: 'none',
                     duration: 2000
                 });
-                this.setData({
-                    dataBase: !this.data.dataBase
-                })
+                try {
+                    this.data.fabSubButtons[1].icon = "/res/icons/pin/gou.png"
+                    this.setData({
+                        dataBase: !this.data.dataBase
+                    })
+                } catch (error) {
+                    console.log(e);
+                }
             })
         } else {
             var key = "t" + this.data.teamIndex.teamNumber;
@@ -224,9 +246,14 @@ Page({
                     icon: 'none',
                     duration: 2000
                 });
-                this.setData({
-                    dataBase: !this.data.dataBase
-                })
+                try {
+                    this.data.fabSubButtons[1].icon = "/res/icons/pin/pin.png"
+                    this.setData({
+                        dataBase: !this.data.dataBase
+                    })
+                } catch (error) {
+                    console.log(e);
+                }
             }, () => {
                 wx.showToast({
                     title: '无收藏，无法删除',
@@ -237,15 +264,27 @@ Page({
         }
     },
 
-    onPinButtonClick: function () {
-        this.onSaveStatus();
-    },
-
     getTeamYear: function (e) {
         var index = e.detail;
         if (this.data.teamYearArray[index] != "No event info found") {
             var eventAtYearApi = `team/frc${this.data.teamIndex.teamNumber}/events/${this.data.teamYearArray[index]}`;
             app.globalMethod.httpsRequest(eventAtYearApi, this.onEventatYearCallback);
         }
+    },
+
+    onfabClick: function (e) {
+        var clickedButton = e.detail.value.className;
+        if (clickedButton == "pinHome") {
+            this.onSaveStatus();
+        } else if (clickedButton == "share") {
+            //这里什么都不用做，因为当选中“分享”标签时会自动触发onShareAppMessage方法
+            //留在这里是为了占位，便于理解，程序实际不会执行到这里
+        }
+    },
+
+    onfabRefresh: function () {
+        this.setData({
+            fabSubButtons: this.data.fabSubButtons
+        })
     }
 })

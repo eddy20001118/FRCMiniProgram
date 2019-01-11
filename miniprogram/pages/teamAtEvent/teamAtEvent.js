@@ -15,7 +15,30 @@ Page({
         activeNames: [], //折叠面板激活
         activeTab: Number,
         height: Number,
-        dataBase: Boolean
+        dataBase: Boolean,
+        fromId: String,
+        fabSubButtons:
+            [{
+                className: 'share',
+                label: 'Share',
+                icon: '/res/icons/pin/share.png',
+                openType: 'share'
+            },
+            {
+                className: 'pinHome',
+                label: 'Pin to home',
+                icon: '/res/icons/pin/pin.png'
+            },
+            {
+                className: 'event',
+                label: 'Check event info',
+                icon: '/res/icons/pin/event.png'
+            },
+            {
+                className: 'team',
+                label: 'Check team info',
+                icon: '/res/icons/pin/team.png'
+            }]
     },
 
     /**
@@ -49,18 +72,28 @@ Page({
                 })
             }
 
+            if (options.id != null) {
+                this.setData({
+                    fromId: options.id
+                })
+            }
+
             wx.setNavigationBarTitle({
                 title: this.data.eventIndex.eventTitle + " " + this.data.team.teamNumber
             });
 
             var key = `q${team.teamNumber}${eventIndex.eventYear}${eventIndex.eventCode}`
             app.get(key, (value) => {
+                this.data.fabSubButtons[1].icon = "/res/icons/pin/gou.png"
                 this.setData({
+                    fabSubButtons: this.data.fabSubButtons,
                     dataBase: true
                 })
                 console.log("已有收藏")
             }, () => {
+                this.data.fabSubButtons[1].icon = "/res/icons/pin/pin.png"
                 this.setData({
+                    fabSubButtons: this.data.fabSubButtons,
                     dataBase: false
                 })
                 console.log("无已有收藏")
@@ -295,7 +328,7 @@ Page({
             app.set({
                 key: `q${this.data.team.teamNumber}${this.data.eventIndex.eventYear}${this.data.eventIndex.eventCode}`,
                 data: {
-                    team : this.data.team,
+                    team: this.data.team,
                     eventIndex: this.data.eventIndex,
                     lastmatch: lastmatch
                 }
@@ -305,9 +338,14 @@ Page({
                     icon: 'none',
                     duration: 2000
                 });
-                this.setData({
-                    dataBase: !this.data.dataBase
-                })
+                try {
+                    this.data.fabSubButtons[1].icon = "/res/icons/pin/gou.png"
+                    this.setData({
+                        dataBase: !this.data.dataBase
+                    })
+                } catch (error) {
+                    console.log(e);
+                }
             })
         } else {
             var key = `q${this.data.team.teamNumber}${this.data.eventIndex.eventYear}${this.data.eventIndex.eventCode}`;
@@ -317,9 +355,14 @@ Page({
                     icon: 'none',
                     duration: 2000
                 });
-                this.setData({
-                    dataBase: !this.data.dataBase
-                })
+                try {
+                    this.data.fabSubButtons[1].icon = "/res/icons/pin/pin.png"
+                    this.setData({
+                        dataBase: !this.data.dataBase
+                    })
+                } catch (error) {
+                    console.log(e);
+                }
             }, () => {
                 wx.showToast({
                     title: '无收藏，无法删除',
@@ -329,4 +372,40 @@ Page({
             });
         }
     },
+
+    onfabClick: function (e) {
+        var clickedButton = e.detail.value.className;
+        if (clickedButton == "pinHome") {
+            this.onSaveStatus();
+        } else if (clickedButton == "event") {
+            if (this.data.fromId == "event") {
+                wx.navigateBack({
+                    delta: 1
+                })
+            } else {
+                wx.navigateTo({
+                    url: `/pages/eventDetail/eventDetail?eventInfo=${encodeURIComponent(JSON.stringify(this.data.eventIndex))}`
+                })
+            }
+        } else if (clickedButton == "team") {
+            if (this.data.fromId == "team") {
+                wx.navigateBack({
+                    delta: 1
+                })
+            } else {
+                wx.navigateTo({
+                    url: `/pages/teamDetail/teamDetail?teamInfo=${encodeURIComponent(JSON.stringify(this.data.team))}`
+                })
+            }
+        } else if (clickedButton == "share") {
+            //这里什么都不用做，因为当选中“分享”标签时会自动触发onShareAppMessage方法
+            //留在这里是为了占位，便于理解，程序实际不会执行到这里
+        }
+    },
+
+    onfabRefresh: function () {
+        this.setData({
+            fabSubButtons: this.data.fabSubButtons
+        })
+    }
 })

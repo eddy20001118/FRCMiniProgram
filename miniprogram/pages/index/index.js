@@ -140,7 +140,7 @@ Page({
             JSON.stringify(this.data.teamAtEvent[index].team)
         );
         wx.navigateTo({
-            url: `/pages/teamAtEvent/teamAtEvent?eventIndex=${eventIndex}&team=${team}`
+            url: `/pages/teamAtEvent/teamAtEvent?eventIndex=${eventIndex}&team=${team}&id=home`
         });
     },
 

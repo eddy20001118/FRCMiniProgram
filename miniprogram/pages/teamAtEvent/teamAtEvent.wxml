@@ -5,7 +5,6 @@
                 <view class="container">
                     <teamatevent-summary summaryInfo="{{summaryInfo}}" />
                 </view>
-                <pin-button status="{{dataBase}}" bind:onclick="onPinButtonClick" />
                 <empty-pages hidden="{{summaryInfo != null}}" type="E" msg="No summary found" height="{{height}}" />
             </van-transition>
         </van-tab>
@@ -55,4 +54,11 @@
             </van-transition>
         </van-tab>
     </van-tabs>
+    <wux-fab-button 
+        position="bottomRight" 
+        theme="energized" 
+        direction="vertical" 
+        buttons="{{ fabSubButtons }}" 
+        bind:click="onfabClick"
+        bind:change="onfabRefresh"  />
 </view>
