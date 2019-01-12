@@ -179,7 +179,7 @@ Page({
 		yearArray.reverse();
 		var filteritems = [{
 			type: 'radio',
-			label: 'Country',
+			label: 'Country/Region',
 			value: 'Country',
 			children: [{ label: 'USA', value: 'USA' },
 			{ label: 'Canada', value: 'Canada' },

@@ -3,7 +3,7 @@
         <image class="logo" src="/res/logo/icon.png" />
         <view class="row">
             <text class="title margin" decode="{{true}}">Towero &nbsp;</text>
-            <text class="version">(v0.2.6)</text>
+            <text class="version">(v0.3.0)</text>
         </view>
         <text class="version margin">©2019 易世科技服务中心</text>
     </view>
@@ -12,6 +12,6 @@
         <navigator-list type="click" icon="/res/icons/myAccount/github.png " title="Git仓库" smallText="https://github.com/eddy20001118/FRCMiniProgram" />
         <navigator-list type="click" icon="/res/icons/myAccount/info.png" title="开源协议 (MIT)" smallText="在软件和软件的所有副本中都必须包含以上版权声明和MIT许可声明。" />
         <navigator-list type="click" icon="/res/icons/myAccount/contact.png" title="联系我们" smallText="企业合作邮箱：embedchamber@outlook.com \n公众号: Embed Chamber \nBug反馈邮箱：yuhao_li@hotmail.com (开发者邮箱) \n" />
-        <navigator-list type="click" icon="/res/icons/myAccount/emojifill.png" title="鸣谢" />
+        <navigator-list type="click" icon="/res/icons/myAccount/emojifill.png" title="鸣谢" smallText="Logo设计: Simon"/>
     </view>
 </view>

@@ -41,10 +41,11 @@ Page({
             var teamInfo = JSON.parse(decodeURIComponent(options.teamInfo));
             var teamapi = `team/frc${teamInfo.teamNumber}`;
 
-            if (teamInfo.teamNumber != null)
+            if (teamInfo.teamNumber != null) {
                 wx.setNavigationBarTitle({
                     title: "Team " + teamInfo.teamNumber
                 })
+            }
 
             var key = "t" + teamInfo.teamNumber;
             app.get(key, (value) => {

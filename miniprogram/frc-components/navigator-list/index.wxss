@@ -32,6 +32,8 @@
 }
 
 .link-text{
+    overflow: auto;
+    word-break:break-all;
     margin-bottom: 15px;
     font-size: 9pt;
     color: #424242;

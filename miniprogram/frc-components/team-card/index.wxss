@@ -35,9 +35,8 @@
 }
 
 .teamLocation {
-    color: #424242;
+    color: #535353;
     font-size: 9.375pt;
-    font-weight: lighter;
 }
 
 .teamNumberBox {
