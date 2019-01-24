@@ -1,6 +1,8 @@
 .data-list{
     flex-direction: row;
-    padding: 15px 10px;
+    padding-top : 15px;
+    padding-bottom: 15px;
+    padding-left: 25rpx;
     width: 700rpx;
     display: flex;
     align-items: center;
@@ -13,7 +15,7 @@
 
 .text{
     width: 550rpx;
-    margin-left : 50rpx;
+    margin-left : 25rpx;
     margin-right: 25rpx;
     overflow: hidden;
     font-size: 11pt;
@@ -21,7 +23,9 @@
 
 .hover{
     flex-direction: row;
-    padding: 15px 10px;
+    padding-top : 15px;
+    padding-bottom: 15px;
+    padding-left: 25rpx;
     width: 700rpx;
     display: flex;
     align-items: center;
